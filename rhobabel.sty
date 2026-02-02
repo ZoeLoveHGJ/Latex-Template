@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+% Rhobabel
+% LaTeX Package
+% Version 1.0.1 (14/08/2024)
+% 
+% Chinese Comments Version by: AntiGravity Agent
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+%                        注意!
+% --------------------------------------------------------
+% 请保持此文件与主类文件在同一目录或为了编译路径可达。
+% 此包主要负责定义多语言相关的文本与宏。
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------
+% 包配置
+%----------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rhobabel}[2024/05/21]
+
+%----------------------------------------------------------
+% 关键词名称 (Keywords)
+%----------------------------------------------------------
+
+\newcommand{\keywordname}{{\keywordheadfont Keywords: }}
+
+%----------------------------------------------------------
+% 作者连接词 ("and", "y")
+%----------------------------------------------------------
+
+\newcommand{\andlanguage}{
+    \iflanguage{spanish}{
+        { y }%
+    }{%
+        { and }%
+    }%
+}
+
+%----------------------------------------------------------
+% 文章信息字段 (Correspondence, Email, etc.)
+%----------------------------------------------------------
+
+\newcommand{\correslanguage}{
+    \iflanguage{spanish}{
+        {Autor de correspondencia: }%
+    }{%
+        {Corresponding author: }%
+    }%
+}
+
+\newcommand{\emaillanguage}{
+    \iflanguage{spanish}{
+        {Correo electr\'onico: }%
+    }{%
+        {E-mail address: }%
+    }%
+}
+
+\newcommand{\receivedlanguage}{
+    \iflanguage{spanish}{
+        {Recibido: }%
+    }{%
+        {Received: }%
+    }%
+}
+
+\newcommand{\revisedlanguage}{
+    \iflanguage{spanish}{
+        {Revisado: }%
+    }{%
+        {Revised: }%
+    }%
+}
+
+\newcommand{\acceptedlanguage}{
+    \iflanguage{spanish}{
+        {Aceptado: }%
+    }{%
+        {Accepted: }%
+    }%
+}
+
+\newcommand{\publishedlanguage}{
+    \iflanguage{spanish}{
+        {Publicado: }%
+    }{%
+        {Published: }%
+    }%
+}
+
+%----------------------------------------------------------
+% 环境名称语言包 (Environments)
+%----------------------------------------------------------
+
+% Information/Informaci\'on language setup
+\newcommand{\infolanguage}{
+    \iflanguage{spanish}{
+        {\bfseries\noindent Informaci\'on}%
+    }{%
+        {\bfseries\noindent Information}%
+    }%
+}
+
+% Note/Nota language setup
+\newcommand{\notelanguage}{
+    \iflanguage{spanish}{
+        {\bfseries\noindent Nota}%
+    }{%
+        {\bfseries\noindent Note}%
+    }%
+}
+
+\endinput

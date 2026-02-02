@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+% Rhoenvs
+% LaTeX Package
+% Version 1.0.1 (21/05/2024)
+%
+% Chinese Comments Version by: AntiGravity Agent
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+%                        注意!
+% --------------------------------------------------------
+% 此包定义了模版所需的颜色方案和自定义环境（Info, Note等）。
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------
+% 包配置
+%----------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rhoenvs}[2024/05/21]
+
+%----------------------------------------------------------
+% 颜色定义
+%----------------------------------------------------------
+
+\RequirePackage[table]{xcolor} % 开启 table 选项，支持 \rowcolors 等命令
+\definecolor{rhocolor}{rgb}{0.0,0.25,0.5}        % Academic Navy (学术藏青 - 新主色)
+%\definecolor{rhocolor}{rgb}{0.12, 0.3, 0.17}    % Green (备选)
+%\definecolor{rhocolor}{rgb}{0.4, 0.26, 0.13}    % Brown (备选)
+
+%----------------------------------------------------------
+% 自定义环境: RHOENV, INFO, NOTE
+%----------------------------------------------------------
+
+% Rhoenv (通用环境)
+\newmdenv[
+    backgroundcolor=rhocolor!22, 					
+    linecolor=rhocolor!22,									
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries,
+    frametitlerule=false,
+    frametitlefont=\color{rhocolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\selectfont,
+    fontcolor=rhocolor,									
+    frametitleaboveskip=8pt,
+    skipabove=10pt
+]{rhoenv}
+
+%----------------------------------------------------------
+
+% Info (信息提示框)
+\newmdenv[
+    backgroundcolor=rhocolor!22, 						
+    linecolor=rhocolor!22,									
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries\infolanguage,
+    frametitlerule=false,
+    frametitlefont=\color{rhocolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\normalfont,
+    fontcolor=rhocolor,									
+    frametitleaboveskip=3pt,
+    skipabove=10pt
+]{info}
+
+%----------------------------------------------------------
+
+% Note (注释框)
+\newmdenv[
+    backgroundcolor=rhocolor!22, 						
+    linecolor=rhocolor!22,									
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries\notelanguage,
+    frametitlerule=false,
+    frametitlefont=\color{rhocolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\normalfont,
+    fontcolor=rhocolor,									
+    frametitleaboveskip=3pt,
+    skipabove=10pt
+]{note}
+
+%----------------------------------------------------------
+
+\endinput

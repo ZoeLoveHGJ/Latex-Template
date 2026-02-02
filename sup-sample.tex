@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+% Supplementary Material Template
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 加载补充材料文档类 (单栏，9pt)
+\documentclass[9pt,a4paper,twoside,onecolumn]{sup}
+
+\usepackage[english]{babel}
+
+% --------------------------------------------------------
+% 自定义设置
+% --------------------------------------------------------
+
+% 重置计数器，使章节、图表编号带有 "S" 前缀 (S.1, Fig S1)
+\renewcommand{\thesection}{S.\arabic{section}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+% --------------------------------------------------------
+% 文章标题
+% --------------------------------------------------------
+
+\title{Supplementary Material for "Paper Title..."}
+
+% 作者信息 (可选，如果不希望显示太多，可精简)
+\author[1]{First Author}
+\author[1,2]{Second Author}
+\author[1]{Third Author}
+
+\affil[1]{School of Computer Science and Technology, University Name, City, Country}
+\affil[2]{Key Laboratory of Research, City, Country}
+
+\leadauthor{Supplementary Material} % 页眉显示
+
+% --------------------------------------------------------
+% 开关
+% --------------------------------------------------------
+\setbool{rho-abstract}{true}
+\setbool{corres-info}{false} % 补充材料通常不显示底部详细通信信息
+
+% --------------------------------------------------------
+% 摘要 (必须放在 \maketitle 之前)
+% --------------------------------------------------------
+\begin{abstract}
+This supplementary document provides comprehensive mathematical proofs, detailed simulation settings, and additional experimental results that support the main claims of the paper.
+\end{abstract}
+
+% --------------------------------------------------------
+% 正文
+% --------------------------------------------------------
+\begin{document}
+
+\maketitle
+\thispagestyle{firststyle} % 使用专用首页样式
+
+% 目录
+\tableofcontents
+\vspace{20pt}
+\hrule
+\vspace{20pt}
+
+% --------------------------------------------------------
+% 内容区
+% --------------------------------------------------------
+
+\section{Detailed Derivations}
+This section presents the derivation of the optimal frame length. By minimizing the collision probability, we can derive the condition for maximum throughput.
+
+\section{Additional Experiments}
+\subsection{Throughput Analysis}
+We further analyze the system throughput under different tag densities.
+
+\subsubsection{Impact of Velocity}
+The tag velocity introduces Doppler shifts, which may affect the decoding performance. However, our results show that our protocol remains robust up to 5 m/s.
+
+% --------------------------------------------------------
+% 宽表格示例 (单栏模式优势)
+% --------------------------------------------------------
+\begin{table}[h]
+    \centering
+    \caption{Detailed Simulation Parameters (Full Width)}
+    \rowcolors{2}{gray!10}{white}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} & \textbf{Description} \\
+        \midrule
+        Tag Population & 100 -- 1000 & - & Number of tags in SOA \\
+        Clock Drift & 0.4\% & - & Maximum oscillator deviation \\
+        Bit Rate & 40 -- 640 & kbps & Adaptive link speed \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\end{document}
