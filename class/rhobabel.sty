@@ -3,33 +3,32 @@
 % Rhobabel
 % LaTeX Package
 % Version 1.0.1 (14/08/2024)
-% 
-% Chinese Comments Version by: AntiGravity Agent
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------------------------------------
-%                        注意!
+%                        WARNING!
 % --------------------------------------------------------
-% 请保持此文件与主类文件在同一目录或为了编译路径可达。
-% 此包主要负责定义多语言相关的文本与宏。
+% Do not remove this package from 'class/main.cls' to 
+% avoid compilation problems. This package defines the 
+% translation to spanish for some parts of the text.
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------
-% 包配置
+% PACKAGE CONFIGURATION
 %----------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rhobabel}[2024/05/21]
+\ProvidesPackage{class/rhobabel}[2024/05/21]
 
 %----------------------------------------------------------
-% 关键词名称 (Keywords)
+% KEYWORDS WORD
 %----------------------------------------------------------
 
 \newcommand{\keywordname}{{\keywordheadfont Keywords: }}
 
 %----------------------------------------------------------
-% 作者连接词 ("and", "y")
+% AUTHOR "AND" LANGUAGES
 %----------------------------------------------------------
 
 \newcommand{\andlanguage}{
@@ -41,8 +40,10 @@
 }
 
 %----------------------------------------------------------
-% 文章信息字段 (Correspondence, Email, etc.)
+% ARTICLE INFORMATION LANGUAGES
 %----------------------------------------------------------
+
+% Change manually the second {} if using another language babel
 
 \newcommand{\correslanguage}{
     \iflanguage{spanish}{
@@ -93,7 +94,7 @@
 }
 
 %----------------------------------------------------------
-% 环境名称语言包 (Environments)
+% ENVIRONMENTS LANGUAGES
 %----------------------------------------------------------
 
 % Information/Informaci\'on language setup

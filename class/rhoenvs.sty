@@ -3,38 +3,36 @@
 % Rhoenvs
 % LaTeX Package
 % Version 1.0.1 (21/05/2024)
-%
-% Chinese Comments Version by: AntiGravity Agent
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------------------------------------
-%                        注意!
+%                        WARNING!
 % --------------------------------------------------------
-% 此包定义了模版所需的颜色方案和自定义环境（Info, Note等）。
+% Do not remove this package from 'class/main.cls' to 
+% avoid compilation problems. This package defines the 
+% included environments and colors.
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------
-% 包配置
+% PACKAGE CONFIGURATION
 %----------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rhoenvs}[2024/05/21]
+\ProvidesPackage{class/rhoenvs}[2024/05/21]
 
 %----------------------------------------------------------
-% 颜色定义
+% COLORS
 %----------------------------------------------------------
 
-\RequirePackage[table]{xcolor} % 开启 table 选项，支持 \rowcolors 等命令
-\definecolor{rhocolor}{rgb}{0.0,0.25,0.5}        % Academic Navy (学术藏青 - 新主色)
-%\definecolor{rhocolor}{rgb}{0.12, 0.3, 0.17}    % Green (备选)
-%\definecolor{rhocolor}{rgb}{0.4, 0.26, 0.13}    % Brown (备选)
+\RequirePackage[table]{xcolor}
+\definecolor{rhocolor}{rgb}{0.0,0.25,0.5}        % Academic Navy
 
 %----------------------------------------------------------
-% 自定义环境: RHOENV, INFO, NOTE
+% RHOENV-, INFO-, NOTE- ENVIRONMENTS
 %----------------------------------------------------------
 
-% Rhoenv (通用环境)
+% Rhoenv
 \newmdenv[
     backgroundcolor=rhocolor!22, 					
     linecolor=rhocolor!22,									
@@ -55,7 +53,7 @@
 
 %----------------------------------------------------------
 
-% Info (信息提示框)
+% Info
 \newmdenv[
     backgroundcolor=rhocolor!22, 						
     linecolor=rhocolor!22,									
@@ -76,7 +74,7 @@
 
 %----------------------------------------------------------
 
-% Note (注释框)
+% Note
 \newmdenv[
     backgroundcolor=rhocolor!22, 						
     linecolor=rhocolor!22,									

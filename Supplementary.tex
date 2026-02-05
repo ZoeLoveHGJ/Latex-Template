@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rho Class - Supplementary Material Template
+% --------------------------------------------------------
+% 使用说明：
+% 1. 本模板基于 Rho Class Sup 样式
+% 2. 默认单栏排版 (onecolumn)
+% 3. 用于附录、补充数据等
+% 4. 核心类文件位于 class/ 目录下
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,onecolumn]{class/sup}
+
+%----------------------------------------------------------
+% 基本宏包配置
+%----------------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+
+%----------------------------------------------------------
+% 标题信息
+%----------------------------------------------------------
+\title{Supplementary Material: Detailed Derivations and Additional Results}
+\author{First Author, Second Author, Corresponding Author}
+\journalname{Preprint Submitted to Journal Name}
+\dates{\today}
+
+% 页脚和版本信息
+\institution{University Name}
+\leadauthor{First Author et al.}
+
+\setbool{rho-abstract}{true}
+
+\begin{abstract}
+    This supplementary material provides detailed derivations of the mathematical models presented in the main text, specifically the convergence proof in Section 3. Additionally, we present extended experimental results comparing the proposed method with two additional baselines under varying channel conditions.
+\end{abstract}
+
+%----------------------------------------------------------
+% 正文开始
+%----------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+
+\tableofcontents
+\vspace{20pt}
+\hrule
+\vspace{20pt}
+
+\section{Overview}
+\rhostart{T}{his} supplementary material accompanies the main manuscript. It includes detailed mathematical derivations, additional experimental results, and extended discussions that were not included in the main text due to space limitations.
+
+\textbf{Template Note:} This document uses the `class/sup` class, which is optimized for supplementary materials:
+\begin{itemize}
+    \item \textbf{Single Column}: Defaults to `onecolumn` for better readability of large tables and equations.
+    \item \textbf{Simplified Header}: Removes the complex author/affiliation block in favor of a clean title.
+    \item \textbf{Numbering}: You can customize section numbering (e.g., S.1) manually if required, though standard numbering is often sufficient.
+\end{itemize}
+
+\section{Additional Methodology Details}
+This section provides a deepening of the methods described in the main text.
+
+\subsection{Algorithm Analysis}
+The complexity of the proposed algorithm is $O(n \log n)$, as derived from standard principles \cite{Textbook_Example}. Below is the detailed proof.
+\begin{equation}
+    E = mc^2 + \int_{0}^{\infty} e^{-x} dx
+\end{equation}
+
+\section{Extended Results}
+
+\subsection{Additional Figures}
+We provide additional comparisons in Figure \ref{fig:sup_fig}. Note that figures in supplementary materials often use an "S" prefix, which can be configured using standard LaTeX commands (e.g., `\renewcommand{\thefigure}{S\arabic{figure}}`) if not already handled by the journal style.
+
+\begin{figure}[h]
+    \centering
+    % 使用 Template/figures/ 目录下的图片
+    \includegraphics[width=0.6\linewidth]{abstract_graph.pdf}
+    \caption{Supplementary Figure: detailed breakdown of the efficient frontier. The data correlates with the findings in Section 4 of the main manuscript.}
+    \label{fig:sup_fig}
+\end{figure}
+
+\subsection{Raw Data Tables}
+Table \ref{tab:sup_table} lists the complete dataset used for the simulation.
+
+\begin{table}[h]
+    \centering
+    \caption{Complete Simulation Parameters and Results}
+    \label{tab:sup_table}
+    \rowcolors{2}{gray!10}{white}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Dataset} & \textbf{Parameter A} & \textbf{Parameter B} & \textbf{Precision} & \textbf{Recall} \\
+        \midrule
+        Set 1 & 0.5 & 100 & 98.2\% & 97.5\% \\
+        Set 2 & 0.6 & 200 & 97.8\% & 96.9\% \\
+        Set 3 & 0.7 & 300 & 96.5\% & 96.1\% \\
+        Set 4 & 0.8 & 400 & 95.1\% & 95.5\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\printbibliography
+
+\end{document}

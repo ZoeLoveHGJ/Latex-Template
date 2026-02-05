@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rho Class - Academic Paper Template (Standardized)
+% --------------------------------------------------------
+% 使用说明：
+% 1. 本模板基于 Rho Class，适用于学术论文写作
+% 2. 默认双栏排版 (twocolumn)
+% 3. 请确保使用 BibLaTeX + Biber 进行参考文献编译
+% 4. 核心类文件位于 class/ 目录下
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,twoside,twocolumn]{class/main}
+
+%----------------------------------------------------------
+% 基本宏包配置
+%----------------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+
+%----------------------------------------------------------
+% 论文信息配置 (Metadata)
+%----------------------------------------------------------
+
+% 标题
+\title{Paper Title: A Comprehensive Study on Important Topics}
+\journalname{Preprint Submitted to Journal Name}
+% \paperversion{Draft Version 1.0}
+
+% 作者信息
+% 作信息
+\author[1]{First Author Name$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[1,2]{Second Author Name$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[2,$*$]{Corresponding Author Name$^{*,\orcidlink{0000-0000-0000-0000}}$}
+\author[1]{Fourth Author Name}
+\author[2]{Fifth Author Name}
+
+% 机构信息
+\affil[1]{Department of Computer Science, University Name, City, Country}
+\affil[2]{Research Institute, Technology Center, City, Country}
+
+% 通讯作者及其他元数据
+\corres{Corresponding Author Name}
+\email{corresponding.author@example.com}
+\firstauthor{First Author Name}
+\femail{first.author@example.com}
+% \allemails{first@example.com, second@example.com}
+
+\dates{Received: January 01, 2025; Revised: February 15, 2025; Accepted: March 01, 2025}
+\doi{\url{https://doi.org/10.1000/xyz123}}
+
+% 致谢/资助信息 (Acknowledgments / Funding)
+% 这部分信息显示在首页底部
+\license{This work was supported by the National Natural Science Foundation of China (Grant No. 12345678) and the Fundamental Research Funds for the Central Universities. The authors would like to thank Dr. X and Prof. Y for their valuable suggestions. This work is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source.}
+
+% 页脚信息
+\leadauthor{First Author et al.}
+\institution{University Name}
+
+% 开启功能模块
+\setbool{rho-abstract}{true}
+\setbool{corres-info}{true}
+
+%----------------------------------------------------------
+% 摘要 (Abstract)
+%----------------------------------------------------------
+\begin{abstract}
+    This is a comprehensive placeholder for the abstract to demonstrate the layout. The abstract typically summarizes the background, methodology, results, and conclusions of the study. 
+    
+    Missing Entity Identification is a crucial problem in large-scale RFID systems. We propose a novel protocol that leverages physical layer information and logical slotting to achieve high throughput. Our experimental results show a significant improvement over existing state-of-the-art solutions. Functional verification confirms the stability under various channel conditions.
+\end{abstract}
+
+\keywords{RFID, Missing Tag Identification, De-slotted Architecture, Perfect Hashing, Link-adaptive.}
+
+%----------------------------------------------------------
+% 图形化摘要 (Graphical Abstract)
+%----------------------------------------------------------
+\graphicalabstract{
+    \includegraphics[width=0.8\linewidth]{abstract_graph.pdf}
+    \captionsetup{font={small,bf,color=rhocolor}, labelformat=empty}
+    \captionof{figure}{Graphical Abstract: A visual summary of the main findings.}
+}
+
+%----------------------------------------------------------
+% 正文开始
+%----------------------------------------------------------
+\begin{document}
+
+\maketitle
+\clearpage % 强制Introduction从第二页开始
+
+\section{Introduction}
+\rhostart{W}{elcome} to the \textbf{Rho Class Standardized Template}. This template is designed for academic preprints and articles, featuring a clean, professional "Academic Navy" theme. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
+
+\textbf{Quick Start Guide:}
+\begin{enumerate}
+    \item \textbf{Configuration}: Open `Main.tex` and edit the metadata block (Title, Authors, Affiliations) at the top.
+    \item \textbf{Class Files}: The core logic resides in the `class/` directory (`main.cls`, `sup.cls`, `cover.cls`). Do not modify these unless you need to change the global style.
+    \item \textbf{Compilation}: Use \textbf{XeLaTeX} + \textbf{Biber} (for bibliography) + \textbf{XeLaTeX} sequence.
+\end{enumerate}
+
+\section{Template Features}
+
+\subsection{First Page Elements}
+\begin{itemize}
+    \item \textbf{Header}: Displays the Running Title (`\title`) and Lead Author (`\leadauthor`).
+    \item \textbf{Footer}: Contains the Institution Name (`\institution`), Preprint Version Date (automatically generated), and Page Number (e.g., "1-5").
+    \item \textbf{Metadata}: The bottom rule contains the Correspondence (`\corres`), License/Funding (`\license`), and Dates (`\dates`). Ensure `\setbool{corres-info}{true}` is set to enable this block.
+\end{itemize}
+
+\subsection{Graphical Abstract}
+You can include a graphical abstract before the introduction using the `\graphicalabstract` command.
+\begin{verbatim}
+\graphicalabstract{
+    \includegraphics[width=0.8\linewidth]{abstract.pdf}
+    \captionof{figure}{...}
+}
+\end{verbatim}
+\subsection{Citations and References}
+This template uses `biblatex` with `biber` backend.
+\begin{itemize}
+    \item Add your references to `ref.bib`.
+    \item Cite them using `\cite{key}`, e.g., \cite{Industry4} or \cite{Techrxiv}.
+\end{itemize}
+
+\subsection{Figures and Tables}
+Figures should be placed in the `figures/` directory. Use standard LaTeX environments.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{abstract_graph.pdf}
+    \caption{Example of a figure. Note that the caption is left-aligned and colored in Academic Navy.}
+    \label{fig:example}
+\end{figure}
+
+Table \ref{tab:example} demonstrates the default style.
+
+\begin{table}[h]
+    \centering
+    \caption{Example Table Style}
+    \label{tab:example}
+    \rowcolors{2}{gray!10}{white}
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Feature} & \textbf{Command} & \textbf{Note} \\
+        \midrule
+        Lead Author & \texttt{\textbackslash leadauthor} & Header usage \\
+        Institution & \texttt{\textbackslash institution} & Footer usage \\
+        License & \texttt{\textbackslash license} & Bottom info \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Conclusion}
+This template aims to provide an "out-of-the-box" experience for professional academic writing. If you encounter missing footer information, please check that `\setbool{corres-info}{true}` is present in your preamble.
+
+%----------------------------------------------------------
+% 参考文献
+%----------------------------------------------------------
+\printbibliography
+
+\end{document}

@@ -1,34 +1,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------------------------------------
-% Rho (Supplementary Material Class)
+% Supplementary Material Class (Based on Rho)
 % LaTeX Class
-% Version 2.1.2 (2025/02/02)
-% 
-% Optimized for 9pt Single-Column & S.X Numbering
-% Chinese Comments Version by: AntiGravity Agent
+% Version 2.2.0 (Standardized)
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------
-% 类配置 (Class Configuration)
+% CLASS CONFIGURATION
 %----------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sup}[2025/02/02 Rho Supplementary Class]
+\ProvidesClass{class/sup}[2025/02/05 Standardized Supplementary Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{extarticle}}
 \ProcessOptions\relax
-% 默认加载 extarticle 类，强制单栏 (onecolumn) 作为默认值
-\LoadClass[onecolumn]{extarticle} 
+\LoadClass{extarticle} % Defaults to onecolumn
 \AtEndOfClass{\RequirePackage{microtype}}
-\linespread{1.05} % 编辑行距优化
-
-% Tighter spacing
+\linespread{1.05} 
 \setlength{\textfloatsep}{10pt plus 1.0pt minus 2.0pt}
 \setlength{\floatsep}{10pt plus 1.0pt minus 2.0pt}
 \setlength{\intextsep}{10pt plus 1.0pt minus 2.0pt}
 
 %----------------------------------------------------------
-% 基础包加载 (跟 main.cls 保持一致)
+% REQUIRED PACKAGES
 %----------------------------------------------------------
 
 \RequirePackage[utf8]{inputenc}
@@ -52,9 +46,9 @@
 \RequirePackage{iflang}
 \RequirePackage{listings}
 \RequirePackage{lipsum}
-\RequirePackage{fontawesome5} 
-\RequirePackage{chemfig}     
-\RequirePackage{circuitikz}  
+\RequirePackage{fontawesome5}
+\RequirePackage{chemfig}
+\RequirePackage{circuitikz}
 \RequirePackage{supertabular}
 \RequirePackage{matlab-prettifier}
 \RequirePackage{csquotes}
@@ -64,21 +58,39 @@
 \RequirePackage{subcaption}
 \RequirePackage{stfloats} 
 \RequirePackage{authblk}
-\RequirePackage{authblk}
 
 %----------------------------------------------------------
-% 加载自定义包
+% RHO CUSTOM PACKAGES
 %----------------------------------------------------------
 
-\RequirePackage{rhobabel}
-\RequirePackage{rhoenvs}
+\RequirePackage{class/rhobabel}
+\RequirePackage{class/rhoenvs}
 
 %----------------------------------------------------------
-% 开关 & 布局 & 盒子
+% CORRESPONDING AUTHOR SECTION-, ABTRACT-, NEWBOOL
 %----------------------------------------------------------
 
 \newbool{corres-info}
 \newbool{rho-abstract}
+
+% Default settings for Supplementary
+\setbool{rho-abstract}{false}
+\setbool{corres-info}{false}
+
+\AtBeginDocument{
+    \setcounter{figure}{0}
+    \setcounter{table}{0}
+    \setcounter{equation}{0}
+    \setcounter{section}{0}
+    \renewcommand{\thefigure}{S\arabic{figure}}
+    \renewcommand{\thetable}{S\arabic{table}}
+    \renewcommand{\theequation}{EqS-\arabic{equation}}
+    \renewcommand{\thesection}{S.\arabic{section}}
+}
+
+%----------------------------------------------------------
+% PAGE LAYOUT
+%----------------------------------------------------------
 
 \RequirePackage[
     left=1.25cm, 
@@ -87,18 +99,26 @@
     bottom=2cm, 
     headsep=0.75cm
 ]{geometry}
-\setlength{\columnsep}{15pt}
+% No columnsep needed for onecolumn
+
+%----------------------------------------------------------
+% PACKAGES FOR FIGURES
+%----------------------------------------------------------
 
 \usepackage{graphicx}
 \RequirePackage{here}
 \graphicspath{{figures/}{./}} 
+
+%----------------------------------------------------------
+% PACKAGES FOR BOXES
+%----------------------------------------------------------
 
 \RequirePackage{adjustbox}
 \RequirePackage{colortbl}
 \RequirePackage{tcolorbox}
 
 %----------------------------------------------------------
-% 数学 & 字体
+% MATH PACKAGES
 %----------------------------------------------------------
 
 \RequirePackage{amsmath}
@@ -114,23 +134,38 @@
     \setlength\belowdisplayshortskip{\eqskip}%
 }
 
+%----------------------------------------------------------
+% FONTS
+%----------------------------------------------------------
+
 \usepackage[notextcomp]{stix2}
 \RequirePackage[scaled]{helvet}
 \renewcommand{\ttdefault}{lmtt}
+
+%----------------------------------------------------------
+% URLs STYLE
+%----------------------------------------------------------
 
 \RequirePackage{url}
 \RequirePackage{xurl}
 \renewcommand\UrlFont{\selectfont}
 
+%----------------------------------------------------------
+
 \RequirePackage[colorlinks=true, allcolors=rhocolor]{hyperref}
+\RequirePackage{orcidlink}
 \RequirePackage{cleveref}
 \RequirePackage{bookmark}
-\RequirePackage{orcidlink}
+
+%----------------------------------------------------------
+% ITEMS
+%----------------------------------------------------------
+
 \RequirePackage{enumitem}
 \setlist{noitemsep}
 
 %----------------------------------------------------------
-% 页眉页脚 (Supplementary 统一页眉样式)
+% FIRST PAGE-, HEADER AND FOOTER
 %----------------------------------------------------------
 
 \newcommand{\footerfont}{\normalfont\sffamily\fontsize{7}{9}\selectfont}
@@ -141,9 +176,8 @@
 \newcommand{\theday}[1]{\def\@theday{#1}}
 
 \pagestyle{fancy}
-\pagenumbering{arabic}
+   \pagenumbering{arabic}
 
-% First page (继承常规样式)
 \fancypagestyle{firststyle}{
     \fancyfoot[R]{
         {\ifx\@institution\undefined\else\footerfont\@institution\hspace{10pt}\fi}
@@ -157,72 +191,44 @@
     \fancyhead[C]{}
     \fancyhead[R]{}
     \fancyhead[L]{}
-    \renewcommand{\headrulewidth}{0.1pt} % Supplementary 首页也保留横线，因标题逻辑不同
+    \renewcommand{\headrulewidth}{0pt}
 }
 
 \fancyhead[RO,LE]{\ifx\@title\undefined\else\footerfont\@title\fi}
 \fancyhead[RE,LO]{\ifx\@leadauthor\undefined\else\footerfont\@leadauthor\fi}
-
 \fancyfoot[C]{\footerfont\textit{Supplementary Material \textendash\ \today}\hspace{20pt}\thepage\textendash\pageref{LastPage}}
 
 \renewcommand{\headrulewidth}{0.1pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{black!15}\leaders\hrule height \headrulewidth\hfill}}
-\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt} 
 
 %----------------------------------------------------------
-% 首字下沉
+% LETTERS
 %----------------------------------------------------------
 
 \newcommand{\dropcapfont}{\color{rhocolor}\bfseries\fontsize{25pt}{28pt}\selectfont}
 \newcommand{\rhostart}[1]{\lettrine[lines=2,lraise=0,findent=2pt, nindent=0em]{{\dropcapfont{#1}}}{}}
 
 %----------------------------------------------------------
-% 底部信息栏 (Correspondence)
+% INFO SECTION (Simplified for Sup)
 %----------------------------------------------------------
-% (虽然补充材料一般不显示，但保留定义防止报错)
 
 \newcommand{\rhoinfofont}{\color{black}\normalfont\sffamily\linespread{1}\fontsize{7.8}{9}\selectfont}
-\newcommand{\received}[1]{\def\@received{#1}}
-\newcommand{\revised}[1]{\def\@revised{#1}}
-\newcommand{\accepted}[1]{\def\@accepted{#1}}
-\newcommand{\published}[1]{\def\@published{#1}}
-\newcommand{\corres}[1]{\def\@corres{#1}}
-\newcommand{\email}[1]{\def\@email{#1}}
-\newcommand{\doi}[1]{\def\@doi{#1}}
-\newcommand{\license}[1]{\def\@license{#1}}
-\newcommand{\firstauthor}[1]{\def\@firstauthor{#1}}
-\newcommand{\femail}[1]{\def\@femail{#1}}
-\newcommand{\firstauthorlanguage}{First Author: }
-
-\newcommand{\rhoinfo}{
-    \rhoinfofont
-        \vskip5pt
-            {\ifx\@corres\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\correslanguage}\@corres\fi} 
-            {\ifx\@email\undefined\else\textcolor{rhocolor}{\itshape\ignorespaces\emaillanguage}\@email\fi}
-            \quad
-            {\ifx\@firstauthor\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\firstauthorlanguage}\@firstauthor\fi} 
-            {\ifx\@femail\undefined\else\textcolor{rhocolor}{\itshape\ignorespaces\emaillanguage}\@femail\fi\par}
-            {\ifx\@doi\undefined\else\textcolor{rhocolor}{\bfseries DOI: }\@doi\fi\par}
-            {\ifx\@received\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\receivedlanguage}\@received\hspace{10pt}\fi}
-            {\ifx\@revised\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\revisedlanguage}\@revised\hspace{10pt}\fi} 
-            {\ifx\@accepted\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\acceptedlanguage}\@accepted\hspace{10pt}\fi}
-            {\ifx\@published\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\publishedlanguage}\@published\fi\par}
-                \vskip3pt
-            {\ifx\@license\undefined\else\@license\fi\par}
-         \vskip1pt
-        {\color{rhocolor}\rule{\textwidth}{0.3pt}}
-}
+% Dummy definitions if needed
 
 %----------------------------------------------------------
-% 摘要 (Abstract)
+%----------------------------------------------------------
+% ABSTRACT STYLE
 %----------------------------------------------------------
 
+% Abstract text style new commands
 \newcommand{\keywords}[1]{\def\@keywords{#1}}
 \newcommand{\absfont}{\color{black}\normalfont\sffamily\linespread{1}\fontsize{8}{10}\selectfont}
 \newcommand{\absheadfont}{\color{rhocolor}\normalfont\sffamily\fontsize{9}{11}\selectfont}
 \newcommand{\keywordsfont}{\normalfont\sffamily\itshape\linespread{1}\fontsize{7}{8.5}\selectfont}
 \newcommand{\keywordheadfont}{\color{rhocolor}\normalfont\sffamily\fontsize{7.8}{9}\selectfont\bfseries}
 
+% Abstract definition
 \def\xabstract{abstract}
 \long\def\abstract#1\end#2{
     \def\two{#2}\ifx\two\xabstract
@@ -235,6 +241,7 @@
     \let\go\relax\fi
 \go}
 
+% Rho class abstract style 
 \newcommand{\rhoabstract}{
     \begin{tcolorbox}[colback=rhocolor!12, arc=0pt, boxrule=0pt, left=5pt, right=5pt, top=5pt, bottom=5pt, colframe=rhocolor, sharp corners]
         \ifx\@keywords\undefined
@@ -247,7 +254,7 @@
 }
 
 %----------------------------------------------------------
-% 标题区 (Title)
+% TITLE STYLE
 %----------------------------------------------------------
 
 \newcommand{\journalname}[1]{\def\@journalname{#1}}
@@ -257,12 +264,12 @@
 \renewcommand{\@maketitle}{
     \bgroup\setlength{\parindent}{0pt}
     {
-        % 补充材料不显示 journalname
+        {\ifx\@journalname\undefined\vskip-18pt\else\vskip-25pt\RaggedRight\sffamily\bfseries\fontsize{8}{14}\selectfont\@journalname\par\fi}
         {\RaggedRight\color{rhocolor}\sffamily\bfseries\fontsize{16}{22}\selectfont\@title\par}
         \vskip10pt
             {\RaggedRight\@author\par}
         \vskip8pt
-            {\ifx\@dates\undefined\vskip2pt\else\RaggedRight\datesfont\@dates\par\vskip15pt\fi}
+        % Abstract and Info
         \ifbool{rho-abstract}{\justify\rhoabstract}{}
         \ifbool{corres-info}{\RaggedRight\rhoinfo}{}
     } 
@@ -271,7 +278,7 @@
 }
 
 %----------------------------------------------------------
-% 作者机构 (Affiliation)
+% AFFILIATION
 %----------------------------------------------------------
 
 \setlength{\affilsep}{9pt}
@@ -283,7 +290,7 @@
 \renewcommand\Authands{\ignorespaces\andlanguage }
 
 %----------------------------------------------------------
-% 章节 (Sections)
+% SECTION STYLE
 %----------------------------------------------------------
 
 \setcounter{secnumdepth}{5}
@@ -313,7 +320,7 @@
     {\small\sffamily\bfseries\itshape}
     {\thesubsubsection.}
     {0.5em}
-    {#1}    
+    {#1}
     []    
   
 \titleformat{\paragraph}[runin]
@@ -328,13 +335,13 @@
 \titlespacing*{\paragraph}{0pc}{1.5ex \@plus2pt \@minus1pt}{12pt}
 
 %----------------------------------------------------------
-% 目录 (TOC) - 补充材料专用宽间距
+% TABLE OF CONTENTS (Wider Spacing)
 %----------------------------------------------------------
 
 \newlength{\tocsep} 
-\setlength\tocsep{2.5pc} % Section 缩进加大，适应 "S.1"
-\newlength{\tocsubsecsep} \setlength{\tocsubsecsep}{5pc} % Subsection 缩进加大
-\newlength{\tocsubsubsecsep} \setlength{\tocsubsubsecsep}{7.5pc} % Subsubsection 缩进加大
+\setlength\tocsep{2.5pc} % Wider indentation for "S.1"
+\newlength{\tocsubsecsep} \setlength{\tocsubsecsep}{3.5pc}
+\newlength{\tocsubsubsecsep} \setlength{\tocsubsubsecsep}{5.0pc}
 \setcounter{tocdepth}{5}
 
 \usepackage{titletoc}
@@ -362,7 +369,7 @@
     []
 
 %----------------------------------------------------------
-% 标题 (Captions)
+% CAPTIONS
 %----------------------------------------------------------
 
 \RequirePackage[
@@ -382,19 +389,17 @@
 \AtBeginEnvironment{supertabular}{\footnotesize}
 
 \newcommand{\captioncodelanguage}{
-    \iflanguage{spanish}{
-        {C\'odigo}%
-    }{%
-        {Code}%
-    }%
+    \iflanguage{spanish}{{C\'odigo}}{{Code}}
 }
 \captionsetup[lstlisting]{font=footnotesize, labelfont={bf,sf,color=rhocolor}, belowskip=3pt, position=below, labelsep=period}
 \renewcommand\lstlistingname{\captioncodelanguage}
 \renewcommand\lstlistlistingname{\captioncodelanguage}
 
 %----------------------------------------------------------
-% 代码样式 (Listings)
+% LISTINGS
 %----------------------------------------------------------
+% Skipped repetition for brevity, assuming standard listings style from main.cls works fine or users copy it. 
+% Wait, I should include it for completeness.
 
 \definecolor{rhocodeback}{RGB}{246, 248, 250}   
 \definecolor{rhocodecomment}{RGB}{106, 115, 125} 
@@ -414,15 +419,15 @@
     breaklines=true,                 
     captionpos=b,                    
     keepspaces=true,                 
-    numbers=left,				 	 
-    numbersep=8pt,    				           
+    numbers=left,
+    numbersep=8pt,
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
     tabsize=2,
     aboveskip=12pt,
     belowskip=8pt,
-    xleftmargin=10pt,				
+    xleftmargin=10pt,
     rulecolor=\color{rhogray},
     frame=single
 }
@@ -437,7 +442,7 @@
 \lstset{style=rhocoding}
 
 %----------------------------------------------------------
-% 尾注
+% FOOTNOTES
 %----------------------------------------------------------
 
 \definecolor{black50}{gray}{0.5}
@@ -449,7 +454,7 @@
 }
 
 %----------------------------------------------------------
-% Reference
+% BIBLATEX
 %----------------------------------------------------------
 
 \usepackage[
@@ -461,4 +466,5 @@
 \addbibresource{ref.bib}
 
 %----------------------------------------------------------
+
 \endinput
