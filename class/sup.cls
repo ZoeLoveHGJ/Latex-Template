@@ -174,29 +174,37 @@
 \newcommand{\footinfo}[1]{\def\@footinfo{#1}}
 \newcommand{\smalltitle}[1]{\def\@smalltitle{#1}}
 \newcommand{\theday}[1]{\def\@theday{#1}}
+\newcommand{\paperversion}[1]{\def\@paperversion{#1}}
+
+% Cross-Referencing
+\RequirePackage{xr}
+\newcommand{\setupxr}[1]{
+    \externaldocument{#1}
+}
 
 \pagestyle{fancy}
    \pagenumbering{arabic}
 
 \fancypagestyle{firststyle}{
     \fancyfoot[R]{
-        {\ifx\@institution\undefined\else\footerfont\@institution\hspace{10pt}\fi}
-        {\ifx\@theday\undefined\else\footerfont\bfseries\@theday\hspace{10pt}\fi}
         {\ifx\@smalltitle\undefined\else\footerfont\@smalltitle\hspace{10pt}\fi}
-        {\footerfont\textit{Supplementary Material \textendash\ \today}\hspace{10pt}}
-        {\footerfont\textbf\thepage\textendash\pageref{LastPage}}
+        {\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
     }
-    \fancyfoot[L]{\ifx\@footinfo\undefined\else\footerfont\@footinfo\fi}
-    \fancyfoot[C]{}
+    \fancyfoot[L]{
+        {\ifx\@institution\undefined\else\footerfont\@institution\fi}
+        {\ifx\@footinfo\undefined\else\footerfont\@footinfo\fi}
+    }
+    \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
     \fancyhead[C]{}
     \fancyhead[R]{}
     \fancyhead[L]{}
     \renewcommand{\headrulewidth}{0pt}
 }
 
-\fancyhead[RO,LE]{\ifx\@title\undefined\else\footerfont\@title\fi}
-\fancyhead[RE,LO]{\ifx\@leadauthor\undefined\else\footerfont\@leadauthor\fi}
-\fancyfoot[C]{\footerfont\textit{Supplementary Material \textendash\ \today}\hspace{20pt}\thepage\textendash\pageref{LastPage}}
+\fancyhead[L]{\ifx\@savedtitle\undefined\else\footerfont\@savedtitle\fi}
+\fancyhead[R]{\ifx\@leadauthor\undefined\else\footerfont\@leadauthor\fi}
+\fancyfoot[R]{\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
+\fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
 \renewcommand{\headrulewidth}{0.1pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{black!15}\leaders\hrule height \headrulewidth\hfill}}
@@ -263,6 +271,7 @@
 
 \renewcommand{\@maketitle}{
     \bgroup\setlength{\parindent}{0pt}
+    \global\let\@savedtitle\@title
     {
         {\ifx\@journalname\undefined\vskip-18pt\else\vskip-25pt\RaggedRight\sffamily\bfseries\fontsize{8}{14}\selectfont\@journalname\par\fi}
         {\RaggedRight\color{rhocolor}\sffamily\bfseries\fontsize{16}{22}\selectfont\@title\par}
@@ -276,6 +285,7 @@
     \egroup
     \vskip12pt
 }
+\apptocmd{\maketitle}{\thispagestyle{firststyle}}{}{}
 
 %----------------------------------------------------------
 % AFFILIATION
