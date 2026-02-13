@@ -20,6 +20,11 @@
 \usepackage[table]{xcolor}
 
 %----------------------------------------------------------
+% 主题色配置 (可选: red, purple, blue)
+%----------------------------------------------------------
+\rhotheme{red}  % 切换主题色：red / purple / blue
+
+%----------------------------------------------------------
 % 论文信息配置 (Metadata)
 %----------------------------------------------------------
 
@@ -30,7 +35,7 @@
 
 % 作者信息
 % 作信息
-\author[1]{Hongquan ZHou$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[1]{Hongquan Zhou$^{\orcidlink{0000-0000-0000-0000}}$}
 \author[1,2]{Zhong Du$^{\orcidlink{0000-0000-0000-0000}}$}
 \author[2,$*$]{Xiaolin Jia$^{*,\orcidlink{0000-0000-0000-0000}}$}
 \author[1]{Yajun Gu}
@@ -73,11 +78,7 @@ Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling
 %----------------------------------------------------------
 % 图形化摘要 (Graphical Abstract)
 %----------------------------------------------------------
-\graphicalabstract{
-    \includegraphics[width=0.8\linewidth]{abstract_graph.pdf}
-    \captionsetup{font={small,bf,color=rhocolor}, labelformat=empty}
-    \captionof{figure}{Graphical Abstract: A visual summary of the main findings.}
-}
+\graphicalabstract{\includegraphics[width=0.8\linewidth]{abstract_graph.pdf}}{This graphical abstract illustrates the architecture and performance of LODS-MTI, a protocol designed to reconcile logical reliability with physical spectral efficiency in RFID systems. 1. Context: Resolves the structural conflict between stable logic-layer scheduling (Type I) and fast physical-layer collision resolution (Type II). 2. Mechanism: Replaces guard intervals with a de-slotted continuous stream for spectral compression. A Digital Majority Voting logic ($\sum w_i \ge \theta$) recovers data from synchronization drift, achieving $\Gamma \approx 3.52$. 3. Outcome: Delivers 10x lower energy ($\sim 150 \mu J/tag$) and sustains 5,200+ tags/s goodput with 99.1\% accuracy.}
 
 %----------------------------------------------------------
 % 正文开始
@@ -86,9 +87,9 @@ Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling
 
 \maketitle
 \clearpage % 强制Introduction从第二页开始
-
+% \rhostart{W}{elcome}            
 \section{Introduction}
-\rhostart{W}{elcome} to the \textbf{Rho Class Standardized Template}. This template is designed for academic preprints and articles, featuring a clean, professional "Academic Navy" theme. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
+Welcome to the \textbf{Rho Class Standardized Template}. This template is designed for academic preprints and articles, featuring a clean, professional "Academic Navy" theme. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
 
 \textbf{Quick Start Guide:}
 \begin{enumerate}

@@ -26,7 +26,22 @@
 %----------------------------------------------------------
 
 \RequirePackage[table]{xcolor}
-\definecolor{rhocolor}{HTML}{B00000}        % Amazon/OSU Red
+
+% ------ 主题色预设 (Theme Color Presets) ------
+% 使用方法：在 \documentclass 之后调用 \rhotheme{颜色名}
+% 可选值：red (默认), purple, blue
+% 示例：\rhotheme{purple}
+\definecolor{rho-red}{HTML}{B00000}           % 学术红
+\definecolor{rho-purple}{HTML}{6A1B9A}        % 优雅紫
+\definecolor{rho-blue}{HTML}{1565C0}          % 经典蓝
+
+% 默认主题色
+\colorlet{rhocolor}{rho-red}
+
+% 主题切换命令
+\newcommand{\rhotheme}[1]{%
+    \colorlet{rhocolor}{rho-#1}%
+}
 
 %----------------------------------------------------------
 % RHOENV-, INFO-, NOTE- ENVIRONMENTS

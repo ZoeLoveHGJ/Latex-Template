@@ -173,8 +173,8 @@
     \fancyfoot[L]{}
     \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
     \fancyhead[L]{\ifx\@institution\undefined\else\footerfont\textbf{\@institution}\fi}
-    \fancyhead[R]{\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
-    \fancyhead[C]{}
+    \fancyhead[R]{\ifx\@paperversion\undefined\footerfont\textit{Version\textendash\  \today}\else\footerfont\textit{\@paperversion}\fi}
+    \fancyhead[C]{\sffamily\fontsize{7}{9}\selectfont\bfseries Main Paper}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
     \renewcommand{\footrulewidth}{0pt}
@@ -189,9 +189,9 @@
 \fancyfoot[R]{\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
 \fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
-\renewcommand{\headrulewidth}{0.1pt} % Faint header rule
-\renewcommand{\headrule}{\hbox to\headwidth{\color{black!15}\leaders\hrule height \headrulewidth\hfill}}
-\renewcommand{\footrulewidth}{0pt} % No footer rule
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
 
 %----------------------------------------------------------
 % RHO START ~ LETTRINE
@@ -279,8 +279,10 @@
     ]
         \justify\absfont\theabstract
         \ifx\@keywords\undefined\else
-            \vskip8pt
-            \noindent\keywordsfont\textbf{Keywords:}\hspace{0.3em}\@keywords
+            \vskip6pt
+            {\color{black!20}\rule{\linewidth}{0.3pt}}
+            \vskip4pt
+            \noindent\keywordsfont\textcolor{rhocolor}{\bfseries Keywords:}\hspace{0.3em}\@keywords
         \fi
     \end{tcolorbox}
 }
@@ -325,7 +327,17 @@
 \apptocmd{\maketitle}{\thispagestyle{firststyle}}{}{}
 
 
-\newcommand{\graphicalabstract}[1]{\def\@graphicalabstract{#1}}
+% 图形化摘要命令 (Graphical Abstract)
+% 使用方法：\graphicalabstract{图片命令}{描述文字}
+% 示例：\graphicalabstract{\includegraphics[width=0.8\linewidth]{fig.pdf}}{描述内容}
+\newcommand{\graphicalabstract}[2]{%
+    \def\@graphicalabstract{%
+        #1\par\vskip6pt
+        \noindent\begin{minipage}{\linewidth}
+            \small\textcolor{rhocolor}{\bfseries Graphical Abstract:} #2
+        \end{minipage}%
+    }%
+}
 
 %----------------------------------------------------------
 % AFFILIATION SETUP
@@ -358,7 +370,7 @@
     {\color{rhocolor}\sffamily\large\bfseries}
     {}
     {0em}
-    {\tikz\draw[rhocolor, fill=rhocolor] (0,0) rectangle (6.6pt,6.6pt); \hspace{2.5pt} {#1}}
+    {#1}
     []
   
 \titleformat{\subsection}[block]

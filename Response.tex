@@ -1,0 +1,168 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rho Class - Response to Reviewers Template
+% --------------------------------------------------------
+% 使用说明：
+% 1. 填写论文信息（\papertitle, \journalname 等）
+% 2. 开头为致编辑/审稿人的总结信
+% 3. 目录自动生成，方便审稿人定位
+% 4. 使用 \reviewer{N} 分区，每个问题用：
+%    - reviewercomment 环境（审稿意见）
+%    - authorresponse 环境（作者回复）
+%    - revisedtext 环境（修改后的正文段落）
+% 5. 可用 \added{新增文字}, \deleted{删除文字} 标记修改
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{class/response}
+
+%----------------------------------------------------------
+% 基本宏包配置
+%----------------------------------------------------------
+\usepackage[english]{babel}
+
+%----------------------------------------------------------
+% 主题色配置 (可选: red, purple, blue)
+%----------------------------------------------------------
+\rhotheme{red}
+
+%----------------------------------------------------------
+% 论文信息（定义一次，全局复用）
+%----------------------------------------------------------
+\papertitle{LODS-MTI: A Link-Adaptive, Orthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
+\journalname{IEEE Transactions on Mobile Computing}
+\authorname{Xiaolin Jia et al.}
+\manuscriptid{TMC-2025-XXXXX}
+
+%----------------------------------------------------------
+\begin{document}
+
+\makeresponsetitle
+
+%==========================================================
+% 致编辑与审稿人的总结信
+%==========================================================
+
+\textbf{Dear Editors and Reviewers:}
+
+We would like to express our sincere appreciation to the Editor-in-Chief, the Associate Editor, and the Reviewers for their time and effort in reviewing our manuscript. We are particularly grateful for the encouraging comments from \textbf{Reviewer \#2} and \textbf{Reviewer \#4}, who recognized the novelty and readiness of our work.
+
+Simultaneously, we found the critical questions raised by \textbf{Reviewer \#1} and \textbf{Reviewer \#3} regarding physical layer assumptions and worst-case scenarios to be insightful. These comments have guided us to perform a fundamental upgrade to our simulation framework and validation methodology.
+
+We have carefully addressed all comments point-by-point. Our major revisions are summarized as follows:
+
+\begin{enumerate}
+    \item Re-executed ALL experiments using an upgraded high-fidelity simulation framework.
+    \item Implemented a refined dynamic energy model for listening cost analysis.
+    \item Introduced a Channel Middleware layer to model realistic physical layer imperfections.
+    \item Conducted a comparative ablation study to verify our ``Earliest-Position-First'' strategy.
+    \item Made the complete source code publicly available for transparency and reproducibility.
+    \item Added a rigorous discussion on worst-case complexity; all major revisions are \added{highlighted in red} for easy tracking.
+    \item Updated the references strictly according to IEEE journal requirements.
+\end{enumerate}
+
+We believe these extensive revisions have significantly strengthened the technical depth, rigor, and practical relevance of the paper. We hope the revised manuscript is now suitable for publication.
+
+\vskip0.5em
+Best regards,
+
+\textbf{Prof. Xiaolin Jia and Co-authors} \hfill \today
+
+%==========================================================
+% 目录（方便审稿人快速定位）
+%==========================================================
+
+\vskip2em
+\makeresponsetoc
+
+
+%==========================================================
+% Reviewer #1
+%==========================================================
+
+\reviewer{1}
+
+% --- Comment 1.1 ---
+\begin{reviewercomment}
+The paper assumes perfect physical layer conditions. How does the protocol perform under realistic channel impairments such as timing jitter, sensing errors, and tag dropout?
+\end{reviewercomment}
+
+\begin{authorresponse}
+Thank you for this insightful comment. We have introduced a Channel Middleware layer in our simulation framework to model realistic physical layer imperfections. Specifically, we now account for:
+
+\begin{itemize}
+    \item Timing jitter ($\pm 5\%$ variation in slot boundaries)
+    \item Bit-level sensing errors (BER = $10^{-3}$)
+    \item Tag dropout probability ($p_{\text{drop}} = 0.01$)
+\end{itemize}
+
+The revised results show that LODS-MTI maintains its performance advantage with less than 3\% degradation. Please see Section 5.3:
+
+\begin{revisedtext}
+To validate the robustness of LODS-MTI under realistic conditions, we introduce a Channel Middleware layer that models three types of physical layer imperfections: (1) \added{timing jitter with $\pm 5\%$ slot boundary variation}, (2) \added{bit-level sensing errors at BER = $10^{-3}$}, and (3) \added{stochastic tag dropout with probability $p_{\text{drop}} = 0.01$}. Our experimental results demonstrate that the protocol maintains its performance advantage with less than 3\% degradation compared to ideal conditions.
+\end{revisedtext}
+
+\end{authorresponse}
+
+% --- Comment 1.2 ---
+\begin{reviewercomment}
+The worst-case complexity analysis is missing. What happens when the number of missing tags is very large (e.g., 50\% or more)?
+\end{reviewercomment}
+
+\begin{authorresponse}
+We have added Section 4.4 analyzing the worst-case complexity:
+
+\begin{revisedtext}
+\textbf{Worst-Case Analysis.} When the missing rate $\alpha$ exceeds a threshold $\alpha_{\text{th}} = 0.5$, the communication overhead of incremental identification surpasses that of full re-inventory. In this regime, LODS-MTI \added{automatically triggers a fallback to complete re-inventory mode, which achieves $O(n)$ complexity where $n$ is the total tag population.}
+\end{revisedtext}
+
+\end{authorresponse}
+
+
+%==========================================================
+% Reviewer #2
+%==========================================================
+
+\reviewer{2}
+
+% --- Comment 2.1 ---
+\begin{reviewercomment}
+Some references are not formatted according to IEEE standards. Please update accordingly.
+\end{reviewercomment}
+
+\begin{authorresponse}
+Thank you. We have reformatted all references to comply with IEEE transaction standards:
+
+\begin{itemize}
+    \item Replaced informal citations with proper IEEE format
+    \item Added DOI links where available
+    \item Ensured consistent author name formatting
+\end{itemize}
+\end{authorresponse}
+
+
+%==========================================================
+% Reviewer #3
+%==========================================================
+
+\reviewer{3}
+
+% --- Comment 3.1 ---
+\begin{reviewercomment}
+The energy model does not account for the listening cost during idle slots. This may lead to underestimation of total energy consumption.
+\end{reviewercomment}
+
+\begin{authorresponse}
+Excellent observation. We have refined the energy model to include listening costs. The updated analysis (Section 5.2):
+
+\begin{revisedtext}
+The total energy consumption $E_{\text{total}}$ is computed as:
+\begin{equation}
+    E_{\text{total}} = \sum_{i=1}^{R} \left( E_{\text{tx},i} + \added{E_{\text{listen},i} \cdot N_{\text{active},i}} + E_{\text{idle},i} \right)
+\end{equation}
+where \added{$E_{\text{listen},i}$ represents the per-tag listening energy during round $i$, and $N_{\text{active},i}$ is the number of active tags in that round.}
+\end{revisedtext}
+
+\end{authorresponse}
+
+
+\end{document}
