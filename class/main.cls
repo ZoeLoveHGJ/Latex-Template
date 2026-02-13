@@ -101,6 +101,7 @@
 \RequirePackage{adjustbox}
 \RequirePackage{colortbl}
 \RequirePackage{tcolorbox}
+\tcbuselibrary{skins}
 
 %----------------------------------------------------------
 % MATH PACKAGES
@@ -168,19 +169,15 @@
 
 % First page style
 \fancypagestyle{firststyle}{
-    \fancyfoot[R]{
-        {\ifx\@smalltitle\undefined\else\footerfont\@smalltitle\hspace{10pt}\fi}
-        {\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
-    }
-    \fancyfoot[L]{
-        {\ifx\@institution\undefined\else\footerfont\@institution\fi}
-        {\ifx\@footinfo\undefined\else\footerfont\@footinfo\fi}
-    }
+    \fancyfoot[R]{}
+    \fancyfoot[L]{}
     \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
+    \fancyhead[L]{\ifx\@institution\undefined\else\footerfont\textbf{\@institution}\fi}
+    \fancyhead[R]{\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
     \fancyhead[C]{}
-    \fancyhead[R]{}
-    \fancyhead[L]{}
-    \renewcommand{\headrulewidth}{0pt} % No header rule on first page
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
+    \renewcommand{\footrulewidth}{0pt}
 }
 
 % Header
@@ -188,6 +185,7 @@
 \fancyhead[R]{\ifx\@leadauthor\undefined\else\footerfont\@leadauthor\fi}
 
 % Footer
+\fancyfoot[L]{\ifx\@institution\undefined\else\footerfont\@institution\fi}
 \fancyfoot[R]{\ifx\@paperversion\undefined\footerfont\textit{Paper Version \textendash\ \today}\else\footerfont\textit{\@paperversion}\fi}
 \fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
@@ -222,7 +220,7 @@
 \newcommand{\firstauthorlanguage}{First Author: }
 
 \newcommand{\rhoinfo}{
-    \rhoinfofont
+    \centering\rhoinfofont
         \vskip5pt
             {\ifx\@corres\undefined\else\textcolor{rhocolor}{\bfseries\ignorespaces\correslanguage}\@corres\fi} 
             {\ifx\@email\undefined\else\textcolor{rhocolor}{\itshape\ignorespaces\emaillanguage}\@email\fi}
@@ -238,7 +236,6 @@
                 \vskip3pt
             {\ifx\@license\undefined\else\@license\fi\par}
          \vskip1pt
-        {\color{rhocolor}\rule{\textwidth}{0.3pt}}
 }
 
 %----------------------------------------------------------
@@ -267,12 +264,23 @@
 
 % Rho class abstract style 
 \newcommand{\rhoabstract}{
-    \begin{tcolorbox}[colback=rhocolor!12, arc=0pt, boxrule=0pt, left=5pt, right=5pt, top=5pt, bottom=5pt, colframe=rhocolor, sharp corners]
-        \ifx\@keywords\undefined
-            \absheadfont\bfseries\abstractname\vskip0.5em\absfont\theabstract\vskip10pt
-        \else
-            \absheadfont\bfseries\abstractname\vskip0.5em\absfont\theabstract\vskip10pt
-            \keywordsfont\keywordname\hspace{0.1em}\keywordsfont\@keywords
+    \begin{tcolorbox}[
+        enhanced,
+        colback=white,
+        arc=5pt,
+        boxrule=0.8pt,
+        left=10pt, right=10pt, top=12pt, bottom=8pt,
+        colframe=rhocolor,
+        title={\centering\bfseries\color{rhocolor}\abstractname},
+        coltitle=rhocolor,
+        fonttitle=\sffamily\fontsize{10}{12}\selectfont,
+        attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
+        boxed title style={colback=white, colframe=white, boxrule=0pt, arc=0pt, left=6pt, right=6pt, top=1pt, bottom=1pt}
+    ]
+        \justify\absfont\theabstract
+        \ifx\@keywords\undefined\else
+            \vskip8pt
+            \noindent\keywordsfont\textbf{Keywords:}\hspace{0.3em}\@keywords
         \fi
     \end{tcolorbox}
 }
@@ -290,14 +298,19 @@
     \bgroup\setlength{\parindent}{0pt}
     \global\let\@savedtitle\@title
     {
-        {\ifx\@journalname\undefined\vskip-18pt\else\vskip-25pt\RaggedRight\sffamily\bfseries\fontsize{8}{14}\selectfont\@journalname\par\fi}
-        {\RaggedRight\color{rhocolor}\sffamily\bfseries\fontsize{16}{22}\selectfont\@title\par}
+        \centering
+        {\ifx\@journalname\undefined\vskip-10pt\else\vskip-5pt\sffamily\bfseries\fontsize{8}{14}\selectfont\@journalname\par\fi}
         \vskip10pt
-            {\RaggedRight\@author\par}
+        {\color{black}\bfseries\fontsize{18}{22}\selectfont\@title\par}
+        \vskip6pt
+        {\color{rhocolor}\rule{\textwidth}{0.4pt}}\par
         \vskip8pt
-            {\ifx\@dates\undefined\vskip2pt\else\RaggedRight\datesfont\@dates\par\vskip15pt\fi}
-        \ifbool{rho-abstract}{\justify\rhoabstract}{}
-        \ifbool{corres-info}{\RaggedRight\rhoinfo}{}
+        {\bfseries\@author\par}
+        \vskip6pt
+            {\ifx\@dates\undefined\vskip2pt\else\datesfont\@dates\par\vskip8pt\fi}
+        \ifbool{corres-info}{\rhoinfo}{}
+        \vskip8pt
+        \ifbool{rho-abstract}{\rhoabstract}{}
         \ifx\@graphicalabstract\undefined\else
             \vskip15pt
             \centering
@@ -307,6 +320,7 @@
     } 
     \egroup
     \vskip12pt
+    \thispagestyle{firststyle}
 }
 \apptocmd{\maketitle}{\thispagestyle{firststyle}}{}{}
 
@@ -318,7 +332,7 @@
 %----------------------------------------------------------
 
 \setlength{\affilsep}{9pt}
-\renewcommand\Authfont{\fontsize{9}{11}\bfseries\sffamily\selectfont}
+\renewcommand\Authfont{\fontsize{9}{11}\bfseries\selectfont}
 \renewcommand\Affilfont{\fontsize{7}{8.5}\it\selectfont}
 \renewcommand\AB@affilsep{\reset@font\protect\Affilfont}
 \renewcommand\AB@affilsepx{\reset@font\protect\\\protect\Affilfont}
@@ -335,9 +349,9 @@
 
 \titleformat{\section}
     {\color{rhocolor}\sffamily\large\bfseries}
-    {}
-    {0em}
-    {\tikz\draw[rhocolor, fill=rhocolor] (0,0) rectangle (6.6pt,6.6pt); \hspace{2.5pt} \thesection. \hspace{0.5em} #1}
+    {\thesection}
+    {0.5em}
+    {#1}
     []
 
 \titleformat{name=\section,numberless}[block]
@@ -349,9 +363,9 @@
   
 \titleformat{\subsection}[block]
     {\sffamily\bfseries}
-    {}
-    {0em}
-    {\tikz\draw[rhocolor, fill=rhocolor] (0,0) rectangle (5pt,5pt); \hspace{2.5pt} \thesubsection. \hspace{0.5em} #1}     
+    {\thesubsection}
+    {0.5em}
+    {#1}     
     []
   
 \titleformat{\subsubsection}[block]

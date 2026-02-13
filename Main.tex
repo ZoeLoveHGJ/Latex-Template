@@ -9,7 +9,7 @@
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[10pt,a4paper,twoside,twocolumn]{class/main}
+\documentclass[10pt,a4paper,twoside,onecolumn]{class/main}
 
 %----------------------------------------------------------
 % 基本宏包配置
@@ -24,39 +24,39 @@
 %----------------------------------------------------------
 
 % 标题
-\title{Paper Title: A Comprehensive Study on Important Topics}
-\journalname{Preprint Submitted to Journal Name}
+\title{LODS-MTI: A Link-Adaptive, 0rthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
+% \journalname{Preprint Submitted to Journal Name}
 % \paperversion{Draft Version 1.0}
 
 % 作者信息
 % 作信息
-\author[1]{First Author Name$^{\orcidlink{0000-0000-0000-0000}}$}
-\author[1,2]{Second Author Name$^{\orcidlink{0000-0000-0000-0000}}$}
-\author[2,$*$]{Corresponding Author Name$^{*,\orcidlink{0000-0000-0000-0000}}$}
-\author[1]{Fourth Author Name}
-\author[2]{Fifth Author Name}
+\author[1]{Hongquan ZHou$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[1,2]{Zhong Du$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[2,$*$]{Xiaolin Jia$^{*,\orcidlink{0000-0000-0000-0000}}$}
+\author[1]{Yajun Gu}
+\author[2]{Hong Yang}
 
 % 机构信息
 \affil[1]{Department of Computer Science, University Name, City, Country}
 \affil[2]{Research Institute, Technology Center, City, Country}
 
 % 通讯作者及其他元数据
-\corres{Corresponding Author Name}
-\email{corresponding.author@example.com}
-\firstauthor{First Author Name}
-\femail{first.author@example.com}
+\corres{Xiaolin Jia}
+\email{my\_jiaxl@163.com}
+\firstauthor{Hongquan ZHou}
+\femail{2024319433@qq.com}
 % \allemails{first@example.com, second@example.com}
 
-\dates{Received: January 01, 2025; Revised: February 15, 2025; Accepted: March 01, 2025}
-\doi{\url{https://doi.org/10.1000/xyz123}}
+% \dates{Received: January 01, 2025; Revised: February 15, 2025; Accepted: March 01, 2025}
+% \doi{\url{https://doi.org/10.1000/xyz123}}
 
 % 致谢/资助信息 (Acknowledgments / Funding)
 % 这部分信息显示在首页底部
-\license{This work was supported by the National Natural Science Foundation of China (Grant No. 12345678) and the Fundamental Research Funds for the Central Universities. The authors would like to thank Dr. X and Prof. Y for their valuable suggestions. This work is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source.}
+% \license{This work was supported by the National Natural Science Foundation of China (Grant No. 12345678) and the Fundamental Research Funds for the Central Universities. The authors would like to thank Dr. X and Prof. Y for their valuable suggestions. This work is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source.}
 
 % 页脚信息
-\leadauthor{First Author et al.}
-\institution{University Name}
+\leadauthor{Hongquan ZHou et al.}
+\institution{Southwest University of Science and Technology}
 
 % 开启功能模块
 \setbool{rho-abstract}{true}
@@ -66,11 +66,8 @@
 % 摘要 (Abstract)
 %----------------------------------------------------------
 \begin{abstract}
-    This is a comprehensive placeholder for the abstract to demonstrate the layout. The abstract typically summarizes the background, methodology, results, and conclusions of the study. 
-    
-    Missing Entity Identification is a crucial problem in large-scale RFID systems. We propose a novel protocol that leverages physical layer information and logical slotting to achieve high throughput. Our experimental results show a significant improvement over existing state-of-the-art solutions. Functional verification confirms the stability under various channel conditions.
+Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling reliability for physical-layer spectral efficiency. This paper presents LODS-MTI, a Link-adaptive Orthogonal De-slotted protocol that eliminates inter-tag guard times using batch-synchronized continuous bitstreams. To mitigate synchronization loss in de-slotted transmissions, a digital majority voting mechanism corrects single-bit timing slips and accommodates 0.4\% clock drift. The design uses short-term coherence through ``Power-of-2'' batching to replace arithmetic division with bitwise operations. A tolerance-driven feedback loop ($\epsilon=0.30$) adjusts redundancy based on link quality to maintain a Safe Operating Area (SOA) with 99.10\% accuracy within 128-bit windows. Experimental results show that LODS-MTI achieves a normalized time efficiency of $\Gamma \approx 3.52$ (a 50\% increase over baselines) and sustains 5,200--8,811 tags/s goodput ($P_{e}\approx0.1$) at $150~\mu J/tag$, reducing energy consumption by approximately 10$\times$ compared to analog collision resolution schemes. Code and results are available at \href{https://github.com/ZoeLoveHGJ/Project_LODS_MTI}{GitHub}.
 \end{abstract}
-
 \keywords{RFID, Missing Tag Identification, De-slotted Architecture, Perfect Hashing, Link-adaptive.}
 
 %----------------------------------------------------------
