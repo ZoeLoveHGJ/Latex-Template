@@ -19,6 +19,23 @@
 | **投稿信** | `Cover_Letter.tex` | `class/cover_letter.cls` | 投稿附信 |
 | **审稿回复** | `Response.tex` | `class/response.cls` | 逐条回复审稿意见 |
 
+### 效果预览
+
+#### 正文 (`Main.tex`)
+<img src="sample/main.png" width="600">
+
+#### 补充材料 (`Supplementary.tex`)
+<img src="sample/sup.png" width="600">
+
+#### 投稿信 (`Cover_Letter.tex`)
+<img src="sample/cover-letter.png" width="600">
+
+#### 审稿回复 (`Response.tex`)
+<img src="sample/response-1.png" width="600">
+<img src="sample/response-2.png" width="600">
+
+---
+
 ### 文件结构
 
 ```
