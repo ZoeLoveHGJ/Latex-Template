@@ -1,11 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Rho Class - Academic Paper Template (Standardized)
+% Rho Class - Academic Paper Template
 % --------------------------------------------------------
 % 使用说明：
-% 1. 本模板基于 Rho Class，适用于学术论文写作
-% 2. 默认双栏排版 (twocolumn)
-% 3. 请确保使用 BibLaTeX + Biber 进行参考文献编译
-% 4. 核心类文件位于 class/ 目录下
+%   1. 使用 class/main 文档类（双栏学术论文）
+%   2. 编辑下方的元数据块：标题、作者、机构、通讯信息
+%   3. 摘要和关键词放在 \begin{document} 之前
+%   4. 主题色可选: \rhotheme{red/purple/blue}
+%   5. 参考文献使用 BibLaTeX + Biber
+%
+% 编译方式: xelatex Main → biber Main → xelatex Main → xelatex Main
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,7 +37,7 @@
 % \paperversion{Draft Version 1.0}
 
 % 作者信息
-% 作信息
+% 作者信息（[编号] 对应下方 \affil 的机构编号）
 \author[1]{Hongquan Zhou$^{\orcidlink{0000-0000-0000-0000}}$}
 \author[1,2]{Zhong Du$^{\orcidlink{0000-0000-0000-0000}}$}
 \author[2,$*$]{Xiaolin Jia$^{*,\orcidlink{0000-0000-0000-0000}}$}
@@ -46,22 +49,21 @@
 \affil[2]{Research Institute, Technology Center, City, Country}
 
 % 通讯作者及其他元数据
-\corres{Xiaolin Jia}
-\email{my\_jiaxl@163.com}
-\firstauthor{Hongquan ZHou}
-\femail{2024319433@qq.com}
+\corres{Xiaolin Jia}                         % 通讯作者姓名
+\email{my\_jiaxl@163.com}                    % 通讯邮箱
+\firstauthor{Hongquan ZHou}                   % 第一作者
+\femail{2024319433@qq.com}                    % 第一作者邮箱
 % \allemails{first@example.com, second@example.com}
 
-% \dates{Received: January 01, 2025; Revised: February 15, 2025; Accepted: March 01, 2025}
-% \doi{\url{https://doi.org/10.1000/xyz123}}
+% \dates{Received: January 01, 2025; ...}    % 日期信息（录用后填写）
+% \doi{\url{https://doi.org/10.1000/xyz}}    % DOI（录用后填写）
 
-% 致谢/资助信息 (Acknowledgments / Funding)
-% 这部分信息显示在首页底部
-% \license{This work was supported by the National Natural Science Foundation of China (Grant No. 12345678) and the Fundamental Research Funds for the Central Universities. The authors would like to thank Dr. X and Prof. Y for their valuable suggestions. This work is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source.}
+% 致谢/资助/版权信息（显示在首页底部）
+% \license{This work was supported by ...}
 
-% 页脚信息
-\leadauthor{Hongquan ZHou et al.}
-\institution{Southwest University of Science and Technology}
+% 页眉/页脚信息
+\leadauthor{Hongquan ZHou et al.}             % 页眉显示
+\institution{Southwest University of Science and Technology}  % 页脚显示
 
 % 开启功能模块
 \setbool{rho-abstract}{true}

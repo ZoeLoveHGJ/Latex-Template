@@ -2,14 +2,20 @@
 % Rho Class - Response to Reviewers Template
 % --------------------------------------------------------
 % 使用说明：
-% 1. 填写论文信息（\papertitle, \journalname 等）
-% 2. 开头为致编辑/审稿人的总结信
-% 3. 目录自动生成，方便审稿人定位
-% 4. 使用 \reviewer{N} 分区，每个问题用：
-%    - reviewercomment 环境（审稿意见）
-%    - authorresponse 环境（作者回复）
-%    - revisedtext 环境（修改后的正文段落）
-% 5. 可用 \added{新增文字}, \deleted{删除文字} 标记修改
+%   1. 填写论文信息 (\papertitle, \journalname, \authorname, \manuscriptid)
+%   2. \makeresponsetitle 生成标题区
+%   3. 先写致编辑/审稿人的总结信
+%   4. \makeresponsetoc 生成可跳转的目录
+%   5. 用 \reviewer{N} 分区，每个问题使用：
+%      - reviewercomment 环境 → 蓝色文字显示审稿意见
+%      - authorresponse 环境 → 黑色文字回复（支持多段、列表、公式）
+%      - revisedtext 环境   → 绿色背景框展示正文修改段落
+%   6. 修改标记命令：
+%      - \added{文字}    → 红色斜体（文本/公式中均可用）
+%      - \deleted{文字}  → 红色删除线
+%      - \highlight{文字} → 黄色背景高亮
+%
+% 编译方式: xelatex Response（编译两次以生成目录）
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,6 +33,8 @@
 
 %----------------------------------------------------------
 % 论文信息（定义一次，全局复用）
+% - 页眉左侧自动显示期刊名，右侧显示稿件号+日期
+% - 标题区自动显示论文标题
 %----------------------------------------------------------
 \papertitle{LODS-MTI: A Link-Adaptive, Orthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
 \journalname{IEEE Transactions on Mobile Computing}
@@ -39,7 +47,8 @@
 \makeresponsetitle
 
 %==========================================================
-% 致编辑与审稿人的总结信
+% 第一部分：致编辑与审稿人的总结信
+% 简要说明修改要点，让编辑快速了解改动范围
 %==========================================================
 
 \textbf{Dear Editors and Reviewers:}
@@ -68,7 +77,8 @@ Best regards,
 \textbf{Prof. Xiaolin Jia and Co-authors} \hfill \today
 
 %==========================================================
-% 目录（方便审稿人快速定位）
+% 第二部分：目录（方便审稿人快速定位到各 Reviewer）
+% 编译两次后自动生成可点击的超链接目录
 %==========================================================
 
 \vskip2em
@@ -77,15 +87,20 @@ Best regards,
 
 %==========================================================
 % Reviewer #1
+% 使用 \reviewer{N} 自动创建带编号的分区
 %==========================================================
 
 \reviewer{1}
 
-% --- Comment 1.1 ---
+%%% 审稿意见 1.1 %%%
+%% reviewercomment 环境：蓝色文字显示审稿人原文
+%% Comment 编号自动生成（格式：Comment 审稿人号.问题号）
 \begin{reviewercomment}
 The paper assumes perfect physical layer conditions. How does the protocol perform under realistic channel impairments such as timing jitter, sensing errors, and tag dropout?
 \end{reviewercomment}
 
+%% authorresponse 环境：黑色正文回复
+%% 支持多段文字、itemize/enumerate 列表、公式、嵌套 revisedtext
 \begin{authorresponse}
 Thank you for this insightful comment. We have introduced a Channel Middleware layer in our simulation framework to model realistic physical layer imperfections. Specifically, we now account for:
 
@@ -97,13 +112,16 @@ Thank you for this insightful comment. We have introduced a Channel Middleware l
 
 The revised results show that LODS-MTI maintains its performance advantage with less than 3\% degradation. Please see Section 5.3:
 
+%% revisedtext 环境：绿色背景框展示修改后的正文段落
+%% 框顶部嵌入 "Revised Manuscript Text" 标签
+%% 其中 \added{} 标记的文字以红色斜体显示
 \begin{revisedtext}
 To validate the robustness of LODS-MTI under realistic conditions, we introduce a Channel Middleware layer that models three types of physical layer imperfections: (1) \added{timing jitter with $\pm 5\%$ slot boundary variation}, (2) \added{bit-level sensing errors at BER = $10^{-3}$}, and (3) \added{stochastic tag dropout with probability $p_{\text{drop}} = 0.01$}. Our experimental results demonstrate that the protocol maintains its performance advantage with less than 3\% degradation compared to ideal conditions.
 \end{revisedtext}
 
 \end{authorresponse}
 
-% --- Comment 1.2 ---
+%%% 审稿意见 1.2 %%%
 \begin{reviewercomment}
 The worst-case complexity analysis is missing. What happens when the number of missing tags is very large (e.g., 50\% or more)?
 \end{reviewercomment}
@@ -124,7 +142,6 @@ We have added Section 4.4 analyzing the worst-case complexity:
 
 \reviewer{2}
 
-% --- Comment 2.1 ---
 \begin{reviewercomment}
 Some references are not formatted according to IEEE standards. Please update accordingly.
 \end{reviewercomment}
@@ -146,7 +163,6 @@ Thank you. We have reformatted all references to comply with IEEE transaction st
 
 \reviewer{3}
 
-% --- Comment 3.1 ---
 \begin{reviewercomment}
 The energy model does not account for the listening cost during idle slots. This may lead to underestimation of total energy consumption.
 \end{reviewercomment}
@@ -154,6 +170,7 @@ The energy model does not account for the listening cost during idle slots. This
 \begin{authorresponse}
 Excellent observation. We have refined the energy model to include listening costs. The updated analysis (Section 5.2):
 
+%% \added{} 在公式环境中自动只使用红色（不加斜体），避免编译错误
 \begin{revisedtext}
 The total energy consumption $E_{\text{total}}$ is computed as:
 \begin{equation}

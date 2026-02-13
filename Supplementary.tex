@@ -2,10 +2,14 @@
 % Rho Class - Supplementary Material Template
 % --------------------------------------------------------
 % 使用说明：
-% 1. 本模板基于 Rho Class Sup 样式
-% 2. 默认单栏排版 (onecolumn)
-% 3. 用于附录、补充数据等
-% 4. 核心类文件位于 class/ 目录下
+%   1. 使用 class/sup 文档类（单栏排版）
+%   2. 在导言区设置标题、作者、日期、版本等
+%   3. 用 \setupxr{Main} 交叉引用正文中的图表编号
+%      （需先编译 Main.tex 生成 Main.aux）
+%   4. 支持摘要 (\begin{abstract}...\end{abstract})
+%   5. 支持目录 (\tableofcontents)
+%
+% 编译方式: xelatex Supplementary → biber Supplementary → xelatex x2
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -22,25 +26,32 @@
 %----------------------------------------------------------
 % 主题色配置 (可选: red, purple, blue)
 %----------------------------------------------------------
-\rhotheme{red}  % 切换主题色：red / purple / blue
+\rhotheme{red}
 
 %----------------------------------------------------------
 % 标题信息
 %----------------------------------------------------------
 \title{Supplementary Material: Detailed Derivations and Additional Results}
 \author{First Author, Second Author, Corresponding Author}
-% \journalname{Preprint Submitted to Journal Name}
 \dates{\today}
-\paperversion{Version -- \today}
+\paperversion{Version -- \today}          % 页脚显示版本号
 
-% 跨文档引用设置 (自动引用 Main.tex)
-% 请确保 Main.tex 已编译并生成 Main.aux
+%----------------------------------------------------------
+% 交叉引用正文（可选）
+% 使用 \setupxr{Main} 后，可用 \ref{正文中的label} 引用正文图表
+% 前提：Main.tex 已编译生成 Main.aux
+%----------------------------------------------------------
 \setupxr{Main}
 
-% 页脚和版本信息
+%----------------------------------------------------------
+% 页脚信息
+%----------------------------------------------------------
 \institution{University Name}
 \leadauthor{First Author et al.}
 
+%----------------------------------------------------------
+% 摘要（放在 \begin{document} 之前）
+%----------------------------------------------------------
 \setbool{rho-abstract}{true}
 
 \begin{abstract}
@@ -54,7 +65,7 @@
 
 \maketitle
 
-
+%% 目录（可选，适合较长的补充材料）
 \tableofcontents
 \vspace{20pt}
 \hrule
@@ -63,11 +74,12 @@
 \section{Overview}
 \rhostart{T}{his} supplementary material accompanies the main manuscript. It includes detailed mathematical derivations, additional experimental results, and extended discussions that were not included in the main text due to space limitations.
 
-\textbf{Template Note:} This document uses the `class/sup` class, which is optimized for supplementary materials:
+\textbf{Template Note:} This document uses the \texttt{class/sup} class, which is optimized for supplementary materials:
 \begin{itemize}
-    \item \textbf{Single Column}: Defaults to `onecolumn` for better readability of large tables and equations.
+    \item \textbf{Single Column}: Defaults to \texttt{onecolumn} for better readability of large tables and equations.
     \item \textbf{Simplified Header}: Removes the complex author/affiliation block in favor of a clean title.
-    \item \textbf{Numbering}: You can customize section numbering (e.g., S.1) manually if required, though standard numbering is often sufficient.
+    \item \textbf{Cross-reference}: Use \texttt{$\backslash$setupxr\{Main\}} to reference figures/tables from the main text.
+    \item \textbf{Version Info}: Displayed automatically in the footer via \texttt{$\backslash$paperversion}.
 \end{itemize}
 
 \section{Additional Methodology Details}
@@ -82,11 +94,10 @@ The complexity of the proposed algorithm is $O(n \log n)$, as derived from stand
 \section{Extended Results}
 
 \subsection{Additional Figures}
-We provide additional comparisons in Figure \ref{fig:sup_fig}. Note that figures in supplementary materials often use an "S" prefix, which can be configured using standard LaTeX commands (e.g., `\renewcommand{\thefigure}{S\arabic{figure}}`) if not already handled by the journal style.
+We provide additional comparisons in Figure \ref{fig:sup_fig}.
 
 \begin{figure}[h]
     \centering
-    % 使用 Template/figures/ 目录下的图片
     \includegraphics[width=0.6\linewidth]{abstract_graph.pdf}
     \caption{Supplementary Figure: detailed breakdown of the efficient frontier. The data correlates with the findings in Section 4 of the main manuscript.}
     \label{fig:sup_fig}

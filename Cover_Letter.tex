@@ -2,10 +2,13 @@
 % Rho Class - Cover Letter Template
 % --------------------------------------------------------
 % 使用说明：
-% 1. 使用 class/cover_letter 文档类
-% 2. 填写论文信息（只需定义一次，自动填充 Subject）
-% 3. 使用 \makeheader 和 \makeclosing 生成标准格式
-% 4. 在正文中用 \thepapertitle 和 \thejournalname 引用
+%   1. 填写论文信息 (\papertitle, \journalname)
+%      → Subject 行自动生成，正文中用 \thepapertitle 引用
+%   2. 填写发件人 / 收件人信息
+%   3. \makeheader 生成信头，\makeclosing 生成结尾
+%   4. 主题色可选: \rhotheme{red/purple/blue}
+%
+% 编译方式: xelatex Cover_Letter（一次即可）
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,7 +18,6 @@
 % 基本宏包配置
 %----------------------------------------------------------
 \usepackage[english]{babel}
-\usepackage{graphicx}
 
 %----------------------------------------------------------
 % 主题色配置 (可选: red, purple, blue)
@@ -24,22 +26,26 @@
 
 %----------------------------------------------------------
 % 论文信息（定义一次，全局复用）
+% - Subject 行自动由 \papertitle + \journalname 生成
+% - 正文中用 \thepapertitle 引用带引号的标题
+% - 正文中用 \thejournalname 引用带斜体的期刊名
 %----------------------------------------------------------
-\papertitle{LODS-MTI: A Link-Adaptive, Orthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
+\papertitle{Your Paper Title Goes Here}
 \journalname{IEEE Transactions on Mobile Computing}
 
 %----------------------------------------------------------
-% 机构 Logo（显示在首页页眉左侧）
+% 机构 Logo（可选，显示在首页页眉左侧）
 %----------------------------------------------------------
-% \institutionlogo{figures/university_logo.pdf}  % 取消注释并替换为实际 logo 路径
+% \institutionlogo{figure/university_logo.pdf}
 
 %----------------------------------------------------------
 % 发件人信息 (Sender)
 %----------------------------------------------------------
-\sendername{Prof. Xdddd Xaaa}
+\sendername{Prof. Xiaolin Jia}
 \senderaffiliation{Department of Computer Science \\ University Name}
 \senderaddress{Xi'an, Shaanxi, China, 710000}
-\senderemail{xxxxxx@163.com}
+\senderemail{my\_jiaxl@163.com}
+% \senderphone{+86-xxx-xxxx-xxxx}    % 可选
 
 %----------------------------------------------------------
 % 收件人信息 (Recipient)
@@ -60,6 +66,10 @@
 \begin{document}
 
 \makeheader
+
+%% ===== 正文部分 =====
+%% 在此撰写投稿信内容
+%% 可直接使用 \thepapertitle 和 \thejournalname 引用论文/期刊名
 
 I am writing to submit our manuscript entitled \thepapertitle\ for consideration of publication in \thejournalname.
 
