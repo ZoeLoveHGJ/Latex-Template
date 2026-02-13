@@ -1,286 +1,6 @@
-# Rho LaTeX Template Suite
+# 学术 LaTeX 模板套件 | Academic LaTeX Template Suite
 
-**Rho 学术 LaTeX 模板套件**
-
-[English](#english) | [中文](#中文说明)
-
----
-
-<a name="english"></a>
-
-## English Guide
-
-### Overview
-
-Rho is a professional LaTeX template suite for academic writing, covering **four** document types commonly used in the publication workflow:
-
-| Template | File | Class | Purpose |
-|----------|------|-------|---------|
-| **Main Paper** | `Main.tex` | `class/main.cls` | Two-column academic paper |
-| **Supplementary** | `Supplementary.tex` | `class/sup.cls` | Single-column supplementary material |
-| **Cover Letter** | `Cover_Letter.tex` | `class/cover_letter.cls` | Submission cover letter |
-| **Response to Reviewers** | `Response.tex` | `class/response.cls` | Point-by-point reviewer response |
-
-### File Structure
-
-```
-Latex-Template/
-├── Main.tex                  # Main paper (entry point)
-├── Supplementary.tex         # Supplementary material
-├── Cover_Letter.tex          # Cover letter
-├── Response.tex              # Response to reviewers
-├── ref.bib                   # Bibliography database
-├── abstract_graph.pdf        # Graphical abstract example
-├── figure/                   # Figures directory
-├── class/                    # Class files (do NOT modify)
-│   ├── main.cls              # Main paper class
-│   ├── sup.cls               # Supplementary class
-│   ├── cover_letter.cls      # Cover letter class
-│   ├── response.cls          # Response class
-│   ├── rhoenvs.sty           # Shared environments
-│   ├── rhobabel.sty          # Language support
-│   └── cover.cls             # Alias for cover_letter.cls
-└── README.md
-```
-
-### Quick Start
-
-#### 1. Compilation
-
-All templates require **XeLaTeX**. For documents with bibliography (Main, Supplementary), use:
-
-```bash
-xelatex Main
-biber Main
-xelatex Main
-xelatex Main
-```
-
-For Cover Letter and Response (no bibliography), single compilation suffices:
-
-```bash
-xelatex Cover_Letter
-xelatex Response        # Run twice for TOC
-```
-
-#### 2. Theme Colors
-
-All templates support three built-in theme colors via `\rhotheme{color}`:
-
-| Color | Command | Hex |
-|-------|---------|-----|
-| Red (default) | `\rhotheme{red}` | `#B00000` |
-| Purple | `\rhotheme{purple}` | `#6A1B9A` |
-| Blue | `\rhotheme{blue}` | `#1565C0` |
-
-#### 3. VS Code Configuration (LaTeX Workshop)
-
-Add these **magic comments** at the top of your `.tex` file:
-
-```latex
-%!TEX program = xelatex
-%!BIB program = biber
-```
-
-Or configure `settings.json`:
-
-```json
-"latex-workshop.latex.recipes": [
-    {
-        "name": "XeLaTeX -> Biber -> XeLaTeX x2",
-        "tools": ["xelatex", "biber", "xelatex", "xelatex"]
-    }
-],
-"latex-workshop.latex.tools": [
-    {
-        "name": "xelatex",
-        "command": "xelatex",
-        "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"]
-    },
-    {
-        "name": "biber",
-        "command": "biber",
-        "args": ["%DOCFILE%"]
-    }
-]
-```
-
----
-
-### Template Details
-
-#### Main Paper (`Main.tex`)
-
-Full-featured two-column academic paper template.
-
-**Key commands:**
-
-```latex
-\documentclass[10pt,a4paper,twoside,onecolumn]{class/main}
-\rhotheme{red}
-
-\title{Your Paper Title}
-\author[1]{Author One}
-\author[2]{Author Two}
-\affil[1]{University A}
-\affil[2]{University B}
-\corres{Corresponding Author}
-\email{email@example.com}
-\leadauthor{Author One et al.}
-\institution{University Name}
-
-\setbool{rho-abstract}{true}
-\setbool{corres-info}{true}
-
-\begin{abstract}
-    Your abstract here.
-\end{abstract}
-\keywords{keyword1, keyword2}
-```
-
-**Features:** Abstract, graphical abstract (`\graphicalabstract`), running headers, BibLaTeX references, ORCID links, correspondence info, figure/table numbering.
-
----
-
-#### Supplementary Material (`Supplementary.tex`)
-
-Single-column template for supplementary data, proofs, and extended results.
-
-**Key commands:**
-
-```latex
-\documentclass[10pt,a4paper,onecolumn]{class/sup}
-\title{Supplementary Material: ...}
-\author{Author list}
-\dates{\today}
-\paperversion{Version -- \today}
-\setupxr{Main}               % Cross-reference Main.tex
-```
-
-**Features:** Table of contents, cross-document references (`\setupxr`), S-prefix numbering for figures/tables can be configured manually, version info in footer.
-
----
-
-#### Cover Letter (`Cover_Letter.tex`)
-
-Clean, professional cover letter for journal submission.
-
-**Key commands:**
-
-```latex
-\documentclass{class/cover_letter}
-\rhotheme{red}
-
-% Paper info (defined once, auto-fills Subject line)
-\papertitle{Your Paper Title}
-\journalname{Target Journal}
-
-% Sender
-\sendername{Prof. Your Name}
-\senderaffiliation{Department \\ University}
-\senderaddress{City, Country}
-\senderemail{your@email.com}
-
-% Recipient
-\recipientname{Dr. Editor Name}
-\recipienttitle{Editor-in-Chief}
-
-% Letter content
-\opening{Dear Dr. Editor,}
-\closing{Sincerely,}
-```
-
-**Usage pattern:**
-
-```latex
-\begin{document}
-\makeheader
-% ... letter body ...
-% Use \thepapertitle and \thejournalname to reference paper/journal
-\makeclosing
-\end{document}
-```
-
-**Features:** Auto-generated subject line from `\papertitle` + `\journalname`, institution logo support (`\institutionlogo{path}`), consistent header/footer.
-
----
-
-#### Response to Reviewers (`Response.tex`)
-
-Structured point-by-point response template with Table of Contents navigation.
-
-**Key commands:**
-
-```latex
-\documentclass{class/response}
-\rhotheme{red}
-
-\papertitle{Your Paper Title}
-\journalname{Target Journal}
-\authorname{Author et al.}
-\manuscriptid{MS-2025-XXXXX}
-```
-
-**Core environments:**
-
-| Environment | Purpose | Visual style |
-|-------------|---------|-------------|
-| `\reviewer{N}` | Section divider per reviewer | Black bold heading |
-| `reviewercomment` | Reviewer's original comment | Blue text |
-| `authorresponse` | Author's reply | Black text with bold "Response:" label |
-| `revisedtext` | Quoted revised manuscript text | Green background box with embedded title |
-
-**Markup commands:**
-
-| Command | Effect | Usage |
-|---------|--------|-------|
-| `\added{text}` | Red italic (text) / Red (math) | Mark new content |
-| `\addedtext{text}` | Red bold italic | Emphasized additions |
-| `\deleted{text}` | Red strikethrough | Mark removed content |
-| `\highlight{text}` | Yellow background | General highlight |
-
-**Usage pattern:**
-
-```latex
-\begin{document}
-\makeresponsetitle
-
-% Summary letter to editors
-Dear Editors and Reviewers: ...
-
-\makeresponsetoc              % Auto-generated Table of Contents
-
-\reviewer{1}                  % Creates "Reviewer #1" section
-
-\begin{reviewercomment}
-    The reviewer's question goes here...
-\end{reviewercomment}
-
-\begin{authorresponse}
-    Our response with multiple paragraphs, lists, equations...
-
-    \begin{revisedtext}
-        The revised manuscript text with \added{new content marked in red}.
-    \end{revisedtext}
-\end{authorresponse}
-
-\reviewer{2}                  % Next reviewer
-% ... repeat pattern ...
-\end{document}
-```
-
-**Features:** Auto-numbered comments (e.g., Comment 1.1, 1.2, 2.1), hyperlinked TOC, `\added` works in both text and math mode.
-
----
-
-### FAQ
-
-1. **References show `[?]`** → Ensure you use `biber` (not `bibtex`). See VS Code config above.
-2. **Abstract error** → `\begin{abstract}...\end{abstract}` must be placed **before** `\begin{document}` in Main/Supplementary templates.
-3. **Response TOC missing** → Compile **twice** (first pass generates TOC data, second renders it).
-4. **Cover Letter subject blank** → Define `\papertitle` and `\journalname` before `\begin{document}`.
-
----
+[中文](#中文说明) | [English](#english)
 
 ---
 
@@ -290,7 +10,7 @@ Dear Editors and Reviewers: ...
 
 ### 概述
 
-Rho 是一套专业的学术 LaTeX 模板套件，覆盖论文投稿流程中最常用的 **四种文档类型**：
+这是一套专业的学术 LaTeX 模板套件，覆盖论文投稿流程中最常用的 **四种文档类型**：
 
 | 模板 | 文件 | 文档类 | 用途 |
 |------|------|--------|------|
@@ -316,8 +36,7 @@ Latex-Template/
 │   ├── cover_letter.cls      # 投稿信文档类
 │   ├── response.cls          # 审稿回复文档类
 │   ├── rhoenvs.sty           # 共享环境宏包
-│   ├── rhobabel.sty          # 多语言支持
-│   └── cover.cls             # cover_letter.cls 的别名
+│   └── rhobabel.sty          # 多语言支持
 └── README.md
 ```
 
@@ -360,7 +79,7 @@ xelatex Response              # 编译两次（生成目录）
 %!BIB program = biber
 ```
 
-或在 `settings.json` 中配置编译配方（见英文部分 JSON 示例）。
+或在 `settings.json` 中配置编译配方（见下方英文部分 JSON 示例）。
 
 ---
 
@@ -395,16 +114,14 @@ xelatex Response              # 编译两次（生成目录）
 
 #### 补充材料 (`Supplementary.tex`)
 
-单栏排版,适合补充数据、推导、扩展实验等。
+单栏排版，适合补充数据、推导、扩展实验等。
 
 ```latex
 \documentclass[10pt,a4paper,onecolumn]{class/sup}
 \title{Supplementary Material: ...}
 \author{作者列表}
-\setupxr{Main}                      % 交叉引用正文
+\setupxr{Main}                      % 交叉引用正文（需先编译 Main.tex）
 ```
-
-使用 `\setupxr{Main}` 可以引用正文中的图表编号（需先编译 Main.tex）。
 
 ---
 
@@ -416,7 +133,7 @@ xelatex Response              # 编译两次（生成目录）
 \documentclass{class/cover_letter}
 
 \papertitle{论文标题}                % 定义一次，全局复用
-\journalname{IEEE Trans. on XXX}   % 同上
+\journalname{期刊名称}
 
 \sendername{Prof. 张三}
 \senderaffiliation{计算机系 \\ 某某大学}
@@ -476,7 +193,198 @@ xelatex Response              # 编译两次（生成目录）
 2. **摘要报错** → `\begin{abstract}...\end{abstract}` 必须在 `\begin{document}` **之前**。
 3. **审稿回复目录为空** → 编译 **两次**。
 4. **投稿信 Subject 为空** → 检查是否定义了 `\papertitle` 和 `\journalname`。
-5. **Cover Letter 用 `\thejournalname`** → 返回期刊名斜体格式，适合在正文中引用。
+
+---
+
+---
+
+<a name="english"></a>
+
+## English Guide
+
+### Overview
+
+A professional LaTeX template suite for academic writing, covering **four** document types commonly used in the publication workflow:
+
+| Template | File | Class | Purpose |
+|----------|------|-------|---------|
+| **Main Paper** | `Main.tex` | `class/main.cls` | Two-column academic paper |
+| **Supplementary** | `Supplementary.tex` | `class/sup.cls` | Single-column supplementary material |
+| **Cover Letter** | `Cover_Letter.tex` | `class/cover_letter.cls` | Submission cover letter |
+| **Response to Reviewers** | `Response.tex` | `class/response.cls` | Point-by-point reviewer response |
+
+### File Structure
+
+```
+Latex-Template/
+├── Main.tex                  # Main paper (entry point)
+├── Supplementary.tex         # Supplementary material
+├── Cover_Letter.tex          # Cover letter
+├── Response.tex              # Response to reviewers
+├── ref.bib                   # Bibliography database
+├── abstract_graph.pdf        # Graphical abstract example
+├── figure/                   # Figures directory
+├── class/                    # Class files (do NOT modify)
+│   ├── main.cls              # Main paper class
+│   ├── sup.cls               # Supplementary class
+│   ├── cover_letter.cls      # Cover letter class
+│   ├── response.cls          # Response class
+│   ├── rhoenvs.sty           # Shared environments
+│   └── rhobabel.sty          # Language support
+└── README.md
+```
+
+### Quick Start
+
+#### 1. Compilation
+
+All templates require **XeLaTeX**. For documents with bibliography (Main, Supplementary):
+
+```bash
+xelatex Main
+biber Main
+xelatex Main
+xelatex Main
+```
+
+For Cover Letter and Response (no bibliography):
+
+```bash
+xelatex Cover_Letter
+xelatex Response        # Run twice for TOC
+```
+
+#### 2. Theme Colors
+
+All templates support three built-in theme colors via `\rhotheme{color}`:
+
+| Color | Command | Hex |
+|-------|---------|-----|
+| Red (default) | `\rhotheme{red}` | `#B00000` |
+| Purple | `\rhotheme{purple}` | `#6A1B9A` |
+| Blue | `\rhotheme{blue}` | `#1565C0` |
+
+#### 3. VS Code Configuration (LaTeX Workshop)
+
+Add these **magic comments** at the top of your `.tex` file:
+
+```latex
+%!TEX program = xelatex
+%!BIB program = biber
+```
+
+Or configure `settings.json`:
+
+```json
+"latex-workshop.latex.recipes": [
+    {
+        "name": "XeLaTeX -> Biber -> XeLaTeX x2",
+        "tools": ["xelatex", "biber", "xelatex", "xelatex"]
+    }
+],
+"latex-workshop.latex.tools": [
+    {
+        "name": "xelatex",
+        "command": "xelatex",
+        "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"]
+    },
+    {
+        "name": "biber",
+        "command": "biber",
+        "args": ["%DOCFILE%"]
+    }
+]
+```
+
+---
+
+### Template Details
+
+#### Main Paper (`Main.tex`)
+
+Full-featured two-column academic paper template.
+
+```latex
+\documentclass[10pt,a4paper,twoside,onecolumn]{class/main}
+\rhotheme{red}
+
+\title{Your Paper Title}
+\author[1]{Author One}
+\affil[1]{University A}
+\corres{Corresponding Author}
+\email{email@example.com}
+\leadauthor{Author One et al.}
+\institution{University Name}
+
+\setbool{rho-abstract}{true}
+\setbool{corres-info}{true}
+
+\begin{abstract}
+    Your abstract here.
+\end{abstract}
+\keywords{keyword1, keyword2}
+```
+
+**Features:** Abstract, graphical abstract (`\graphicalabstract`), running headers, BibLaTeX references, ORCID links, correspondence info.
+
+---
+
+#### Supplementary Material (`Supplementary.tex`)
+
+```latex
+\documentclass[10pt,a4paper,onecolumn]{class/sup}
+\title{Supplementary Material: ...}
+\author{Author list}
+\setupxr{Main}               % Cross-reference Main.tex
+```
+
+**Features:** Table of contents, cross-document references, version info in footer.
+
+---
+
+#### Cover Letter (`Cover_Letter.tex`)
+
+```latex
+\documentclass{class/cover_letter}
+\papertitle{Your Paper Title}
+\journalname{Target Journal}
+\sendername{Prof. Your Name}
+\recipientname{Dr. Editor Name}
+\opening{Dear Dr. Editor,}
+\closing{Sincerely,}
+```
+
+Use `\thepapertitle` and `\thejournalname` in the letter body to reference paper/journal names.
+
+---
+
+#### Response to Reviewers (`Response.tex`)
+
+**Core environments:**
+
+| Environment | Purpose | Visual style |
+|-------------|---------|-------------|
+| `\reviewer{N}` | Section divider per reviewer | Black bold heading |
+| `reviewercomment` | Reviewer's original comment | Blue text |
+| `authorresponse` | Author's reply | Black text |
+| `revisedtext` | Quoted revised manuscript text | Green background box |
+
+**Markup commands:**
+
+| Command | Effect |
+|---------|--------|
+| `\added{text}` | Red italic (text) / Red (math) |
+| `\deleted{text}` | Red strikethrough |
+| `\highlight{text}` | Yellow background |
+
+---
+
+### FAQ
+
+1. **References show `[?]`** → Use `biber` (not `bibtex`).
+2. **Abstract error** → `\begin{abstract}` must be **before** `\begin{document}`.
+3. **Response TOC missing** → Compile **twice**.
+4. **Cover Letter subject blank** → Define `\papertitle` and `\journalname`.
 
 ---
 

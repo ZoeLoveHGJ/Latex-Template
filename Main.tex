@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Rho Class - Academic Paper Template
+% Academic Paper Template
 % --------------------------------------------------------
 % 使用说明：
 %   1. 使用 class/main 文档类（双栏学术论文）
@@ -91,12 +91,12 @@ Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling
 \clearpage % 强制Introduction从第二页开始
 % \rhostart{W}{elcome}            
 \section{Introduction}
-Welcome to the \textbf{Rho Class Standardized Template}. This template is designed for academic preprints and articles, featuring a clean, professional "Academic Navy" theme. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
+Welcome to the \textbf{Academic Paper Template}. This template is designed for academic preprints and articles, featuring a clean, professional design. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
 
 \textbf{Quick Start Guide:}
 \begin{enumerate}
     \item \textbf{Configuration}: Open `Main.tex` and edit the metadata block (Title, Authors, Affiliations) at the top.
-    \item \textbf{Class Files}: The core logic resides in the `class/` directory (`main.cls`, `sup.cls`, `cover.cls`). Do not modify these unless you need to change the global style.
+    \item \textbf{Class Files}: The core logic resides in the `class/` directory (`main.cls`, `sup.cls`, `cover\_letter.cls`, `response.cls`). Do not modify these unless you need to change the global style.
     \item \textbf{Compilation}: Use \textbf{XeLaTeX} + \textbf{Biber} (for bibliography) + \textbf{XeLaTeX} sequence.
 \end{enumerate}
 
@@ -104,9 +104,9 @@ Welcome to the \textbf{Rho Class Standardized Template}. This template is design
 
 \subsection{First Page Elements}
 \begin{itemize}
-    \item \textbf{Header}: Displays the Running Title (`\title`) and Lead Author (`\leadauthor`).
-    \item \textbf{Footer}: Contains the Institution Name (`\institution`), Preprint Version Date (automatically generated), and Page Number (e.g., "1-5").
-    \item \textbf{Metadata}: The bottom rule contains the Correspondence (`\corres`), License/Funding (`\license`), and Dates (`\dates`). Ensure `\setbool{corres-info}{true}` is set to enable this block.
+    \item \textbf{Header}: Displays the Running Title (`\textbackslash title`) and Lead Author (`\textbackslash leadauthor`).
+    \item \textbf{Footer}: Contains the Institution Name (`\textbackslash institution`), Version Date (automatically generated), and Page Number (e.g., ``1--5'').
+    \item \textbf{Metadata}: The bottom rule contains the Correspondence (`\textbackslash corres`), License/Funding (`\textbackslash license`), and Dates (`\textbackslash dates`). Ensure `\textbackslash setbool\{corres-info\}\{true\}` is set to enable this block.
 \end{itemize}
 
 \subsection{Graphical Abstract}
@@ -152,7 +152,7 @@ Table \ref{tab:example} demonstrates the default style.
 \end{table}
 
 \section{Conclusion}
-This template aims to provide an "out-of-the-box" experience for professional academic writing. If you encounter missing footer information, please check that `\setbool{corres-info}{true}` is present in your preamble.
+This template aims to provide an ``out-of-the-box'' experience for professional academic writing. If you encounter missing footer information, please check that `\textbackslash setbool\{corres-info\}\{true\}` is present in your preamble.
 
 %----------------------------------------------------------
 % 参考文献
