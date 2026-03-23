@@ -27,9 +27,14 @@
 \RequirePackage{enumitem}
 \RequirePackage{lastpage}
 \RequirePackage{etoolbox}
+\RequirePackage{placeins}
+\RequirePackage{float}
+\RequirePackage{caption}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{tcolorbox}
+\RequirePackage{adjustbox}
 \tcbuselibrary{skins,breakable}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{titletoc}
@@ -44,15 +49,32 @@
 
 \colorlet{rhocolor}{rho-red}
 
+% 主题相关功能色（随主题切换）
+\definecolor{rho-red-comment}{HTML}{8D1F1F}
+\definecolor{rho-purple-comment}{HTML}{5E35B1}
+\definecolor{rho-blue-comment}{HTML}{1565C0}
+
+% 固定功能色（不随主题切换）
+\definecolor{revisedbg}{HTML}{FFF3E0}         % Revised Text 橙色浅底
+\definecolor{revisedaccent}{HTML}{E67E22}     % Revised Text 橙色强调
+\definecolor{addedcolor}{HTML}{B00000}        % highlighted in red 始终红色
+\definecolor{deletedcolor}{HTML}{8A0000}      % 删除文字固定红色系
+\colorlet{commentcolor}{rho-red-comment}      % 审稿意见文字
+
 \newcommand{\rhotheme}[1]{%
     \colorlet{rhocolor}{rho-#1}%
+    \ifstrequal{#1}{red}{%
+        \colorlet{commentcolor}{rho-red-comment}%
+    }{%
+        \ifstrequal{#1}{purple}{%
+            \colorlet{commentcolor}{rho-purple-comment}%
+        }{%
+            \ifstrequal{#1}{blue}{%
+                \colorlet{commentcolor}{rho-blue-comment}%
+            }{}%
+        }%
+    }%
 }
-
-% 功能色
-\definecolor{commentcolor}{HTML}{1565C0}      % 审稿意见文字（蓝色）
-\definecolor{revisedbg}{HTML}{E8F5E9}          % 修改文本背景（浅绿）
-\definecolor{addedcolor}{HTML}{B00000}          % 新增文字标记（红色）
-\definecolor{deletedcolor}{HTML}{B71C1C}        % 删除文字（深红）
 
 %----------------------------------------------------------
 % PAGE LAYOUT
@@ -66,8 +88,11 @@
     headsep=1cm
 }
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.6em}
+% Global paragraph style: keep indentation in body text and avoid overly loose paragraph gaps.
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.2em plus 0.05em minus 0.05em}
+% Tighter default table column padding to avoid width overflow in dense response tables.
+\setlength{\tabcolsep}{4pt}
 
 %----------------------------------------------------------
 % FONTS
@@ -83,6 +108,27 @@
 
 \RequirePackage{url}
 \RequirePackage[colorlinks=true, allcolors=rhocolor]{hyperref}
+\RequirePackage{indentfirst}
+
+% Keep tabular-based tables within current line width automatically.
+\BeforeBeginEnvironment{tabular}{\begin{adjustbox}{max width=\linewidth}}
+\AfterEndEnvironment{tabular}{\end{adjustbox}}
+\BeforeBeginEnvironment{tabular*}{\begin{adjustbox}{max width=\linewidth}}
+\AfterEndEnvironment{tabular*}{\end{adjustbox}}
+
+% In response letters, table captions are unnumbered by default
+% to avoid confusion with manuscript table numbering.
+\DeclareCaptionLabelFormat{resptable}{\textbf{Table (Response)}}
+\captionsetup[table]{
+    labelformat=resptable,
+    labelsep=colon,
+    labelfont=bf,
+    textfont=bf,
+    font=small,
+    justification=centering,
+    singlelinecheck=false,
+    skip=6pt
+}
 
 %----------------------------------------------------------
 % 文档信息命令
@@ -92,6 +138,12 @@
 \newcommand{\journalname}[1]{\def\@journalname{#1}}
 \newcommand{\authorname}[1]{\def\@authorname{#1}}
 \newcommand{\manuscriptid}[1]{\def\@manuscriptid{#1}}
+
+% 默认值（避免未定义判断和空内容留白问题）
+\papertitle{}
+\journalname{}
+\authorname{}
+\manuscriptid{}
 
 \newcommand{\thepapertitle}{\textbf{``\@papertitle''}}
 \newcommand{\thejournalname}{\textit{\@journalname}}
@@ -105,8 +157,8 @@
 \pagestyle{fancy}
 \fancyhf{}
 
-\fancyhead[L]{\ifx\@papertitle\undefined\else\footerfont\@papertitle\fi}
-\fancyhead[R]{\ifx\@authorname\undefined\else\footerfont\@authorname\fi}
+\fancyhead[L]{\ifstrempty{\@papertitle}{}{\footerfont\@papertitle}}
+\fancyhead[R]{\ifstrempty{\@authorname}{}{\footerfont\@authorname}}
 \fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
 \renewcommand{\headrulewidth}{0.4pt}
@@ -116,12 +168,11 @@
 % 首页样式
 \fancypagestyle{firststyle}{
     \fancyhf{}
-    \fancyhead[L]{\ifx\@journalname\undefined\else\footerfont\@journalname\fi}
-    \fancyhead[C]{\sffamily\fontsize{7}{9}\selectfont\bfseries Response to Reviewers}
+    \fancyhead[L]{\ifstrempty{\@journalname}{}{\footerfont\@journalname}}
+    \fancyhead[C]{\sffamily\fontsize{7}{9}\selectfont\bfseries Response Letter}
     \fancyhead[R]{%
         \footerfont
-        \ifx\@manuscriptid\undefined\else\@manuscriptid\ $\cdot$\ \fi
-        \textit{\today}
+        \ifstrempty{\@manuscriptid}{}{\@manuscriptid}
     }
     \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
     \renewcommand{\headrulewidth}{0.4pt}
@@ -172,15 +223,17 @@
 
 \newcommand{\makeresponsetitle}{
     \thispagestyle{firststyle}
-    \begin{center}
-        {\bfseries\LARGE Statements and Response to Reviewer's Comments}
-        \par\vskip1em
-        \ifx\@papertitle\undefined\else
-            {\large\@papertitle}
-            \par\vskip0.3em
-        \fi
-    \end{center}
-    \vskip1em
+    \vspace*{-0.2em}
+    {\centering
+        {\bfseries\LARGE Statements and Response to Reviewer's Comments\par}
+        \ifstrempty{\@papertitle}{}{%
+            \par\vskip1em
+            {\large\@papertitle\par}
+            \vskip0.3em
+        }
+    }
+    \vskip0.35em
+    \noindent
 }
 
 %----------------------------------------------------------
@@ -188,34 +241,140 @@
 %----------------------------------------------------------
 
 \newcommand{\makeresponsetoc}{
-    {\sffamily\bfseries\large Table of Contents}
+    \par\noindent{\sffamily\bfseries\large Table of Contents\par}
     \vskip0.3em
-    \@starttoc{toc}
-    \vskip1.5em
+    \par\noindent\@starttoc{toc}
+    \vskip0.5em
+    \par\noindent{\color{rhocolor}\rule{\linewidth}{0.4pt}\par}
+    \vskip0.8em
+    \clearpage
 }
 
 %----------------------------------------------------------
 % 审稿人分区
-% 用法: \reviewer{1}（自动生成 section 并进入 TOC）
+% 用法: \reviewer（自动编号并进入 TOC；兼容旧写法 \reviewer{1}）
 %----------------------------------------------------------
 
 \newcounter{reviewernum}
 \newcounter{commentnum}[reviewernum]
+\newcounter{aecommentnum}
 
-\newcommand{\reviewer}[1]{%
+% Visual cue before each reviewer section title.
+\newcommand{\reviewermarker}{%
+    \textcolor{rhocolor}{\raisebox{0.1ex}{\scalebox{0.78}{$\blacktriangledown$}}}%
+}
+
+\newcommand{\reviewer@core}{%
     \stepcounter{reviewernum}%
     \setcounter{commentnum}{0}%
-    \section{Reviewer \protect\#{#1}}%
+    \section[Reviewer \protect\#\arabic{reviewernum}]{%
+        \reviewermarker\hspace{0.45em}Reviewer \protect\#\arabic{reviewernum}%
+    }%
+}
+
+% 支持 \reviewer 与旧写法 \reviewer{1}（参数会被忽略，统一自动编号）
+\newcommand{\reviewer}{\@ifnextchar\bgroup\reviewer@witharg\reviewer@noarg}
+\newcommand{\reviewer@witharg}[1]{\reviewer@core}
+\newcommand{\reviewer@noarg}{\reviewer@core}
+
+% AE comments 分区（不进入 TOC，建议放在目录上方）
+\newcommand{\aecomments}{%
+    \setcounter{aecommentnum}{0}%
+    \section*{AE Comments}%
 }
 
 %----------------------------------------------------------
 % 审稿意见环境
 %----------------------------------------------------------
 
+% Comment status helpers:
+%   \commentdone            -> next comment marked as [DONE] (one-shot)
+%   \commentpending         -> next comment marked as [PENDING] (one-shot)
+%   \commentstatus{done|pending|custom-label}
+%   \commentcustom{LABEL}{color-name}
+%   \hidecommentstatus      -> hide all status labels globally (including brackets)
+%   \showcommentstatus      -> show all status labels globally
+\definecolor{statusdone}{HTML}{2E7D32}
+\definecolor{statuspending}{HTML}{EF6C00}
+\newif\ifcommentstatusvisible
+\commentstatusvisibletrue
+\newcommand{\hidecommentstatus}{\commentstatusvisiblefalse}
+\newcommand{\showcommentstatus}{\commentstatusvisibletrue}
+\newcommand{\commentstatuslabel}{}
+\newcommand{\commentstatuscolor}{black}
+\newcommand{\commentdefaultlabel}{PENDING}
+\newcommand{\commentdefaultcolor}{statuspending}
+\newcommand{\commentdefaultpending}{%
+    \gdef\commentdefaultlabel{PENDING}%
+    \gdef\commentdefaultcolor{statuspending}%
+}
+\newcommand{\commentdefaultnone}{%
+    \gdef\commentdefaultlabel{}%
+    \gdef\commentdefaultcolor{black}%
+}
+\newcommand{\commentresetstatus}{%
+    \gdef\commentstatuslabel{}%
+    \gdef\commentstatuscolor{black}%
+}
+\newcommand{\commentpending}{%
+    \gdef\commentstatuslabel{PENDING}%
+    \gdef\commentstatuscolor{statuspending}%
+}
+\newcommand{\commentdone}{%
+    \gdef\commentstatuslabel{DONE}%
+    \gdef\commentstatuscolor{statusdone}%
+}
+\newcommand{\commentcustom}[2]{%
+    \gdef\commentstatuslabel{#1}%
+    \gdef\commentstatuscolor{#2}%
+}
+\newcommand{\commentstatus}[1]{%
+    \ifstrequal{#1}{done}{\commentdone}{%
+        \ifstrequal{#1}{pending}{\commentpending}{%
+            \commentcustom{#1}{black}%
+        }%
+    }%
+}
+\newcommand{\commentstatusdisplay}{%
+    \ifcommentstatusvisible
+        \ifstrempty{\commentstatuslabel}{%
+            \ifstrempty{\commentdefaultlabel}{}{\textnormal{\textcolor{\commentdefaultcolor}{\space[\commentdefaultlabel]}}}%
+        }{%
+            \textnormal{\textcolor{\commentstatuscolor}{\space[\commentstatuslabel]}}%
+        }%
+    \fi
+}
+
 \newenvironment{reviewercomment}{%
     \stepcounter{commentnum}%
     \vskip0.3em
-    {\bfseries\color{commentcolor} Comment \arabic{reviewernum}.\arabic{commentnum}:}\hspace{0.5em}%
+    \begin{tcolorbox}[
+        enhanced, breakable,
+        colback=black!3,
+        colframe=black!35,
+        boxrule=0pt,
+        leftrule=1.2pt,
+        arc=2pt, outer arc=2pt,
+        left=10pt, right=10pt, top=8pt, bottom=7pt
+    ]
+    {\sffamily\bfseries\large\color{rhocolor} Reviewer's Comment \arabic{reviewernum}.\arabic{commentnum}\commentstatusdisplay:}\par\vspace{0.35em}%
+    \color{black}%
+    % Relax line breaking to avoid overfull boxes in long reviewer sentences.
+    \setlength{\emergencystretch}{2em}%
+    \sloppy%
+    \commentresetstatus%
+    \itshape\ignorespaces
+}{%
+    \color{black}
+    \fussy
+    \end{tcolorbox}
+    \vskip0.3em
+}
+
+\newenvironment{aecomment}{%
+    \stepcounter{aecommentnum}%
+    \vskip0.3em
+    {\bfseries\color{commentcolor} AE Comment \arabic{aecommentnum}:}\hspace{0.5em}%
     \color{commentcolor}%
     \rmfamily\ignorespaces
 }{%
@@ -229,11 +388,15 @@
 
 \newenvironment{authorresponse}{%
     \vskip0.3em
-    {\bfseries\color{black} Response:}
+    \par\noindent{\bfseries\color{green!50!black} \large Author's Response:}\par
     \vskip0.2em
+    \begingroup
     \color{black}
+    \setlength{\parindent}{2em}%
     \rmfamily
+    \ignorespaces
 }{%
+    \par\endgroup
     \vskip0.8em
 }
 
@@ -242,22 +405,25 @@
 %----------------------------------------------------------
 
 \newenvironment{revisedtext}{%
+    \FloatBarrier
     \begin{tcolorbox}[
         enhanced, breakable,
         colback=revisedbg,
-        colframe=black!20,
-        boxrule=0.4pt,
+        colframe=revisedaccent!70!black,
+        boxrule=0.5pt,
         arc=2pt, outer arc=2pt,
         left=10pt, right=10pt, top=10pt, bottom=8pt,
-        title={\small Revised Manuscript Text},
+        borderline west={1.6pt}{0pt}{revisedaccent},
+        title={\small \textbf{Changes in Manuscript}},
         fonttitle=\bfseries\sffamily,
-        coltitle=black,
-        attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
-        boxed title style={colback=revisedbg, colframe=black!20, boxrule=0.4pt, arc=1.5pt, left=6pt, right=6pt, top=1pt, bottom=1pt}
+        coltitle=revisedaccent!90!black,
+        attach boxed title to top left={xshift=8pt,yshift=-\tcboxedtitleheight/2},
+        boxed title style={colback=white, colframe=revisedaccent!70!black, boxrule=0.5pt, arc=1.5pt, left=6pt, right=6pt, top=1pt, bottom=1pt}
     ]
     \color{black}
 }{%
     \end{tcolorbox}
+    \FloatBarrier
 }
 
 %----------------------------------------------------------

@@ -1,185 +1,143 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Response to Reviewers Template
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Response to Reviewers Template (Desensitized)
 % --------------------------------------------------------
 % 使用说明：
 %   1. 填写论文信息 (\papertitle, \journalname, \authorname, \manuscriptid)
 %   2. \makeresponsetitle 生成标题区
 %   3. 先写致编辑/审稿人的总结信
-%   4. \makeresponsetoc 生成可跳转的目录
-%   5. 用 \reviewer{N} 分区，每个问题使用：
-%      - reviewercomment 环境 → 蓝色文字显示审稿意见
-%      - authorresponse 环境 → 黑色文字回复（支持多段、列表、公式）
-%      - revisedtext 环境   → 绿色背景框展示正文修改段落
-%   6. 修改标记命令：
-%      - \added{文字}    → 红色斜体（文本/公式中均可用）
-%      - \deleted{文字}  → 红色删除线
-%      - \highlight{文字} → 黄色背景高亮
-%
-% 编译方式: xelatex Response（编译两次以生成目录）
+%   4. \makeresponsetoc 生成可跳转目录
+%   5. 使用 \reviewer 自动分区（编号自动增长）
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass{class/response}
-
-%----------------------------------------------------------
-% 基本宏包配置
-%----------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
 \usepackage[english]{babel}
 
-%----------------------------------------------------------
-% 主题色配置 (可选: red, purple, blue)
-%----------------------------------------------------------
-\rhotheme{red}
+% 可选：隐藏 Comment 标题后的 [DONE]/[PENDING]
+\hidecommentstatus
+
+% 保持原有配色方案
+\rhotheme{purple}
 
 %----------------------------------------------------------
-% 论文信息（定义一次，全局复用）
-% - 页眉左侧自动显示期刊名，右侧显示稿件号+日期
-% - 标题区自动显示论文标题
+% 文档信息（请按需填写）
 %----------------------------------------------------------
-\papertitle{LODS-MTI: A Link-Adaptive, Orthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
-\journalname{IEEE Transactions on Mobile Computing}
-\authorname{Xiaolin Jia et al.}
-\manuscriptid{TMC-2025-XXXXX}
+\papertitle{[Paper Title]}
+\journalname{[Journal Name]}
+\authorname{[Author Name] et al.}
+\manuscriptid{[Manuscript ID]}
 
-%----------------------------------------------------------
 \begin{document}
 
 \makeresponsetitle
 
 %==========================================================
-% 第一部分：致编辑与审稿人的总结信
-% 简要说明修改要点，让编辑快速了解改动范围
+% 1) 总结信（通用模板）
 %==========================================================
+\noindent\textbf{Dear Editor-in-Chief, Associate Editor, and Reviewers:}
 
-\textbf{Dear Editors and Reviewers:}
+Thank you for your time and constructive comments on our manuscript. We have carefully revised the manuscript and addressed all comments point by point.
 
-We would like to express our sincere appreciation to the Editor-in-Chief, the Associate Editor, and the Reviewers for their time and effort in reviewing our manuscript. We are particularly grateful for the encouraging comments from \textbf{Reviewer \#2} and \textbf{Reviewer \#4}, who recognized the novelty and readiness of our work.
-
-Simultaneously, we found the critical questions raised by \textbf{Reviewer \#1} and \textbf{Reviewer \#3} regarding physical layer assumptions and worst-case scenarios to be insightful. These comments have guided us to perform a fundamental upgrade to our simulation framework and validation methodology.
-
-We have carefully addressed all comments point-by-point. Our major revisions are summarized as follows:
-
+The major updates in this revision are summarized as follows:
 \begin{enumerate}
-    \item Re-executed ALL experiments using an upgraded high-fidelity simulation framework.
-    \item Implemented a refined dynamic energy model for listening cost analysis.
-    \item Introduced a Channel Middleware layer to model realistic physical layer imperfections.
-    \item Conducted a comparative ablation study to verify our ``Earliest-Position-First'' strategy.
-    \item Made the complete source code publicly available for transparency and reproducibility.
-    \item Added a rigorous discussion on worst-case complexity; all major revisions are \added{highlighted in red} for easy tracking.
-    \item Updated the references strictly according to IEEE journal requirements.
+    \item Clarified key definitions and improved methodological descriptions.
+    \item Added/updated theoretical analysis and supporting explanations.
+    \item Expanded experiments or discussions to improve robustness and reproducibility.
+    \item Revised language, formatting, and references according to journal requirements.
 \end{enumerate}
 
-We believe these extensive revisions have significantly strengthened the technical depth, rigor, and practical relevance of the paper. We hope the revised manuscript is now suitable for publication.
+All important revisions in the manuscript are marked using the journal-required format. Detailed responses are provided below.
 
 \vskip0.5em
 Best regards,
 
-\textbf{Prof. Xiaolin Jia and Co-authors} \hfill \today
+\textbf{[Corresponding Author] and Co-authors} \hfill \today
 
 %==========================================================
-% 第二部分：目录（方便审稿人快速定位到各 Reviewer）
-% 编译两次后自动生成可点击的超链接目录
+% 2) 目录
 %==========================================================
-
 \vskip2em
 \makeresponsetoc
 
+%==========================================================
+% 3) AE Comments（可选）
+%==========================================================
+\aecomments
+
+\begin{aecomment}
+[AE comment placeholder.]
+\end{aecomment}
+
+\begin{authorresponse}
+Thank you for this guidance. We have revised the manuscript accordingly and clarified the related content in the corresponding sections.
+\end{authorresponse}
 
 %==========================================================
 % Reviewer #1
-% 使用 \reviewer{N} 自动创建带编号的分区
 %==========================================================
+\reviewer
 
-\reviewer{1}
-
-%%% 审稿意见 1.1 %%%
-%% reviewercomment 环境：蓝色文字显示审稿人原文
-%% Comment 编号自动生成（格式：Comment 审稿人号.问题号）
+\commentpending
 \begin{reviewercomment}
-The paper assumes perfect physical layer conditions. How does the protocol perform under realistic channel impairments such as timing jitter, sensing errors, and tag dropout?
-\end{reviewercomment}
-
-%% authorresponse 环境：黑色正文回复
-%% 支持多段文字、itemize/enumerate 列表、公式、嵌套 revisedtext
-\begin{authorresponse}
-Thank you for this insightful comment. We have introduced a Channel Middleware layer in our simulation framework to model realistic physical layer imperfections. Specifically, we now account for:
-
-\begin{itemize}
-    \item Timing jitter ($\pm 5\%$ variation in slot boundaries)
-    \item Bit-level sensing errors (BER = $10^{-3}$)
-    \item Tag dropout probability ($p_{\text{drop}} = 0.01$)
-\end{itemize}
-
-The revised results show that LODS-MTI maintains its performance advantage with less than 3\% degradation. Please see Section 5.3:
-
-%% revisedtext 环境：绿色背景框展示修改后的正文段落
-%% 框顶部嵌入 "Revised Manuscript Text" 标签
-%% 其中 \added{} 标记的文字以红色斜体显示
-\begin{revisedtext}
-To validate the robustness of LODS-MTI under realistic conditions, we introduce a Channel Middleware layer that models three types of physical layer imperfections: (1) \added{timing jitter with $\pm 5\%$ slot boundary variation}, (2) \added{bit-level sensing errors at BER = $10^{-3}$}, and (3) \added{stochastic tag dropout with probability $p_{\text{drop}} = 0.01$}. Our experimental results demonstrate that the protocol maintains its performance advantage with less than 3\% degradation compared to ideal conditions.
-\end{revisedtext}
-
-\end{authorresponse}
-
-%%% 审稿意见 1.2 %%%
-\begin{reviewercomment}
-The worst-case complexity analysis is missing. What happens when the number of missing tags is very large (e.g., 50\% or more)?
+[Reviewer 1, Comment 1]
 \end{reviewercomment}
 
 \begin{authorresponse}
-We have added Section 4.4 analyzing the worst-case complexity:
-
+Thank you for this valuable comment. We have revised the manuscript accordingly. The relevant changes are summarized below.
 \begin{revisedtext}
-\textbf{Worst-Case Analysis.} When the missing rate $\alpha$ exceeds a threshold $\alpha_{\text{th}} = 0.5$, the communication overhead of incremental identification surpasses that of full re-inventory. In this regime, LODS-MTI \added{automatically triggers a fallback to complete re-inventory mode, which achieves $O(n)$ complexity where $n$ is the total tag population.}
+[Insert revised manuscript text or summary for Reviewer 1, Comment 1.]
 \end{revisedtext}
-
 \end{authorresponse}
 
+\commentpending
+\begin{reviewercomment}
+[Reviewer 1, Comment 2]
+\end{reviewercomment}
+
+\begin{authorresponse}
+Thank you for the suggestion. We have incorporated this point and updated the corresponding section in the revised manuscript.
+\end{authorresponse}
 
 %==========================================================
 % Reviewer #2
 %==========================================================
+\reviewer
 
-\reviewer{2}
-
+\commentpending
 \begin{reviewercomment}
-Some references are not formatted according to IEEE standards. Please update accordingly.
+[Reviewer 2, Comment 1]
 \end{reviewercomment}
 
 \begin{authorresponse}
-Thank you. We have reformatted all references to comply with IEEE transaction standards:
-
-\begin{itemize}
-    \item Replaced informal citations with proper IEEE format
-    \item Added DOI links where available
-    \item Ensured consistent author name formatting
-\end{itemize}
-\end{authorresponse}
-
-
-%==========================================================
-% Reviewer #3
-%==========================================================
-
-\reviewer{3}
-
-\begin{reviewercomment}
-The energy model does not account for the listening cost during idle slots. This may lead to underestimation of total energy consumption.
-\end{reviewercomment}
-
-\begin{authorresponse}
-Excellent observation. We have refined the energy model to include listening costs. The updated analysis (Section 5.2):
-
-%% \added{} 在公式环境中自动只使用红色（不加斜体），避免编译错误
+We appreciate this comment. We have clarified the related assumptions and improved the explanation in the revised manuscript.
 \begin{revisedtext}
-The total energy consumption $E_{\text{total}}$ is computed as:
-\begin{equation}
-    E_{\text{total}} = \sum_{i=1}^{R} \left( E_{\text{tx},i} + \added{E_{\text{listen},i} \cdot N_{\text{active},i}} + E_{\text{idle},i} \right)
-\end{equation}
-where \added{$E_{\text{listen},i}$ represents the per-tag listening energy during round $i$, and $N_{\text{active},i}$ is the number of active tags in that round.}
+[Insert revised manuscript text or summary for Reviewer 2, Comment 1.]
 \end{revisedtext}
-
 \end{authorresponse}
 
+\commentpending
+\begin{reviewercomment}
+[Reviewer 2, Comment 2]
+\end{reviewercomment}
+
+\begin{authorresponse}
+Thank you. We have addressed this concern and added supporting discussion and references where appropriate.
+\end{authorresponse}
+
+%==========================================================
+% Reviewer #3（按需增删）
+%==========================================================
+\reviewer
+
+\commentpending
+\begin{reviewercomment}
+[Reviewer 3, Comment 1]
+\end{reviewercomment}
+
+\begin{authorresponse}
+Thank you for this insightful feedback. We have revised the relevant section and improved readability and precision.
+\end{authorresponse}
 
 \end{document}
