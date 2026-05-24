@@ -10,7 +10,7 @@
 
 ### 概述
 
-这是一套专业的学术 LaTeX 模板套件，覆盖论文投稿流程中最常用的 **四种文档类型**：
+这是一套面向论文投稿流程的学术 LaTeX 模板套件，覆盖最常见的 **四种文档类型**：
 
 | 模板 | 文件 | 文档类 | 用途 |
 |------|------|--------|------|
@@ -52,8 +52,10 @@ Latex-Template/
 │   ├── sup.cls               # 补充材料文档类
 │   ├── cover_letter.cls      # 投稿信文档类
 │   ├── response.cls          # 审稿回复文档类
-│   ├── rhoenvs.sty           # 共享环境宏包
-│   └── rhobabel.sty          # 多语言支持
+│   ├── academicbase.sty      # 正文/补充材料共享基础层
+│   ├── academicenvs.sty      # 共享主题与环境
+│   ├── academiclang.sty      # 多语言文本
+│   └── academicletterbase.sty # Cover/Response 共享基础层
 └── README.md
 ```
 
@@ -61,7 +63,7 @@ Latex-Template/
 
 #### 1. 编译方法
 
-所有模板需使用 **XeLaTeX** 编译。含参考文献的文档（Main、Supplementary）：
+所有模板建议使用 **XeLaTeX** 编译。含参考文献的文档（`Main`、`Supplementary`）：
 
 ```bash
 xelatex Main
@@ -70,7 +72,7 @@ xelatex Main
 xelatex Main
 ```
 
-投稿信和审稿回复（无参考文献）：
+投稿信和审稿回复（通常无参考文献）：
 
 ```bash
 xelatex Cover_Letter          # 编译一次即可
@@ -79,13 +81,13 @@ xelatex Response              # 编译两次（生成目录）
 
 #### 2. 主题色
 
-所有模板统一支持三种主题色，通过 `\rhotheme{颜色}` 切换：
+所有模板统一支持三种主题色，通过 `\academictheme{颜色}` 切换：
 
 | 颜色 | 命令 | 色值 |
 |------|------|------|
-| 学术红（默认） | `\rhotheme{red}` | `#B00000` |
-| 优雅紫 | `\rhotheme{purple}` | `#6A1B9A` |
-| 经典蓝 | `\rhotheme{blue}` | `#1565C0` |
+| 学术红（默认） | `\academictheme{red}` | `#B00000` |
+| 优雅紫 | `\academictheme{purple}` | `#6A1B9A` |
+| 经典蓝 | `\academictheme{blue}` | `#1565C0` |
 
 #### 3. VS Code 配置
 
@@ -100,15 +102,24 @@ xelatex Response              # 编译两次（生成目录）
 
 ---
 
+### 使用建议
+
+1. **先选入口文件**：正文用 `Main.tex`，补充材料用 `Supplementary.tex`，投稿信用 `Cover_Letter.tex`，回复信用 `Response.tex`。  
+2. **优先改元数据块**：标题、作者、单位、通讯作者、期刊名、稿件号等信息都集中在导言区顶部。  
+3. **保留类文件不动**：日常写作只编辑入口 `.tex` 文件；只有需要修改全局版式时才进入 `class/`。  
+4. **按需开启功能**：如摘要、图文摘要、跨文档引用、回复状态标签等。  
+
+---
+
 ### 各模板使用说明
 
 #### 正文 (`Main.tex`)
 
-全功能双栏论文模板，支持摘要、图文摘要、交叉引用等。
+用于主论文正文，默认双栏，适合投稿稿件、预印本和技术报告。
 
 ```latex
-\documentclass[10pt,a4paper,twoside,onecolumn]{class/main}
-\rhotheme{red}
+\documentclass[10pt,a4paper,twoside]{class/main}
+\academictheme{red}
 
 \title{论文标题}
 \author[1]{作者一}
@@ -118,7 +129,7 @@ xelatex Response              # 编译两次（生成目录）
 \leadauthor{作者一 et al.}           % 页眉显示
 \institution{单位名称}               % 页脚显示
 
-\setbool{rho-abstract}{true}        % 开启摘要
+\setabstractenabled{true}           % 开启摘要
 \setbool{corres-info}{true}         % 开启通讯信息
 
 \begin{abstract}
@@ -127,11 +138,13 @@ xelatex Response              # 编译两次（生成目录）
 \keywords{关键词1, 关键词2}
 ```
 
+建议把正文内容按期刊结构替换为：`Introduction`、`Related Work`、`Method`、`Experiments`、`Conclusion`。
+
 ---
 
 #### 补充材料 (`Supplementary.tex`)
 
-单栏排版，适合补充数据、推导、扩展实验等。
+用于补充推导、额外实验、附录图表和复现实验细节，默认单栏。
 
 ```latex
 \documentclass[10pt,a4paper,onecolumn]{class/sup}
@@ -140,11 +153,13 @@ xelatex Response              # 编译两次（生成目录）
 \setupxr{Main}                      % 交叉引用正文（需先编译 Main.tex）
 ```
 
+如果不需要交叉引用正文，可删除 `\setupxr{Main}`。
+
 ---
 
 #### 投稿信 (`Cover_Letter.tex`)
 
-设置论文信息后，Subject 行自动生成。
+用于投稿附信。设置论文标题和期刊名后，主题行会自动生成。
 
 ```latex
 \documentclass{class/cover_letter}
@@ -171,7 +186,7 @@ xelatex Response              # 编译两次（生成目录）
 **最核心的三个环境：**
 
 ```latex
-\reviewer{1}                        % 创建 "Reviewer #1" 分区
+\reviewer                           % 创建 "Reviewer #1" 分区
 
 \begin{reviewercomment}             % 审稿意见（蓝色文字）
     审稿人的问题...
@@ -199,7 +214,7 @@ xelatex Response              # 编译两次（生成目录）
 1. 设置论文信息 → `\makeresponsetitle`
 2. 写致编辑总结信
 3. `\makeresponsetoc` 生成目录
-4. 用 `\reviewer{N}` 分区，逐条回复
+4. 用 `\reviewer` 分区，逐条回复
 5. 编译 **两次**（第一次生成目录数据）
 
 ---
@@ -221,7 +236,7 @@ xelatex Response              # 编译两次（生成目录）
 
 ### Overview
 
-A professional LaTeX template suite for academic writing, covering **four** document types commonly used in the publication workflow:
+A practical LaTeX template suite for academic submission workflows, covering **four** common document types:
 
 | Template | File | Class | Purpose |
 |----------|------|-------|---------|
@@ -246,8 +261,10 @@ Latex-Template/
 │   ├── sup.cls               # Supplementary class
 │   ├── cover_letter.cls      # Cover letter class
 │   ├── response.cls          # Response class
-│   ├── rhoenvs.sty           # Shared environments
-│   └── rhobabel.sty          # Language support
+│   ├── academicbase.sty      # Shared base for main/supplementary
+│   ├── academicenvs.sty      # Shared theme and environments
+│   ├── academiclang.sty      # Language helpers
+│   └── academicletterbase.sty # Shared base for cover/response
 └── README.md
 ```
 
@@ -255,7 +272,7 @@ Latex-Template/
 
 #### 1. Compilation
 
-All templates require **XeLaTeX**. For documents with bibliography (Main, Supplementary):
+All templates are designed for **XeLaTeX**. For documents with bibliography (`Main`, `Supplementary`):
 
 ```bash
 xelatex Main
@@ -264,7 +281,7 @@ xelatex Main
 xelatex Main
 ```
 
-For Cover Letter and Response (no bibliography):
+For Cover Letter and Response (usually without bibliography):
 
 ```bash
 xelatex Cover_Letter
@@ -273,13 +290,13 @@ xelatex Response        # Run twice for TOC
 
 #### 2. Theme Colors
 
-All templates support three built-in theme colors via `\rhotheme{color}`:
+All templates support three built-in theme colors via `\academictheme{color}`:
 
 | Color | Command | Hex |
 |-------|---------|-----|
-| Red (default) | `\rhotheme{red}` | `#B00000` |
-| Purple | `\rhotheme{purple}` | `#6A1B9A` |
-| Blue | `\rhotheme{blue}` | `#1565C0` |
+| Red (default) | `\academictheme{red}` | `#B00000` |
+| Purple | `\academictheme{purple}` | `#6A1B9A` |
+| Blue | `\academictheme{blue}` | `#1565C0` |
 
 #### 3. VS Code Configuration (LaTeX Workshop)
 
@@ -315,15 +332,24 @@ Or configure `settings.json`:
 
 ---
 
+### Recommended Workflow
+
+1. **Choose the right entry file**: `Main.tex`, `Supplementary.tex`, `Cover_Letter.tex`, or `Response.tex`.  
+2. **Edit metadata first**: title, authors, affiliations, journal name, manuscript ID, and correspondence information.  
+3. **Leave class files unchanged** unless you are intentionally adjusting the global style.  
+4. **Enable only the features you need**, such as abstract boxes, graphical abstracts, cross-document references, or response status labels.  
+
+---
+
 ### Template Details
 
 #### Main Paper (`Main.tex`)
 
-Full-featured two-column academic paper template.
+Use this file for the main manuscript. It is two-column by default.
 
 ```latex
-\documentclass[10pt,a4paper,twoside,onecolumn]{class/main}
-\rhotheme{red}
+\documentclass[10pt,a4paper,twoside]{class/main}
+\academictheme{red}
 
 \title{Your Paper Title}
 \author[1]{Author One}
@@ -333,7 +359,7 @@ Full-featured two-column academic paper template.
 \leadauthor{Author One et al.}
 \institution{University Name}
 
-\setbool{rho-abstract}{true}
+\setabstractenabled{true}
 \setbool{corres-info}{true}
 
 \begin{abstract}
@@ -355,7 +381,7 @@ Full-featured two-column academic paper template.
 \setupxr{Main}               % Cross-reference Main.tex
 ```
 
-**Features:** Table of contents, cross-document references, version info in footer.
+**Features:** Table of contents, cross-document references, and version info in the footer.
 
 ---
 
@@ -371,7 +397,7 @@ Full-featured two-column academic paper template.
 \closing{Sincerely,}
 ```
 
-Use `\thepapertitle` and `\thejournalname` in the letter body to reference paper/journal names.
+Use `\thepapertitle` and `\thejournalname` in the letter body to reference the manuscript and journal names.
 
 ---
 
@@ -381,7 +407,7 @@ Use `\thepapertitle` and `\thejournalname` in the letter body to reference paper
 
 | Environment | Purpose | Visual style |
 |-------------|---------|-------------|
-| `\reviewer{N}` | Section divider per reviewer | Black bold heading |
+| `\reviewer` | Section divider per reviewer | Black bold heading |
 | `reviewercomment` | Reviewer's original comment | Blue text |
 | `authorresponse` | Author's reply | Black text |
 | `revisedtext` | Quoted revised manuscript text | Green background box |

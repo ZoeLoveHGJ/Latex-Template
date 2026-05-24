@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Academic shared theme and environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{class/academicenvs}[2026/05/24 Academic shared environments]
+
+\RequirePackage[table]{xcolor}
+
+\definecolor{academic-red}{HTML}{B00000}
+\definecolor{academic-purple}{HTML}{6A1B9A}
+\definecolor{academic-blue}{HTML}{1565C0}
+
+\colorlet{themecolor}{academic-red}
+\colorlet{rhocolor}{themecolor}
+
+\newcommand{\academictheme}[1]{%
+    \colorlet{themecolor}{academic-#1}%
+    \colorlet{rhocolor}{themecolor}%
+}
+\newcommand{\rhotheme}[1]{\academictheme{#1}}
+
+\newmdenv[
+    backgroundcolor=themecolor!22,
+    linecolor=themecolor!22,
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries,
+    frametitlerule=false,
+    frametitlefont=\color{themecolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\selectfont,
+    fontcolor=themecolor,
+    frametitleaboveskip=8pt,
+    skipabove=10pt
+]{academicbox}
+
+\newmdenv[
+    backgroundcolor=themecolor!22,
+    linecolor=themecolor!22,
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries\infolanguage,
+    frametitlerule=false,
+    frametitlefont=\color{themecolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\normalfont,
+    fontcolor=themecolor,
+    frametitleaboveskip=3pt,
+    skipabove=10pt
+]{infobox}
+
+\newmdenv[
+    backgroundcolor=themecolor!22,
+    linecolor=themecolor!22,
+    linewidth=0.7pt,
+    frametitle=\vskip0pt\bfseries\notelanguage,
+    frametitlerule=false,
+    frametitlefont=\color{themecolor}\bfseries\sffamily,
+    frametitlealignment=\raggedright,
+    innertopmargin=3pt,
+    innerbottommargin=6pt,
+    innerleftmargin=6pt,
+    innerrightmargin=6pt,
+    font=\normalfont,
+    fontcolor=themecolor,
+    frametitleaboveskip=3pt,
+    skipabove=10pt
+]{notebox}
+
+\let\rhoenv\academicbox
+\let\endrhoenv\endacademicbox
+\let\info\infobox
+\let\endinfo\endinfobox
+\let\note\notebox
+\let\endnote\endnotebox
+
+\endinput

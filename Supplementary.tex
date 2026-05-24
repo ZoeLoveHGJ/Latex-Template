@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Supplementary Material Template
 % --------------------------------------------------------
-% 使用说明：
-%   1. 使用 class/sup 文档类（单栏排版）
-%   2. 在导言区设置标题、作者、日期、版本等
-%   3. 用 \setupxr{Main} 交叉引用正文中的图表编号
-%      （需先编译 Main.tex 生成 Main.aux）
-%   4. 支持摘要 (\begin{abstract}...\end{abstract})
-%   5. 支持目录 (\tableofcontents)
-%
-% 编译方式: xelatex Supplementary → biber Supplementary → xelatex x2
+% 使用说明与编译指南：
+%   1. 使用 class/sup 文档类（单栏排版，适合展现大图大表与长公式）。
+%   2. 编译方式：使用 XeLaTeX 编译。若含参考文献：
+%      xelatex Supplementary → biber Supplementary → xelatex Supplementary → xelatex Supplementary
+%   3. 跨文档超链接交叉引用：
+%      - 本模板已升级支持双向 PDF 超链接（基于 xr-hyper）。
+%      - 必须先编译 Main.tex 生成 Main.aux，然后再编译 Supplementary.tex。
+%      - 在导言区保留 \setupxr{Main}，即可直接在正文或补充材料中通过 \ref{label} 引用对方的图表公式，且编译后在 PDF 中可以直接点击跳转！
+%   4. 自适应计数器：图表、公式、小节计数器在 Supplementary 中会自动加 "S" 前缀并自动重置。
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26,13 +26,13 @@
 %----------------------------------------------------------
 % 主题色配置 (可选: red, purple, blue)
 %----------------------------------------------------------
-\rhotheme{red}
+\academictheme{red}
 
 %----------------------------------------------------------
 % 标题信息
 %----------------------------------------------------------
-\title{Supplementary Material: Detailed Derivations and Additional Results}
-\author{First Author, Second Author, Corresponding Author}
+\title{Supplementary Material: Your Paper Title}
+\author{Author One, Author Two, Corresponding Author}
 \dates{\today}
 \paperversion{Version -- \today}          % 页脚显示版本号
 
@@ -52,10 +52,10 @@
 %----------------------------------------------------------
 % 摘要（放在 \begin{document} 之前）
 %----------------------------------------------------------
-\setbool{rho-abstract}{true}
+\setabstractenabled{true}
 
 \begin{abstract}
-    This supplementary material provides detailed derivations of the mathematical models presented in the main text, specifically the convergence proof in Section 3. Additionally, we present extended experimental results comparing the proposed method with two additional baselines under varying channel conditions.
+    This supplementary file provides derivations, implementation details, additional experiments, and supporting figures/tables referenced in the main manuscript.
 \end{abstract}
 
 %----------------------------------------------------------
@@ -72,43 +72,36 @@
 \vspace{20pt}
 
 \section{Overview}
-\rhostart{T}{his} supplementary material accompanies the main manuscript. It includes detailed mathematical derivations, additional experimental results, and extended discussions that were not included in the main text due to space limitations.
-
-\textbf{Template Note:} This document uses the \texttt{class/sup} class, which is optimized for supplementary materials:
-\begin{itemize}
-    \item \textbf{Single Column}: Defaults to \texttt{onecolumn} for better readability of large tables and equations.
-    \item \textbf{Simplified Header}: Removes the complex author/affiliation block in favor of a clean title.
-    \item \textbf{Cross-reference}: Use \texttt{$\backslash$setupxr\{Main\}} to reference figures/tables from the main text.
-    \item \textbf{Version Info}: Displayed automatically in the footer via \texttt{$\backslash$paperversion}.
-\end{itemize}
+\dropcapstart{T}his supplementary file accompanies the main manuscript and contains material omitted from the main paper for space and readability reasons.
 
 \section{Additional Methodology Details}
-This section provides a deepening of the methods described in the main text.
+Provide derivations, proofs, pseudocode, or implementation notes that complement the main paper.
 
 \subsection{Algorithm Analysis}
-The complexity of the proposed algorithm is $O(n \log n)$, as derived from standard principles \cite{Textbook_Example}. Below is the detailed proof.
+State the additional assumptions, notation, and proof details used in the main manuscript \cite{Textbook_Example}.
 \begin{equation}
     E = mc^2 + \int_{0}^{\infty} e^{-x} dx
 \end{equation}
 
 \section{Extended Results}
+Include ablations, robustness checks, sensitivity analyses, and extra visualizations if needed.
 
 \subsection{Additional Figures}
-We provide additional comparisons in Figure \ref{fig:sup_fig}.
+Figure \ref{fig:sup_fig} provides an example supplementary figure.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\linewidth]{abstract_graph.pdf}
-    \caption{Supplementary Figure: detailed breakdown of the efficient frontier. The data correlates with the findings in Section 4 of the main manuscript.}
+    \caption{Example supplementary figure. Replace this with an extended result, extra visualization, or appendix figure.}
     \label{fig:sup_fig}
 \end{figure}
 
-\subsection{Raw Data Tables}
-Table \ref{tab:sup_table} lists the complete dataset used for the simulation.
+\subsection{Additional Tables}
+Table \ref{tab:sup_table} shows an example supplementary table layout.
 
 \begin{table}[h]
     \centering
-    \caption{Complete Simulation Parameters and Results}
+    \caption{Example supplementary table. Replace this with appendix statistics, hyperparameters, or extra results.}
     \label{tab:sup_table}
     \rowcolors{2}{gray!10}{white}
     \begin{tabular}{lcccc}

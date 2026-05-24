@@ -1,3 +1,19 @@
+## Project-specific LaTeX entry outputs:
+Main.bbl
+Main.blg
+Main.pdf
+Main.xdv
+Response.pdf
+Supplementary.bbl
+Supplementary.blg
+Supplementary.pdf
+Cover_Letter.pdf
+
+## Keep source/demo PDF assets tracked:
+!abstract_graph.pdf
+!figure/*.pdf
+!sample/*.pdf
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

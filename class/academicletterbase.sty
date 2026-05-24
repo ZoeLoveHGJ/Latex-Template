@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Academic shared letter base
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{class/academicletterbase}[2026/05/23 Academic shared letter base]
+
+\RequirePackage[table]{xcolor}
+\RequirePackage{fancyhdr}
+\RequirePackage{graphicx}
+\RequirePackage{ragged2e}
+\RequirePackage{enumitem}
+\RequirePackage{lastpage}
+\RequirePackage{etoolbox}
+\RequirePackage[notextcomp]{stix2}
+\RequirePackage[scaled]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\RequirePackage{url}
+
+\definecolor{academic-red}{HTML}{B00000}
+\definecolor{academic-purple}{HTML}{6A1B9A}
+\definecolor{academic-blue}{HTML}{1565C0}
+
+\colorlet{themecolor}{academic-red}
+\colorlet{rhocolor}{themecolor}
+
+\newcommand{\academictheme}[1]{%
+    \colorlet{themecolor}{academic-#1}%
+    \colorlet{rhocolor}{themecolor}%
+}
+\newcommand{\rhotheme}[1]{\academictheme{#1}}
+
+\newcommand{\footerfont}{\normalfont\sffamily\fontsize{7}{9}\selectfont}
+\newcommand{\academicheadrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
+
+\newcommand{\papertitle}[1]{\def\@papertitle{#1}}
+\newcommand{\journalname}[1]{\def\@journalname{#1}}
+\newcommand{\authorname}[1]{\def\@authorname{#1}}
+\newcommand{\manuscriptid}[1]{\def\@manuscriptid{#1}}
+
+\papertitle{}
+\journalname{}
+\authorname{}
+\manuscriptid{}
+
+\newcommand{\thepapertitle}{\textbf{``\@papertitle''}}
+\newcommand{\thejournalname}{\textit{\@journalname}}
+
+\newcommand{\setacademicheadrules}{%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\headrule}{\academicheadrule}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+
+\endinput

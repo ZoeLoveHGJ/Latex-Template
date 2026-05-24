@@ -5,7 +5,7 @@
 %   1. 使用 class/main 文档类（双栏学术论文）
 %   2. 编辑下方的元数据块：标题、作者、机构、通讯信息
 %   3. 摘要和关键词放在 \begin{document} 之前
-%   4. 主题色可选: \rhotheme{red/purple/blue}
+%   4. 主题色可选: \academictheme{red/purple/blue}
 %   5. 参考文献使用 BibLaTeX + Biber
 %
 % 编译方式: xelatex Main → biber Main → xelatex Main → xelatex Main
@@ -25,34 +25,32 @@
 %----------------------------------------------------------
 % 主题色配置 (可选: red, purple, blue)
 %----------------------------------------------------------
-\rhotheme{red}  % 切换主题色：red / purple / blue
+\academictheme{red}  % 切换主题色：red / purple / blue
 
 %----------------------------------------------------------
 % 论文信息配置 (Metadata)
 %----------------------------------------------------------
 
 % 标题
-\title{LODS-MTI: A Link-Adaptive, Orthogonal, and De-slotted Protocol for Robust and Fast RFID Missing Tag Identification}
-% \journalname{Preprint Submitted to Journal Name}
+\title{Your Paper Title}
+% \journalname{Journal or Preprint Venue}
 % \paperversion{Draft Version 1.0}
 
 % 作者信息
 % 作者信息（[编号] 对应下方 \affil 的机构编号）
-\author[1]{Hongquan Zhou$^{\orcidlink{0000-0000-0000-0000}}$}
-\author[1,2]{Zhong Du$^{\orcidlink{0000-0000-0000-0000}}$}
-\author[2]{Xiaolin Jia$^{*,\orcidlink{0000-0000-0000-0000}}$}
-\author[1]{Yajun Gu}
-\author[2]{Hong Yang}
+\author[1]{Author One$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[1,2]{Author Two$^{\orcidlink{0000-0000-0000-0000}}$}
+\author[2]{Corresponding Author$^{*,\orcidlink{0000-0000-0000-0000}}$}
 
 % 机构信息
 \affil[1]{Department of Computer Science, University Name, City, Country}
 \affil[2]{Research Institute, Technology Center, City, Country}
 
 % 通讯作者及其他元数据
-\corres{Xiaolin Jia}                         % 通讯作者姓名
-\email{xxxxx@163.com}                    % 通讯邮箱
-\firstauthor{Hongquan Zhou}                   % 第一作者
-\femail{xxxxxxxx@qq.com}                    % 第一作者邮箱
+\corres{Corresponding Author}
+\email{corresponding.author@example.com}
+\firstauthor{Author One}
+\femail{author.one@example.com}
 % \allemails{first@example.com, second@example.com}
 
 % \dates{Received: January 01, 2025; ...}    % 日期信息（录用后填写）
@@ -62,25 +60,25 @@
 % \license{This work was supported by ...}
 
 % 页眉/页脚信息
-\leadauthor{Hongquan Zhou et al.}             % 页眉显示
-\institution{Southwest University of Science and Technology}  % 页脚显示
+\leadauthor{Author One et al.}
+\institution{University Name}
 
 % 开启功能模块
-\setbool{rho-abstract}{true}
+\setabstractenabled{true}
 \setbool{corres-info}{true}
 
 %----------------------------------------------------------
 % 摘要 (Abstract)
 %----------------------------------------------------------
 \begin{abstract}
-Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling reliability for physical-layer spectral efficiency. This paper presents LODS-MTI, a Link-adaptive Orthogonal De-slotted protocol that eliminates inter-tag guard times using batch-synchronized continuous bitstreams. To mitigate synchronization loss in de-slotted transmissions, a digital majority voting mechanism corrects single-bit timing slips and accommodates 0.4\% clock drift. The design uses short-term coherence through ``Power-of-2'' batching to replace arithmetic division with bitwise operations. A tolerance-driven feedback loop ($\epsilon=0.30$) adjusts redundancy based on link quality to maintain a Safe Operating Area (SOA) with 99.10\% accuracy within 128-bit windows. Experimental results show that LODS-MTI achieves a normalized time efficiency of $\Gamma \approx 3.52$ (a 50\% increase over baselines) and sustains 5,200--8,811 tags/s goodput ($P_{e}\approx0.1$) at $150~\mu J/tag$, reducing energy consumption by approximately 10$\times$ compared to analog collision resolution schemes. Code and results are available at \href{https://github.com/ZoeLoveHGJ/Project_LODS_MTI}{GitHub}.
+Write a concise abstract that states the problem, method, key results, and main contribution. Keep it self-contained and suitable for submission systems, preprints, and reviewer screening.
 \end{abstract}
-\keywords{RFID, Missing Tag Identification, De-slotted Architecture, Perfect Hashing, Link-adaptive.}
+\keywords{keyword1, keyword2, keyword3, keyword4}
 
 %----------------------------------------------------------
 % 图形化摘要 (Graphical Abstract)
 %----------------------------------------------------------
-\graphicalabstract{\includegraphics[width=0.8\linewidth]{abstract_graph.pdf}}{This graphical abstract illustrates the architecture and performance of LODS-MTI, a protocol designed to reconcile logical reliability with physical spectral efficiency in RFID systems. 1. Context: Resolves the structural conflict between stable logic-layer scheduling (Type I) and fast physical-layer collision resolution (Type II). 2. Mechanism: Replaces guard intervals with a de-slotted continuous stream for spectral compression. A Digital Majority Voting logic ($\sum w_i \ge \theta$) recovers data from synchronization drift, achieving $\Gamma \approx 3.52$. 3. Outcome: Delivers 10x lower energy ($\sim 150 \mu J/tag$) and sustains 5,200+ tags/s goodput with 99.1\% accuracy.}
+% \graphicalabstract{\includegraphics[width=0.8\linewidth]{abstract_graph.pdf}}{Optional graphical abstract description.}
 
 %----------------------------------------------------------
 % 正文开始
@@ -88,71 +86,25 @@ Existing Missing Tag Identification (MTI) protocols trade logic-layer scheduling
 \begin{document}
 
 \maketitle
-\clearpage % 强制Introduction从第二页开始
-% \rhostart{W}{elcome}            
+% \clearpage % 如需让正文从新页开始可取消注释
+\dropcapstart{T}
 \section{Introduction}
-Welcome to the \textbf{Academic Paper Template}. This template is designed for academic preprints and articles, featuring a clean, professional design. It is built on the `extarticle` class and fully supports XeLaTeX compilation.
+Introduce the problem, motivation, and core contribution. This section should explain why the problem matters and summarize the paper's main idea.
 
-\textbf{Quick Start Guide:}
-\begin{enumerate}
-    \item \textbf{Configuration}: Open `Main.tex` and edit the metadata block (Title, Authors, Affiliations) at the top.
-    \item \textbf{Class Files}: The core logic resides in the `class/` directory (`main.cls`, `sup.cls`, `cover\_letter.cls`, `response.cls`). Do not modify these unless you need to change the global style.
-    \item \textbf{Compilation}: Use \textbf{XeLaTeX} + \textbf{Biber} (for bibliography) + \textbf{XeLaTeX} sequence.
-\end{enumerate}
+\section{Related Work}
+Summarize the most relevant literature and clearly position your work against existing methods.
 
-\section{Template Features}
+\section{Method}
+Describe your model, algorithm, system design, or theoretical framework. Use figures, equations, and tables as needed.
 
-\subsection{First Page Elements}
-\begin{itemize}
-    \item \textbf{Header}: Displays the Running Title (`\textbackslash title`) and Lead Author (`\textbackslash leadauthor`).
-    \item \textbf{Footer}: Contains the Institution Name (`\textbackslash institution`), Version Date (automatically generated), and Page Number (e.g., ``1--5'').
-    \item \textbf{Metadata}: The bottom rule contains the Correspondence (`\textbackslash corres`), License/Funding (`\textbackslash license`), and Dates (`\textbackslash dates`). Ensure `\textbackslash setbool\{corres-info\}\{true\}` is set to enable this block.
-\end{itemize}
+\section{Experiments}
+Report datasets, experimental settings, baselines, metrics, and the main quantitative/qualitative results.
 
-\subsection{Graphical Abstract}
-You can include a graphical abstract before the introduction using the `\graphicalabstract` command.
-\begin{verbatim}
-\graphicalabstract{
-    \includegraphics[width=0.8\linewidth]{abstract.pdf}
-    \captionof{figure}{...}
-}
-\end{verbatim}
-\subsection{Citations and References}
-This template uses `biblatex` with `biber` backend.
-\begin{itemize}
-    \item Add your references to `ref.bib`.
-    \item Cite them using `\cite{key}`, e.g., \cite{Industry4} or \cite{Techrxiv}.
-\end{itemize}
-
-\subsection{Figures and Tables}
-Figures should be placed in the `figures/` directory. Use standard LaTeX environments.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\linewidth]{abstract_graph.pdf}
-    \caption{Example of a figure. Note that the caption is left-aligned and colored in Academic Navy.}
-    \label{fig:example}
-\end{figure}
-
-Table \ref{tab:example} demonstrates the default style.
-
-\begin{table}[h]
-    \centering
-    \caption{Example Table Style}
-    \label{tab:example}
-    \rowcolors{2}{gray!10}{white}
-    \begin{tabular}{ccc}
-        \toprule
-        \textbf{Feature} & \textbf{Command} & \textbf{Note} \\
-        \midrule
-        Lead Author & \texttt{\textbackslash leadauthor} & Header usage \\
-        Institution & \texttt{\textbackslash institution} & Footer usage \\
-        License & \texttt{\textbackslash license} & Bottom info \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\section{Discussion}
+Analyze limitations, assumptions, and broader implications where appropriate.
 
 \section{Conclusion}
-This template aims to provide an ``out-of-the-box'' experience for professional academic writing. If you encounter missing footer information, please check that `\textbackslash setbool\{corres-info\}\{true\}` is present in your preamble.
+Conclude with the main takeaway, practical impact, and possible future work.
 
 %----------------------------------------------------------
 % 参考文献

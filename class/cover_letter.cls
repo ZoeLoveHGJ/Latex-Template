@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------------------------------------
-% Cover Letter Class (Based on Rho)
+% Cover Letter Class
 % LaTeX Class
 % Version 2.1.0 (Standardized)
 % --------------------------------------------------------
@@ -20,34 +20,9 @@
 % REQUIRED PACKAGES
 %----------------------------------------------------------
 
-\RequirePackage[utf8]{inputenc}
 \RequirePackage{geometry}
-\RequirePackage[table]{xcolor}
-\RequirePackage{fancyhdr}
-\RequirePackage{graphicx}
-\RequirePackage{ragged2e}
-\RequirePackage{enumitem}
-\RequirePackage{lastpage}
-\RequirePackage{etoolbox}
+\RequirePackage{class/academicletterbase}
 
-%----------------------------------------------------------
-% 主题色预设 (Theme Color Presets)
-% 使用方法：\rhotheme{red} / \rhotheme{purple} / \rhotheme{blue}
-%----------------------------------------------------------
-
-\definecolor{rho-red}{HTML}{B00000}           % 学术红
-\definecolor{rho-purple}{HTML}{6A1B9A}        % 优雅紫
-\definecolor{rho-blue}{HTML}{1565C0}          % 经典蓝
-
-% 默认主题色
-\colorlet{rhocolor}{rho-red}
-
-% 主题切换命令
-\newcommand{\rhotheme}[1]{%
-    \colorlet{rhocolor}{rho-#1}%
-}
-
-%----------------------------------------------------------
 % PAGE LAYOUT
 %----------------------------------------------------------
 
@@ -62,15 +37,6 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 
-%----------------------------------------------------------
-% FONTS
-%----------------------------------------------------------
-
-\RequirePackage[notextcomp]{stix2}
-\RequirePackage[scaled]{helvet}
-\renewcommand{\ttdefault}{lmtt}
-
-%----------------------------------------------------------
 % LINKS
 %----------------------------------------------------------
 
@@ -81,15 +47,6 @@
 %----------------------------------------------------------
 
 % === 论文信息（定义一次，全局复用）===
-% 投稿论文标题
-\newcommand{\papertitle}[1]{\def\@papertitle{#1}}
-% 目标期刊全称
-\newcommand{\journalname}[1]{\def\@journalname{#1}}
-
-% 便捷引用命令：在正文中用 \thepapertitle / \thejournalname 直接调用
-\newcommand{\thepapertitle}{\textbf{``\@papertitle''}}
-\newcommand{\thejournalname}{\textit{\@journalname}}
-
 % === 发件人信息 (Sender) ===
 \newcommand{\sendername}[1]{\def\@sendername{#1}}
 \newcommand{\senderaffiliation}[1]{\def\@senderaffiliation{#1}}
@@ -113,8 +70,6 @@
 % HEADER & FOOTER
 %----------------------------------------------------------
 
-\newcommand{\footerfont}{\normalfont\sffamily\fontsize{7}{9}\selectfont}
-
 \pagestyle{fancy}
 \fancyhf{}
 
@@ -123,9 +78,7 @@
 \fancyhead[R]{\ifx\@sendername\undefined\else\footerfont\@sendername\fi}
 \fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
-\renewcommand{\footrulewidth}{0pt}
+\setacademicheadrules
 
 % 首页样式（左侧显示机构 Logo，中间 Cover Letter，右侧日期）
 \fancypagestyle{firstpage}{
@@ -140,9 +93,7 @@
     \fancyhead[C]{\sffamily\fontsize{7}{9}\selectfont\bfseries Cover Letter}
     \fancyhead[R]{\footerfont\textit{\today}}
     \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
-    \renewcommand{\headrulewidth}{0.4pt}
-    \renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
-    \renewcommand{\footrulewidth}{0pt}
+    \setacademicheadrules
 }
 
 %----------------------------------------------------------

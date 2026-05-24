@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------------------------------------
-% Response to Reviewers Class (Based on Rho)
+% Response to Reviewers Class
 % LaTeX Class  —  Version 1.1.0 (2026/02/13)
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,13 +20,7 @@
 %----------------------------------------------------------
 
 \RequirePackage{geometry}
-\RequirePackage[table]{xcolor}
-\RequirePackage{fancyhdr}
-\RequirePackage{graphicx}
-\RequirePackage{ragged2e}
-\RequirePackage{enumitem}
-\RequirePackage{lastpage}
-\RequirePackage{etoolbox}
+\RequirePackage{class/academicletterbase}
 \RequirePackage{placeins}
 \RequirePackage{float}
 \RequirePackage{caption}
@@ -35,42 +29,35 @@
 \RequirePackage{amssymb}
 \RequirePackage{tcolorbox}
 \RequirePackage{adjustbox}
+\RequirePackage{supertabular}
+\RequirePackage{longtable}
 \tcbuselibrary{skins,breakable}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{titletoc}
 
-%----------------------------------------------------------
-% 主题色预设
-%----------------------------------------------------------
-
-\definecolor{rho-red}{HTML}{B00000}
-\definecolor{rho-purple}{HTML}{6A1B9A}
-\definecolor{rho-blue}{HTML}{1565C0}
-
-\colorlet{rhocolor}{rho-red}
-
 % 主题相关功能色（随主题切换）
-\definecolor{rho-red-comment}{HTML}{8D1F1F}
-\definecolor{rho-purple-comment}{HTML}{5E35B1}
-\definecolor{rho-blue-comment}{HTML}{1565C0}
+\definecolor{academic-red-comment}{HTML}{8D1F1F}
+\definecolor{academic-purple-comment}{HTML}{5E35B1}
+\definecolor{academic-blue-comment}{HTML}{1565C0}
 
 % 固定功能色（不随主题切换）
 \definecolor{revisedbg}{HTML}{FFF3E0}         % Revised Text 橙色浅底
 \definecolor{revisedaccent}{HTML}{E67E22}     % Revised Text 橙色强调
 \definecolor{addedcolor}{HTML}{B00000}        % highlighted in red 始终红色
 \definecolor{deletedcolor}{HTML}{8A0000}      % 删除文字固定红色系
-\colorlet{commentcolor}{rho-red-comment}      % 审稿意见文字
+\colorlet{commentcolor}{academic-red-comment}
 
-\newcommand{\rhotheme}[1]{%
-    \colorlet{rhocolor}{rho-#1}%
+\renewcommand{\academictheme}[1]{%
+    \colorlet{themecolor}{academic-#1}%
+    \colorlet{rhocolor}{themecolor}%
     \ifstrequal{#1}{red}{%
-        \colorlet{commentcolor}{rho-red-comment}%
+        \colorlet{commentcolor}{academic-red-comment}%
     }{%
         \ifstrequal{#1}{purple}{%
-            \colorlet{commentcolor}{rho-purple-comment}%
+            \colorlet{commentcolor}{academic-purple-comment}%
         }{%
             \ifstrequal{#1}{blue}{%
-                \colorlet{commentcolor}{rho-blue-comment}%
+                \colorlet{commentcolor}{academic-blue-comment}%
             }{}%
         }%
     }%
@@ -85,6 +72,7 @@
     right=2.5cm,
     top=3cm,
     bottom=2.5cm,
+    headheight=20pt,
     headsep=1cm
 }
 
@@ -94,15 +82,6 @@
 % Tighter default table column padding to avoid width overflow in dense response tables.
 \setlength{\tabcolsep}{4pt}
 
-%----------------------------------------------------------
-% FONTS
-%----------------------------------------------------------
-
-\RequirePackage[notextcomp]{stix2}
-\RequirePackage[scaled]{helvet}
-\renewcommand{\ttdefault}{lmtt}
-
-%----------------------------------------------------------
 % LINKS
 %----------------------------------------------------------
 
@@ -130,29 +109,8 @@
     skip=6pt
 }
 
-%----------------------------------------------------------
-% 文档信息命令
-%----------------------------------------------------------
-
-\newcommand{\papertitle}[1]{\def\@papertitle{#1}}
-\newcommand{\journalname}[1]{\def\@journalname{#1}}
-\newcommand{\authorname}[1]{\def\@authorname{#1}}
-\newcommand{\manuscriptid}[1]{\def\@manuscriptid{#1}}
-
-% 默认值（避免未定义判断和空内容留白问题）
-\papertitle{}
-\journalname{}
-\authorname{}
-\manuscriptid{}
-
-\newcommand{\thepapertitle}{\textbf{``\@papertitle''}}
-\newcommand{\thejournalname}{\textit{\@journalname}}
-
-%----------------------------------------------------------
 % HEADER & FOOTER
 %----------------------------------------------------------
-
-\newcommand{\footerfont}{\normalfont\sffamily\fontsize{7}{9}\selectfont}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -161,9 +119,7 @@
 \fancyhead[R]{\ifstrempty{\@authorname}{}{\footerfont\@authorname}}
 \fancyfoot[C]{\footerfont\textbf{\thepage\textendash\pageref{LastPage}}}
 
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
-\renewcommand{\footrulewidth}{0pt}
+\setacademicheadrules
 
 % 首页样式
 \fancypagestyle{firststyle}{
@@ -175,9 +131,7 @@
         \ifstrempty{\@manuscriptid}{}{\@manuscriptid}
     }
     \fancyfoot[C]{\footerfont\textbf{1\textendash\pageref{LastPage}}}
-    \renewcommand{\headrulewidth}{0.4pt}
-    \renewcommand{\headrule}{\hbox to\headwidth{\color{rhocolor}\leaders\hrule height \headrulewidth\hfill}}
-    \renewcommand{\footrulewidth}{0pt}
+    \setacademicheadrules
 }
 
 %----------------------------------------------------------
@@ -350,8 +304,8 @@
     \vskip0.3em
     \begin{tcolorbox}[
         enhanced, breakable,
-        colback=black!3,
-        colframe=black!35,
+        colback=rhocolor!5,
+        colframe=rhocolor!35,
         boxrule=0pt,
         leftrule=1.2pt,
         arc=2pt, outer arc=2pt,

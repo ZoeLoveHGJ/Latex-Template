@@ -1,12 +1,18 @@
-﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Response to Reviewers Template (Desensitized)
 % --------------------------------------------------------
-% 使用说明：
-%   1. 填写论文信息 (\papertitle, \journalname, \authorname, \manuscriptid)
-%   2. \makeresponsetitle 生成标题区
-%   3. 先写致编辑/审稿人的总结信
-%   4. \makeresponsetoc 生成可跳转目录
-%   5. 使用 \reviewer 自动分区（编号自动增长）
+% 使用说明与编译指南：
+%   1. 编译方式：使用 XeLaTeX 编译。需要编译两次（运行 xelatex Response 两次）以生成可跳转的目录。
+%   2. 填写论文元数据 (\papertitle, \journalname, \authorname, \manuscriptid)。
+%   3. \makeresponsetitle 生成标题区，\makeresponsetoc 生成回复信目录。
+%   4. 使用 \reviewer 自动进行审稿人分区（编号自动递增）。
+%   5. 状态跟踪系统：
+%      - 在草稿阶段，可以注释掉第 24 行的 \hidecommentstatus，以便在 PDF 中显示每个审稿意见后的 [PENDING] 或 [DONE] 标记，辅助跟踪修改进度。
+%      - 在审稿意见前调用 \commentdone 或 \commentpending 即可设置该条意见的状态。
+%      - 提交终稿前，取消注释 \hidecommentstatus 即可一键全局隐去所有状态标记。
+%   6. 表格排版提示（非常重要）：
+%      - 本模板默认会将 \begin{tabular} 自动缩放到页面宽度（防超界溢出）。
+%      - 如果您需要排版**跨页的长表格**，请务必使用 \begin{supertabular} 或 \begin{longtable}，它们不会被自动限制宽度，能正常分页展示。
 % --------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,11 +21,11 @@
 \usepackage{multirow}
 \usepackage[english]{babel}
 
-% 可选：隐藏 Comment 标题后的 [DONE]/[PENDING]
+% 可选：隐藏 Comment 标题后的 [DONE]/[PENDING]（提交时请保持启用，草稿修改时可注释掉）
 \hidecommentstatus
 
 % 保持原有配色方案
-\rhotheme{purple}
+\academictheme{purple}
 
 %----------------------------------------------------------
 % 文档信息（请按需填写）
@@ -40,15 +46,15 @@
 
 Thank you for your time and constructive comments on our manuscript. We have carefully revised the manuscript and addressed all comments point by point.
 
-The major updates in this revision are summarized as follows:
+The major updates in this revision are summarized below:
 \begin{enumerate}
-    \item Clarified key definitions and improved methodological descriptions.
-    \item Added/updated theoretical analysis and supporting explanations.
-    \item Expanded experiments or discussions to improve robustness and reproducibility.
-    \item Revised language, formatting, and references according to journal requirements.
+    \item Clarified definitions, assumptions, and methodological details.
+    \item Added or revised analysis, experiments, and supporting discussion where needed.
+    \item Improved presentation, language, and manuscript organization.
+    \item Updated references, figures, and formatting to match submission requirements.
 \end{enumerate}
 
-All important revisions in the manuscript are marked using the journal-required format. Detailed responses are provided below.
+All substantive revisions in the manuscript are marked using the required revision format. Detailed point-by-point responses are provided below.
 
 \vskip0.5em
 Best regards,
@@ -67,7 +73,7 @@ Best regards,
 \aecomments
 
 \begin{aecomment}
-[AE comment placeholder.]
+[Associate editor comment.]
 \end{aecomment}
 
 \begin{authorresponse}
