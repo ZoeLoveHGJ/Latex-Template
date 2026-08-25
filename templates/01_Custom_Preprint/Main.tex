@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Academic Paper Template (Modern Custom Preprint)
 % --------------------------------------------------------
-% 文档类型: 现代双栏学术论文 / 预印本 / arXiv
-% 编译方式: xelatex Main -> biber Main -> xelatex Main -> xelatex Main
+% :  /  / arXiv
+% : xelatex Main -> biber Main -> xelatex Main -> xelatex Main
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[10pt,a4paper,twoside]{../../packages/custom/main}
 
 %----------------------------------------------------------
-% 基本宏包配置与路径
+% 
 %----------------------------------------------------------
 \usepackage[english]{babel}
 \usepackage{graphicx}
@@ -17,17 +17,17 @@
 \graphicspath{{../../figures/}}
 
 %----------------------------------------------------------
-% 参考文献配置 (BibLaTeX + Biber 统一接入 bib/refer.bib)
+%  (BibLaTeX + Biber  bib/refer.bib)
 %----------------------------------------------------------
 \addbibresource{../../bib/refer.bib}
 
 %----------------------------------------------------------
-% 主题色配置 (可选: red, purple, blue)
+%  (: red, purple, blue)
 %----------------------------------------------------------
 \academictheme{red}
 
 %----------------------------------------------------------
-% 论文元数据 (Metadata)
+%  (Metadata)
 %----------------------------------------------------------
 \title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
 
@@ -50,7 +50,7 @@
 \setbool{corres-info}{true}
 
 %----------------------------------------------------------
-% 摘要与关键词
+% 
 %----------------------------------------------------------
 \begin{abstract}
 Tag identification in dense dynamic RFID systems poses significant throughput challenges under stochastic workload arrivals. This paper proposes a decoupled modular architecture that unifies modern authoring pipelines with major publisher formatting requirements (IEEE, Elsevier, ACM). By cleanly isolating scientific content from presentation layer mechanics, researchers can maintain a single source of truth while meeting diverse publication venues with zero migration overhead.
@@ -58,13 +58,13 @@ Tag identification in dense dynamic RFID systems poses significant throughput ch
 \keywords{Modular LaTeX, Academic Authoring, Multi-Publisher Migration, Reproducibility}
 
 %----------------------------------------------------------
-% 正文开始
+% 
 %----------------------------------------------------------
 \begin{document}
 
 \maketitle
 
-% 引入共享正文模块
+% 
 \input{../../sections/01_introduction}
 \input{../../sections/02_related_work}
 \input{../../sections/03_method}
@@ -72,7 +72,7 @@ Tag identification in dense dynamic RFID systems poses significant throughput ch
 \input{../../sections/05_conclusion}
 
 %----------------------------------------------------------
-% 参考文献
+% 
 %----------------------------------------------------------
 \printbibliography
 

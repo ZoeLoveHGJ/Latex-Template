@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IEEE Conference Template
 % --------------------------------------------------------
-% 出版社: IEEE (Institute of Electrical and Electronics Engineers)
-% 适用对象: IEEE Conferences (INFOCOM, ICC, GLOBECOM, WCNC 等)
-% 编译方式: pdflatex Main_IEEE_Conf -> bibtex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf
+% Publisher: IEEE (Institute of Electrical and Electronics Engineers)
+% Target: IEEE Conferences (INFOCOM, ICC, GLOBECOM, WCNC, etc.)
+% Build: pdflatex Main_IEEE_Conf -> bibtex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[conference,10pt,twocolumn,a4paper]{../../packages/publishers/ieee/IEEEtran}
@@ -13,7 +13,7 @@
 \usepackage{algorithmic}
 \graphicspath{{../../figures/}}
 
-% 墨绿色学术高亮
+% Green academic theme
 \usepackage{hyperref}
 \hypersetup{
     colorlinks = true,
@@ -25,28 +25,33 @@
 \IEEEoverridecommandlockouts
 
 % ---------------------------------------------------------
-% 论文元数据
+% Load unified metadata & author constants
 % ---------------------------------------------------------
-\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration%
-\thanks{This work was supported by the Science and Technology Project.}}
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
 
-\author{\IEEEauthorblockN{Hongquan Zhou}
-\IEEEauthorblockA{\textit{Mobile IoT Key Lab} \\
-\textit{University Name}\\
-City, China \\
-zhou@example.com}
+% ---------------------------------------------------------
+% Manuscript Metadata (Official IEEE Conference Format)
+% ---------------------------------------------------------
+\title{\PaperTitle\thanks{\GrantFunding}}
+
+\author{\IEEEauthorblockN{\AuthorA}
+\IEEEauthorblockA{\textit{\DeptA} \\
+\textit{\InstA}\\
+\CityA, \CountryA \\
+\EmailA}
 \and
-\IEEEauthorblockN{Xiaolin Jia}
-\IEEEauthorblockA{\textit{Mobile IoT Key Lab} \\
-\textit{University Name}\\
-City, China \\
-my\_jiaxl@163.com}
+\IEEEauthorblockN{\AuthorB$^*$}
+\IEEEauthorblockA{\textit{\DeptA} \\
+\textit{\InstA}\\
+\CityA, \CountryA \\
+\EmailB}
 \and
-\IEEEauthorblockN{Zhong Du}
+\IEEEauthorblockN{\AuthorC}
 \IEEEauthorblockA{\textit{Computer Science Dept.} \\
-\textit{Technology Center}\\
-City, China \\
-du@example.com}
+\textit{\InstA}\\
+\CityA, \CountryA \\
+\EmailC}
 }
 
 \begin{document}
@@ -54,15 +59,15 @@ du@example.com}
 \maketitle
 
 \begin{abstract}
-Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and severe communication collisions. This paper demonstrates a unified decoupled academic authoring framework that bridges modern modular writing with strict IEEE conference formatting standards.
+\PaperAbstract
 \end{abstract}
 
 \begin{IEEEkeywords}
-IEEE Conference, RFID, anti-collision, modular LaTeX.
+\PaperKeywords
 \end{IEEEkeywords}
 
 % ---------------------------------------------------------
-% 共享正文内容模块
+% Shared Manuscript Sections
 % ---------------------------------------------------------
 \input{../../sections/01_introduction}
 \input{../../sections/02_related_work}
@@ -71,7 +76,7 @@ IEEE Conference, RFID, anti-collision, modular LaTeX.
 \input{../../sections/05_conclusion}
 
 % ---------------------------------------------------------
-% 参考文献 (前置 journal_abrv 自动缩写)
+% References (IEEE Standard Abbreviation)
 % ---------------------------------------------------------
 \bibliographystyle{../../packages/publishers/ieee/IEEEtran}
 \bibliography{../../bib/journal_abrv,../../bib/refer}

@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IEEE Transactions / Journal Template
 % --------------------------------------------------------
-% 出版社: IEEE (Institute of Electrical and Electronics Engineers)
-% 适用对象: IEEE Transactions, IEEE Journals, IEEE Letters
-% 编译方式: pdflatex Main_IEEE_Trans -> bibtex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans
+% Publisher: IEEE (Institute of Electrical and Electronics Engineers)
+% Target: IEEE Transactions, IEEE Journals, IEEE Letters
+% Build: pdflatex Main_IEEE_Trans -> bibtex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[journal,10pt,twocolumn]{../../packages/publishers/ieee/IEEEtran}
@@ -14,7 +14,7 @@
 \usepackage{textcomp}
 \graphicspath{{../../figures/}}
 
-% 墨绿色学术高亮配置
+% Green academic theme
 \usepackage{hyperref}
 \hypersetup{
     colorlinks = true,
@@ -24,38 +24,44 @@
 }
 
 % ---------------------------------------------------------
-% 论文元数据 (Metadata)
+% Load unified metadata & author constants
 % ---------------------------------------------------------
-\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
 
-\author{Hongquan~Zhou,~\IEEEmembership{Graduate~Student~Member,~IEEE,}
-        Xiaolin~Jia,~\IEEEmembership{Senior~Member,~IEEE,}
-        and~Zhong~Du,~\IEEEmembership{Member,~IEEE}%
-\thanks{This work was supported in part by the National Natural Science Foundation of China.}%
-\thanks{H. Zhou and X. Jia are with the Mobile Internet of Things and RFID Technology Key Laboratory, Southwest University of Science and Technology, Mianyang 621010, China (e-mail: my\_jiaxl@163.com).}%
-\thanks{Z. Du is with the School of Computer Science and Technology, Southwest University of Science and Technology, Mianyang 621010, China.}%
+% ---------------------------------------------------------
+% Manuscript Metadata (100% Official IEEE Transactions Format)
+% ---------------------------------------------------------
+\title{\PaperTitle}
+
+\author{\AuthorA,~\IEEEmembership{\RoleA,}
+        \AuthorB,~\IEEEmembership{\RoleB,}
+        and~\AuthorC,~\IEEEmembership{\RoleC}%
+\thanks{\GrantFunding}%
+\thanks{\AuthorA{} and \AuthorB{} (Corresponding Author) are with \AffilA{} (e-mail: \EmailB).}%
+\thanks{\AuthorC{} is with \AffilB{}.}%
 }
 
-\markboth{IEEE Transactions on Knowledge and Data Engineering,~Vol.~XX, No.~X, August~2026}%
-{Zhou \MakeLowercase{\textit{et al.}}: Modular Academic LaTeX Framework}
+\markboth{\JournalRunningHead}%
+{\AuthorA{} \MakeLowercase{\textit{et al.}}: \ShortPaperTitle}
 
 \begin{document}
 
 \maketitle
 
 % ---------------------------------------------------------
-% 摘要与关键词
+% Abstract and Keywords
 % ---------------------------------------------------------
 \begin{abstract}
-Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and severe communication collisions. This paper demonstrates a unified decoupled academic authoring framework that bridges modern modular writing with strict IEEE Transactions publishing requirements. Core sections are maintained independently from venue-specific formatting, ensuring instantaneous multi-target manuscript compilation and verification.
+\PaperAbstract
 \end{abstract}
 
 \begin{IEEEkeywords}
-RFID systems, anti-collision protocol, IEEE Transactions, modular authoring, reproducible research.
+\PaperKeywords
 \end{IEEEkeywords}
 
 % ---------------------------------------------------------
-% 共享正文内容模块
+% Shared Manuscript Sections
 % ---------------------------------------------------------
 \input{../../sections/01_introduction}
 \input{../../sections/02_related_work}
@@ -64,7 +70,7 @@ RFID systems, anti-collision protocol, IEEE Transactions, modular authoring, rep
 \input{../../sections/05_conclusion}
 
 % ---------------------------------------------------------
-% 参考文献 (前置 journal_abrv 自动缩写)
+% References (IEEE Standard Abbreviation)
 % ---------------------------------------------------------
 \bibliographystyle{../../packages/publishers/ieee/IEEEtran}
 \bibliography{../../bib/journal_abrv,../../bib/refer}

@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Elsevier CAS Double Column Template (e.g., ESWA, Information Sciences)
 % --------------------------------------------------------
-% 出版社: Elsevier (ScienceDirect) - Complex Article Service (CAS)
-% 适用对象: Expert Systems with Applications (ESWA) 及 Elsevier 旗下主流 SCI 期刊
-% 编译方式: pdflatex Main_Elsevier -> bibtex Main_Elsevier -> pdflatex Main_Elsevier -> pdflatex Main_Elsevier
+% Publisher: Elsevier (ScienceDirect) - Complex Article Service (CAS)
+% Target: Expert Systems with Applications (ESWA) & Top SCI Journals
+% Build: pdflatex Main_Elsevier -> bibtex Main_Elsevier -> pdflatex Main_Elsevier -> pdflatex Main_Elsevier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[a4paper,fleqn]{../../packages/publishers/elsevier_cas/cas-dc}
@@ -14,8 +14,14 @@
 \usepackage{orcidlink}
 \graphicspath{{../../figures/}}
 
-% 墨绿色学术高亮
+% Green academic theme
 \hypersetup{colorlinks=true, citecolor=academicgreen, linkcolor=academicgreen, urlcolor=academicgreen}
+
+% ---------------------------------------------------------
+% Load unified metadata & author constants
+% ---------------------------------------------------------
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
 
 \begin{document}
 
@@ -24,44 +30,40 @@
 \def\textpagefraction{.001}
 \let\printorcid\relax
 
-% 页眉简短信息
-\shorttitle{Modular Academic LaTeX Framework}
-\shortauthors{H. Zhou et al.}
+% Header short info
+\shorttitle{\ShortPaperTitle}
+\shortauthors{\AuthorA{} et al.}
 
 % ---------------------------------------------------------
-% 论文标题与作者信息 (Elsevier CAS 官方格式)
+% Manuscript Metadata (Official Elsevier CAS Format)
 % ---------------------------------------------------------
-\title[mode = title]{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
+\title[mode = title]{\PaperTitle}
 
-\author[1,2]{Hongquan Zhou$^{\orcidlink{0009-0000-7888-4115}}$}
-\author[1,2]{Xiaolin Jia$^{\orcidlink{0000-0002-4102-3490}}$}
+\author[1,2]{\AuthorA$^{\orcidlink{\OrcidA}}$}
+\author[1,2]{\AuthorB$^{\orcidlink{\OrcidB}}$}
 \cormark[1]
-\author[1,2]{Zhong Du$^{\orcidlink{0000-0003-3809-6864}}$}
+\author[2]{\AuthorC$^{\orcidlink{\OrcidC}}$}
 
-\address[1]{Mobile Internet of Things and Radio Frequency Identification Technology Key Laboratory, Mianyang 621010, China}
-\address[2]{School of Computer Science and Technology, Southwest University of Science and Technology, Mianyang 621010, China}
+\address[1]{\AffilA}
+\address[2]{\AffilB}
 
-\cortext[1]{Corresponding author: Xiaolin Jia (e-mail: my\_jiaxl@163.com)}
+\cortext[1]{Corresponding author: \AuthorB{} (e-mail: \EmailB)}
 
 % ---------------------------------------------------------
-% 摘要与关键词
+% Abstract and Keywords
 % ---------------------------------------------------------
 \begin{abstract}
-Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and packet collisions. This paper presents a modular, decoupled academic authoring framework that aligns with the official Elsevier CAS (Complex Article Service) standards. By cleanly isolating scientific content from publisher-specific typography, researchers can effortlessly adapt manuscripts across major publication venues while guaranteeing reproducibility and data consistency.
+\PaperAbstract
 \end{abstract}
 
 \begin{keywords}
-Elsevier CAS \sep 
-Expert Systems with Applications \sep 
-RFID anti-collision \sep 
-Modular LaTeX framework \sep 
-Academic publishing
+\ElsevierKeywords
 \end{keywords}
 
 \maketitle
 
 % ---------------------------------------------------------
-% 共享正文内容模块 (与其它模板完全共享)
+% Shared Manuscript Sections
 % ---------------------------------------------------------
 \input{../../sections/01_introduction}
 \input{../../sections/02_related_work}
@@ -70,10 +72,9 @@ Academic publishing
 \input{../../sections/05_conclusion}
 
 % ---------------------------------------------------------
-% 参考文献 (前置 journal_full 自动展开官方全称)
+% References (Official Full Name Dictionary for Elsevier)
 % ---------------------------------------------------------
 \bibliographystyle{../../packages/publishers/elsevier_cas/cas-model2-names}
-% \bibliographystyle{unsrt}
 \bibliography{../../bib/journal_full,../../bib/refer}
 
 \end{document}

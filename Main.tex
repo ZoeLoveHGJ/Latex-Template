@@ -1,24 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Academic Paper Template (Root Default: IEEE Transactions)
 % --------------------------------------------------------
-% 出版社: IEEE (Institute of Electrical and Electronics Engineers)
-% 适用对象: IEEE Transactions / Journals (默认入口)
-% 样式特色: 经典学术墨绿色高亮 (Hyperref Forest Green), 表格居中自适应
-% 编译方式: pdflatex Main -> bibtex Main -> pdflatex Main -> pdflatex Main
+% Publisher: IEEE (Institute of Electrical and Electronics Engineers)
+% Target: IEEE Transactions / Journals (Official Standard)
+% Build: pdflatex Main -> bibtex Main -> pdflatex Main -> pdflatex Main
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[journal,10pt,twocolumn]{packages/publishers/ieee/IEEEtran}
 
-% 增强跨模板兼容与样式宏包 (内含 xurl 断行与自适应居中表格)
 \usepackage{packages/publishers/compat_helper}
 \usepackage{cite}
 \usepackage{algorithmic}
 \usepackage{textcomp}
 \graphicspath{{figures/}}
 
-% ---------------------------------------------------------
-% 高雅学术墨绿色超链接与引用高亮配置
-% ---------------------------------------------------------
+% Hyperref setup with academic green
 \usepackage{hyperref}
 \hypersetup{
     colorlinks = true,
@@ -28,38 +24,44 @@
 }
 
 % ---------------------------------------------------------
-% 论文元数据 (Metadata)
+% Load unified metadata & author constants
 % ---------------------------------------------------------
-\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
+\input{metadata/paper_info}
+\input{metadata/authors_info}
 
-\author{Hongquan~Zhou,~\IEEEmembership{Graduate~Student~Member,~IEEE,}
-        Xiaolin~Jia,~\IEEEmembership{Senior~Member,~IEEE,}
-        and~Zhong~Du,~\IEEEmembership{Member,~IEEE}%
-\thanks{This work was supported in part by the National Natural Science Foundation of China.}%
-\thanks{H. Zhou and X. Jia are with the Mobile Internet of Things and RFID Technology Key Laboratory, Southwest University of Science and Technology, Mianyang 621010, China (e-mail: my\_jiaxl@163.com).}%
-\thanks{Z. Du is with the School of Computer Science and Technology, Southwest University of Science and Technology, Mianyang 621010, China.}%
+% ---------------------------------------------------------
+% Manuscript Metadata (100% Official IEEE Transactions Format)
+% ---------------------------------------------------------
+\title{\PaperTitle}
+
+\author{\AuthorA,~\IEEEmembership{\RoleA,}
+        \AuthorB,~\IEEEmembership{\RoleB,}
+        and~\AuthorC,~\IEEEmembership{\RoleC}%
+\thanks{\GrantFunding}%
+\thanks{\AuthorA{} and \AuthorB{} (Corresponding Author) are with \AffilA{} (e-mail: \EmailB).}%
+\thanks{\AuthorC{} is with \AffilB{}.}%
 }
 
-\markboth{IEEE Transactions on Knowledge and Data Engineering,~Vol.~XX, No.~X, August~2026}%
-{Zhou \MakeLowercase{\textit{et al.}}: Modular Academic LaTeX Framework}
+\markboth{\JournalRunningHead}%
+{\AuthorA{} \MakeLowercase{\textit{et al.}}: \ShortPaperTitle}
 
 \begin{document}
 
 \maketitle
 
 % ---------------------------------------------------------
-% 摘要与关键词
+% Abstract and Keywords
 % ---------------------------------------------------------
 \begin{abstract}
-Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and severe communication collisions. This paper demonstrates a unified decoupled academic authoring framework that bridges modern modular writing with strict IEEE Transactions publishing requirements. Core sections are maintained independently from venue-specific formatting, ensuring instantaneous multi-target manuscript compilation and verification.
+\PaperAbstract
 \end{abstract}
 
 \begin{IEEEkeywords}
-RFID systems, anti-collision protocol, IEEE Transactions, modular authoring, reproducible research.
+\PaperKeywords
 \end{IEEEkeywords}
 
 % ---------------------------------------------------------
-% 共享正文内容模块 (所有模板共享此目录)
+% Shared Manuscript Sections
 % ---------------------------------------------------------
 \input{sections/01_introduction}
 \input{sections/02_related_work}
@@ -68,7 +70,7 @@ RFID systems, anti-collision protocol, IEEE Transactions, modular authoring, rep
 \input{sections/05_conclusion}
 
 % ---------------------------------------------------------
-% 参考文献 (真实接入 bib/refer.bib，前置 journal_abrv 自动缩写)
+% Bibliography (IEEE Standard Abbreviation)
 % ---------------------------------------------------------
 \bibliographystyle{packages/publishers/ieee/IEEEtran}
 \bibliography{bib/journal_abrv,bib/refer}

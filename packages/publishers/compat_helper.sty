@@ -1,19 +1,23 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{packages/publishers/compat_helper}[2026/08/25 Advanced Styling and Compatibility Helper]
+\ProvidesPackage{packages/publishers/compat_helper}[2026/08/25 Non-intrusive Styling and SCU Academic Standards Helper]
 
 % 1. 超强 URL 与断行支持 (解决参考文献超长溢出)
 \RequirePackage{url}
 \RequirePackage{xurl} % 允许在任何字符处智能断行，彻底杜绝参考文献溢出
 \urlstyle{same}
 
-% 2. 经典学术高雅墨绿色定义 (Academic Forest/Pine Green)
+% 2. 基础数学与图形支持 (提供 \text, \eqref, \includegraphics)
+\RequirePackage{amsmath,amssymb,amsfonts}
+\RequirePackage{graphicx}
+
+% 3. 经典学术高雅墨绿色定义 (Academic Forest/Pine Green)
 \RequirePackage{xcolor}
 \definecolor{academicgreen}{RGB}{11, 102, 35}     % 经典学术墨绿 #0B6623
 \definecolor{forestgreen}{RGB}{16, 124, 65}      % 雅致松绿 #107C41
 \definecolor{deepteal}{RGB}{0, 95, 86}           % 沉稳墨青 #005F56
 \definecolor{darkslate}{RGB}{38, 70, 83}         % 暗灰石绿 #264653
 
-% 3. 表格居中与自适应增强宏包
+% 4. 表格居中与自适应增强宏包
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}
 \RequirePackage{array}
@@ -28,11 +32,32 @@
 % 改善表格默认行距，呼吸感更强
 \renewcommand{\arraystretch}{1.25}
 
-% 4. 基础数学与图形支持
-\RequirePackage{amsmath,amssymb,amsfonts}
-\RequirePackage{graphicx}
+% 5. SCU 学术交叉引用规范宏 (参考 scu-doc-common 规范，带不可断行波浪号)
+\providecommand{\figref}[1]{Fig.~\ref{#1}}
+\providecommand{\subfigref}[2]{Fig.~\ref{#1}(#2)}
+\providecommand{\figrangeref}[2]{Figs.~\ref{#1}--\ref{#2}}
+\providecommand{\figpairref}[2]{Figs.~\ref{#1} and \ref{#2}}
 
-% 5. 跨模板通用兜底宏
+\providecommand{\tabref}[1]{Table~\ref{#1}}
+\providecommand{\tabrangeref}[2]{Tables~\ref{#1}--\ref{#2}}
+\providecommand{\tabpairref}[2]{Tables~\ref{#1} and \ref{#2}}
+
+\providecommand{\eqnref}[1]{Eq.~(\ref{#1})}
+\providecommand{\eqrangeref}[2]{Eqs.~(\ref{#1})--(\ref{#2})}
+\providecommand{\eqpairref}[2]{Eqs.~(\ref{#1}) and (\ref{#2})}
+
+\providecommand{\secref}[1]{Section~\ref{#1}}
+\providecommand{\secshortref}[1]{Sec.~\ref{#1}}
+\providecommand{\secpairref}[2]{Sections~\ref{#1} and \ref{#2}}
+\providecommand{\secrangeref}[2]{Sections~\ref{#1}--\ref{#2}}
+
+\providecommand{\algref}[1]{Algorithm~\ref{#1}}
+\providecommand{\thmref}[1]{Theorem~\ref{#1}}
+\providecommand{\lemref}[1]{Lemma~\ref{#1}}
+\providecommand{\defref}[1]{Definition~\ref{#1}}
+\providecommand{\appref}[1]{Appendix~\ref{#1}}
+
+% 6. 跨模板通用兜底宏
 \providecommand{\dropcapstart}[1]{#1}
 \providecommand{\added}[1]{{\color{red}\textit{#1}}}
 \providecommand{\deleted}[1]{{\color{red}\sout{#1}}}

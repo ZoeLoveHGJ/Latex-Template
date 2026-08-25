@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Submission Cover Letter (Root Entry)
 % --------------------------------------------------------
-% 文档类型: 投稿附信
-% 编译方式: xelatex Cover_Letter
+% Document Type: Submission Cover Letter
+% Build: xelatex Cover_Letter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass{packages/custom/cover_letter}
@@ -11,19 +11,18 @@
 \journalname{IEEE Transactions on Knowledge and Data Engineering}
 
 \sendername{Dr. Xiaolin Jia}
-\sendertitle{Associate Professor}
-\senderaffiliation{Mobile IoT and RFID Key Laboratory \\ University Name}
+\senderaffiliation{Mobile IoT and RFID Key Laboratory \\ Southwest University of Science and Technology}
 \senderemail{my_jiaxl@163.com}
 
 \recipientname{Prof. Editor-in-Chief}
 \recipienttitle{Editor-in-Chief}
-\recipientaffiliation{IEEE TKDE Editorial Office}
+\recipientaddress{IEEE TKDE Editorial Office}
 \opening{Dear Prof. Editor-in-Chief,}
 \closing{Sincerely yours,}
 
 \begin{document}
 
-\makeletterheader
+\makeheader
 
 We are pleased to submit our manuscript entitled "\thepapertitle" for consideration of publication in \thejournalname.
 
@@ -31,6 +30,6 @@ In this paper, we propose an open-source decoupled LaTeX authoring framework tha
 
 All authors have approved the manuscript and agree with its submission.
 
-\makeletterfooter
+\makeclosing
 
 \end{document}
