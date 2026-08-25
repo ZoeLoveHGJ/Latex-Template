@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supplementary Material Template
+% --------------------------------------------------------
+% 文档类型: 单栏补充材料 / 理论推导与额外实验
+% 编译方式: xelatex Supplementary -> biber Supplementary -> xelatex Supplementary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,onecolumn]{../../packages/custom/sup}
+
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+\graphicspath{{../../figures/}}
+
+% 参考文献
+\addbibresource{../../bib/refer.bib}
+
+% 主题色
+\academictheme{red}
+
+% 论文信息
+\title{Supplementary Material: Modular Academic LaTeX Framework}
+\author{Hongquan Zhou, Xiaolin Jia, Zhong Du}
+
+\institution{Mobile IoT \& RFID Key Laboratory}
+\leadauthor{H. Zhou et al.}
+
+\begin{document}
+
+\maketitle
+
+\section{Extended Experimental Validation}
+This supplementary document provides additional ablation studies and extended proofs for the main manuscript.
+
+\subsection{Theoretical Convergence Analysis}
+We provide full analytical bounds on the migration overhead and proof of invariance across publisher mappings.
+
+\printbibliography
+
+\end{document}

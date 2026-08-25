@@ -1,24 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Academic Paper Template (Root Default: IEEE Transactions)
+% IEEE Transactions / Journal Template
 % --------------------------------------------------------
 % 出版社: IEEE (Institute of Electrical and Electronics Engineers)
-% 适用对象: IEEE Transactions / Journals (默认入口)
-% 样式特色: 经典学术墨绿色高亮 (Hyperref Forest Green), 表格居中自适应
-% 编译方式: pdflatex Main -> bibtex Main -> pdflatex Main -> pdflatex Main
+% 适用对象: IEEE Transactions, IEEE Journals, IEEE Letters
+% 编译方式: pdflatex Main_IEEE_Trans -> bibtex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans -> pdflatex Main_IEEE_Trans
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[journal,10pt,twocolumn]{packages/publishers/ieee/IEEEtran}
+\documentclass[journal,10pt,twocolumn]{../../packages/publishers/ieee/IEEEtran}
 
-% 增强跨模板兼容与样式宏包 (内含 xurl 断行与自适应居中表格)
-\usepackage{packages/publishers/compat_helper}
+\usepackage{../../packages/publishers/compat_helper}
 \usepackage{cite}
 \usepackage{algorithmic}
 \usepackage{textcomp}
-\graphicspath{{figures/}}
+\graphicspath{{../../figures/}}
 
-% ---------------------------------------------------------
-% 高雅学术墨绿色超链接与引用高亮配置
-% ---------------------------------------------------------
+% 墨绿色学术高亮配置
 \usepackage{hyperref}
 \hypersetup{
     colorlinks = true,
@@ -59,18 +55,18 @@ RFID systems, anti-collision protocol, IEEE Transactions, modular authoring, rep
 \end{IEEEkeywords}
 
 % ---------------------------------------------------------
-% 共享正文内容模块 (所有模板共享此目录)
+% 共享正文内容模块
 % ---------------------------------------------------------
-\input{sections/01_introduction}
-\input{sections/02_related_work}
-\input{sections/03_method}
-\input{sections/04_experiments}
-\input{sections/05_conclusion}
+\input{../../sections/01_introduction}
+\input{../../sections/02_related_work}
+\input{../../sections/03_method}
+\input{../../sections/04_experiments}
+\input{../../sections/05_conclusion}
 
 % ---------------------------------------------------------
-% 参考文献 (真实接入 bib/refer.bib，前置 journal_abrv 自动缩写)
+% 参考文献 (前置 journal_abrv 自动缩写)
 % ---------------------------------------------------------
-\bibliographystyle{packages/publishers/ieee/IEEEtran}
-\bibliography{bib/journal_abrv,bib/refer}
+\bibliographystyle{../../packages/publishers/ieee/IEEEtran}
+\bibliography{../../bib/journal_abrv,../../bib/refer}
 
 \end{document}

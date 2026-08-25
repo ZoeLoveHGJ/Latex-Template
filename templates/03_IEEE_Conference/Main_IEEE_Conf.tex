@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IEEE Conference Template
+% --------------------------------------------------------
+% 出版社: IEEE (Institute of Electrical and Electronics Engineers)
+% 适用对象: IEEE Conferences (INFOCOM, ICC, GLOBECOM, WCNC 等)
+% 编译方式: pdflatex Main_IEEE_Conf -> bibtex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf -> pdflatex Main_IEEE_Conf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[conference,10pt,twocolumn,a4paper]{../../packages/publishers/ieee/IEEEtran}
+
+\usepackage{../../packages/publishers/compat_helper}
+\usepackage{cite}
+\usepackage{algorithmic}
+\graphicspath{{../../figures/}}
+
+% 墨绿色学术高亮
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = academicgreen,
+    citecolor  = academicgreen,
+    urlcolor   = academicgreen
+}
+
+\IEEEoverridecommandlockouts
+
+% ---------------------------------------------------------
+% 论文元数据
+% ---------------------------------------------------------
+\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration%
+\thanks{This work was supported by the Science and Technology Project.}}
+
+\author{\IEEEauthorblockN{Hongquan Zhou}
+\IEEEauthorblockA{\textit{Mobile IoT Key Lab} \\
+\textit{University Name}\\
+City, China \\
+zhou@example.com}
+\and
+\IEEEauthorblockN{Xiaolin Jia}
+\IEEEauthorblockA{\textit{Mobile IoT Key Lab} \\
+\textit{University Name}\\
+City, China \\
+my\_jiaxl@163.com}
+\and
+\IEEEauthorblockN{Zhong Du}
+\IEEEauthorblockA{\textit{Computer Science Dept.} \\
+\textit{Technology Center}\\
+City, China \\
+du@example.com}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and severe communication collisions. This paper demonstrates a unified decoupled academic authoring framework that bridges modern modular writing with strict IEEE conference formatting standards.
+\end{abstract}
+
+\begin{IEEEkeywords}
+IEEE Conference, RFID, anti-collision, modular LaTeX.
+\end{IEEEkeywords}
+
+% ---------------------------------------------------------
+% 共享正文内容模块
+% ---------------------------------------------------------
+\input{../../sections/01_introduction}
+\input{../../sections/02_related_work}
+\input{../../sections/03_method}
+\input{../../sections/04_experiments}
+\input{../../sections/05_conclusion}
+
+% ---------------------------------------------------------
+% 参考文献 (前置 journal_abrv 自动缩写)
+% ---------------------------------------------------------
+\bibliographystyle{../../packages/publishers/ieee/IEEEtran}
+\bibliography{../../bib/journal_abrv,../../bib/refer}
+
+\end{document}

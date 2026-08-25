@@ -1,0 +1,41 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{packages/publishers/compat_helper}[2026/08/25 Advanced Styling and Compatibility Helper]
+
+% 1. 超强 URL 与断行支持 (解决参考文献超长溢出)
+\RequirePackage{url}
+\RequirePackage{xurl} % 允许在任何字符处智能断行，彻底杜绝参考文献溢出
+\urlstyle{same}
+
+% 2. 经典学术高雅墨绿色定义 (Academic Forest/Pine Green)
+\RequirePackage{xcolor}
+\definecolor{academicgreen}{RGB}{11, 102, 35}     % 经典学术墨绿 #0B6623
+\definecolor{forestgreen}{RGB}{16, 124, 65}      % 雅致松绿 #107C41
+\definecolor{deepteal}{RGB}{0, 95, 86}           % 沉稳墨青 #005F56
+\definecolor{darkslate}{RGB}{38, 70, 83}         % 暗灰石绿 #264653
+
+% 3. 表格居中与自适应增强宏包
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{makecell}
+
+% 定义垂直居中 + 水平居中的列类型
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+
+% 改善表格默认行距，呼吸感更强
+\renewcommand{\arraystretch}{1.25}
+
+% 4. 基础数学与图形支持
+\RequirePackage{amsmath,amssymb,amsfonts}
+\RequirePackage{graphicx}
+
+% 5. 跨模板通用兜底宏
+\providecommand{\dropcapstart}[1]{#1}
+\providecommand{\added}[1]{{\color{red}\textit{#1}}}
+\providecommand{\deleted}[1]{{\color{red}\sout{#1}}}
+\providecommand{\highlight}[1]{{\colorbox{yellow!40}{#1}}}
+
+\endinput

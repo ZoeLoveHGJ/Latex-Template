@@ -1,0 +1,29 @@
+% ==========================================================
+% Section: Experiments and Results
+% ==========================================================
+
+\section{Experiments and Results}
+\label{sec:experiments}
+
+To evaluate the efficiency of the multi-publisher template suite, we benchmark migration overhead, compilation time, and typographic compliance across diverse venue standards.
+
+\subsection{Experimental Setup}
+All tests are conducted under a unified TeX Live distribution. We compare the migration effort measured in required manual modifications against traditional unified or duplicated repository patterns.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparison of Manuscript Management Strategies}
+    \label{tab:comparison}
+    \begin{tabularx}{\linewidth}{Y Y Y Y}
+        \toprule
+        \textbf{Strategy} & \textbf{Separation Level} & \textbf{Switching Cost} & \textbf{Conflict Risk} \\
+        \midrule
+        Monolithic Multi-Repo & Low & High & High \\
+        Conditional Engine & Medium & Medium & High \\
+        \textbf{Decoupled (Ours)} & \textbf{High} & \textbf{Minimal} & \textbf{None} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Performance and Compatibility}
+As summarized in Table~\ref{tab:comparison}, the proposed architecture eliminates package collision hazards while keeping manuscript synchronization effortless.

@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Point-by-Point Response to Reviewers (Root Entry)
+% Point-by-Point Response to Reviewers
 % --------------------------------------------------------
 % 文档类型: 审稿意见逐条回复信
 % 编译方式: xelatex Response -> xelatex Response (运行两次生成目录)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass{packages/custom/response}
+\documentclass{../../packages/custom/response}
 
 \papertitle{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
-\journalname{IEEE Transactions on Knowledge and Data Engineering}
-\manuscriptid{TKDE-2026-001}
+\journalname{Expert Systems with Applications}
+\manuscriptid{ESWA-D-2026-001}
 \authorname{Hongquan Zhou, Xiaolin Jia, and Zhong Du}
 
 \begin{document}
@@ -30,14 +30,14 @@ Thank you for your constructive comments and thoughtful guidance regarding our m
 \reviewer
 
 \begin{reviewercomment}
-The motivation for cross-publisher decoupling is clear, but could the authors elaborate on citation engine compatibility and URL wrapping across venues?
+The motivation for cross-publisher decoupling is clear, but could the authors elaborate on citation engine compatibility between BibLaTeX and BibTeX?
 \end{reviewercomment}
 
 \begin{authorresponse}
 Thank you for this insightful question. We have clarified the bibliography mechanism in Section 2:
 
 \begin{revisedtext}
-\added{Our architecture integrates the xurl engine to guarantee smooth URL wrapping across all publisher column constraints, alongside native support for BibTeX and BibLaTeX backends.}
+\added{Our architecture provides direct native support for BibTeX backends used by official IEEE/Elsevier/ACM classes while simultaneously offering BibLaTeX compatibility for modern preprint workflows.}
 \end{revisedtext}
 \end{authorresponse}
 

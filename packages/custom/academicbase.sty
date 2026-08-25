@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{class/academicbase}[2026/05/23 Academic shared base]
+\ProvidesPackage{../../packages/custom/academicbase}[2026/05/23 Academic shared base]
 
 \RequirePackage{etoolbox}
 \RequirePackage[framemethod=tikz]{mdframed}
@@ -36,8 +36,8 @@
 \RequirePackage{subcaption}
 \RequirePackage{stfloats}
 \RequirePackage{authblk}
-\RequirePackage{class/academiclang}
-\RequirePackage{class/academicenvs}
+\IfFileExists{packages/custom/academiclang.sty}{\IfFileExists{packages/custom/academiclang.sty}{\RequirePackage{packages/custom/academiclang}}{\RequirePackage{../../packages/custom/academiclang}}}{\RequirePackage{../../packages/custom/academiclang}}
+\IfFileExists{packages/custom/academicenvs.sty}{\IfFileExists{packages/custom/academicenvs.sty}{\RequirePackage{packages/custom/academicenvs}}{\RequirePackage{../../packages/custom/academicenvs}}}{\RequirePackage{../../packages/custom/academicenvs}}
 
 \newbool{corres-info}
 \newbool{abstract-enabled}
@@ -318,6 +318,16 @@
     style=ieee,
     sorting=none
 ]{biblatex}
-\addbibresource{ref.bib}
+
+% 自动尝试加载统一参考文献库（若存在）
+\IfFileExists{../../bib/refer.bib}{
+    \addbibresource{../../bib/refer.bib}
+}{
+    \IfFileExists{refer.bib}{
+        \addbibresource{refer.bib}
+    }{
+        \IfFileExists{ref.bib}{\addbibresource{ref.bib}}{}
+    }
+}
 
 \endinput

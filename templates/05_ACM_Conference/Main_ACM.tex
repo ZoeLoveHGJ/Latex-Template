@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACM Conference / Journal Template
+% --------------------------------------------------------
+% 出版社: ACM (Association for Computing Machinery)
+% 适用对象: ACM SIG Conferences (KDD, SIGMOD, SIGCOMM, CHI, WWW 等)
+% 编译方式: pdflatex Main_ACM -> bibtex Main_ACM -> pdflatex Main_ACM -> pdflatex Main_ACM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[sigconf,nonacm]{../../packages/publishers/acm/acmart}
+
+\usepackage{../../packages/publishers/compat_helper}
+\graphicspath{{../../figures/}}
+
+% 墨绿色学术高亮
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = academicgreen,
+    citecolor  = academicgreen,
+    urlcolor   = academicgreen
+}
+
+% ---------------------------------------------------------
+% 论文元数据
+% ---------------------------------------------------------
+\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
+
+\author{Hongquan Zhou}
+\orcid{0009-0000-7888-4115}
+\affiliation{%
+  \institution{Southwest University of Science and Technology}
+  \department{Mobile IoT Key Laboratory}
+  \city{Mianyang}
+  \country{China}
+}
+\email{zhou@example.com}
+
+\author{Xiaolin Jia}
+\orcid{0000-0002-4102-3490}
+\affiliation{%
+  \institution{Southwest University of Science and Technology}
+  \department{School of Computer Science and Technology}
+  \city{Mianyang}
+  \country{China}
+}
+\email{my_jiaxl@163.com}
+
+\author{Zhong Du}
+\orcid{0000-0003-3809-6864}
+\affiliation{%
+  \institution{Southwest University of Science and Technology}
+  \department{School of Computer Science and Technology}
+  \city{Mianyang}
+  \country{China}
+}
+\email{du@example.com}
+
+\begin{abstract}
+Tags identification in dense mobile RFID systems presents a major challenge due to the stochastic residence time of tags and severe communication collisions. This paper demonstrates a unified decoupled academic authoring framework that bridges modern modular writing with strict ACM SIG conference formatting standards.
+\end{abstract}
+
+\keywords{ACM conference, RFID anti-collision, modular LaTeX framework, reproducible research}
+
+\begin{document}
+
+\maketitle
+
+% ---------------------------------------------------------
+% 共享正文内容模块
+% ---------------------------------------------------------
+\input{../../sections/01_introduction}
+\input{../../sections/02_related_work}
+\input{../../sections/03_method}
+\input{../../sections/04_experiments}
+\input{../../sections/05_conclusion}
+
+% ---------------------------------------------------------
+% 参考文献 (前置 journal_full 自动展开官方全称)
+% ---------------------------------------------------------
+\bibliographystyle{../../packages/publishers/acm/ACM-Reference-Format}
+\bibliography{../../bib/journal_full,../../bib/refer}
+
+\end{document}

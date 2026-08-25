@@ -11,7 +11,7 @@
 %----------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{class/cover_letter}[2026/02/13 Standardized Cover Letter Class v2.1]
+\ProvidesClass{../../packages/custom/cover_letter}[2026/02/13 Standardized Cover Letter Class v2.1]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[a4paper,11pt]{article}
@@ -21,7 +21,7 @@
 %----------------------------------------------------------
 
 \RequirePackage{geometry}
-\RequirePackage{class/academicletterbase}
+\IfFileExists{packages/custom/academicletterbase.sty}{\IfFileExists{packages/custom/academicletterbase.sty}{\RequirePackage{packages/custom/academicletterbase}}{\RequirePackage{../../packages/custom/academicletterbase}}}{\RequirePackage{../../packages/custom/academicletterbase}}
 
 % PAGE LAYOUT
 %----------------------------------------------------------

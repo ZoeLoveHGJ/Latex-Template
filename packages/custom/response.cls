@@ -10,7 +10,7 @@
 %----------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{class/response}[2026/02/13 Response to Reviewers Class v1.1]
+\ProvidesClass{../../packages/custom/response}[2026/02/13 Response to Reviewers Class v1.1]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[a4paper,11pt]{article}
@@ -20,7 +20,7 @@
 %----------------------------------------------------------
 
 \RequirePackage{geometry}
-\RequirePackage{class/academicletterbase}
+\IfFileExists{packages/custom/academicletterbase.sty}{\IfFileExists{packages/custom/academicletterbase.sty}{\RequirePackage{packages/custom/academicletterbase}}{\RequirePackage{../../packages/custom/academicletterbase}}}{\RequirePackage{../../packages/custom/academicletterbase}}
 \RequirePackage{placeins}
 \RequirePackage{float}
 \RequirePackage{caption}

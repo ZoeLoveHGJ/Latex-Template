@@ -1,0 +1,23 @@
+% ==========================================================
+% Section: Methodology
+% ==========================================================
+
+\section{Methodology}
+\label{sec:methodology}
+
+In this section, we formulate the decoupled template framework and its mathematical underpinning for content reusability.
+
+\subsection{Mathematical Formulation}
+Let $\mathcal{C}$ represent the set of core scientific content sections, and let $\mathcal{T} = \{T_{\text{custom}}, T_{\text{ieee}}, T_{\text{elsevier}}, T_{\text{acm}}, T_{\text{springer}}\}$ denote the set of target publisher templates. A compiled manuscript $\mathcal{M}_i$ for a given publisher template $T_i \in \mathcal{T}$ is obtained through a deterministic mapping $\Phi$:
+\begin{equation}
+    \mathcal{M}_i = \Phi(T_i, \mathcal{C}, \mathcal{B}, \mathcal{F})
+    \label{eq:manuscript_mapping}
+\end{equation}
+where $\mathcal{B}$ denotes the bibliography database and $\mathcal{F}$ represents the visual figure assets.
+
+\subsection{Architecture Overview}
+The system enforces strict invariance on $\mathcal{C}$:
+\begin{equation}
+    \frac{\partial \mathcal{C}}{\partial T_i} = 0, \quad \forall T_i \in \mathcal{T}
+\end{equation}
+This invariance ensures that modifying typography or publisher requirements never introduces discrepancies or side effects into the scientific discourse.
