@@ -11,11 +11,19 @@
 ### 概述
 
 这是一套面向**全流程学术写作与多出版社投稿**的高效模块化 LaTeX 模板工程。
-* **100% 保持官方原版纯净度**：所有出版社模板（IEEE Transactions, IEEE Conference, Elsevier CAS ESWA, ACM SIGCONF）**完全遵循官方原生语法与官方类库**，绝不进行非标准魔改，可直接打包原版源文件向出版社系统投稿；
+* **100% 保持官方原版纯净度**：所有出版社模板（IEEE Transactions, IEEE Conference, Elsevier CAS ESWA, ACM SIGCONF, Springer LNCS）**完全遵循官方原生语法与官方类库**，绝不进行非标准魔改，可直接打包原版源文件向出版社系统投稿；
+* **统一元数据常量层（`metadata/`）**：作者姓名、单位、邮箱、ORCID、基金项目统一定义一次，所有官方模板无缝填入，告别多处修改与错漏；
 * **融入 SCU 学术写作与交叉引用规范**：在辅助包中原生提供 `\figref`, `\tabref`, `\eqnref`, `\secref`, `\algref` 等标准语义引用宏（带不可断行波浪号 `~`），跨出版商排版规范零成本对齐；
 * **开箱即用**：一级目录（根目录）默认预置以 **IEEE Transactions** 为标准的主论文（`Main.tex`）、投稿附信（`Cover_Letter.tex`）与审稿回复信（`Response.tex`），点开即可直接写作与编译；
-* **极简切换**：在 `templates/` 下独立集成 **Elsevier (ESWA CAS 官方双栏)**、**IEEE Transactions / Conference**、**ACM SIGCONF** 以及 **自定义现代预印本** 标准模板；
-* **参考文献智能宏解耦**：基于单一 `bib/refer.bib`，通过 `bib/journal_abrv.bib`（标准缩写字典）与 `bib/journal_full.bib`（官方全称字典），**改一个参数即可在 IEEE 缩写 与 Elsevier/ACM 全称之间一键切换**；
+* **极简切换 6 大出版商标准模板**：
+  1. `01_Custom_Preprint`：自定义现代学术预印本套件 (XeLaTeX + Biber)
+  2. `02_IEEE_Transactions`：IEEE Transactions / Journals 官方原生标准
+  3. `03_IEEE_Conference`：IEEE 旗舰会议官方原生标准 (INFOCOM, ICC 等)
+  4. `04_Elsevier_ESWA`：Elsevier CAS 双栏官方原生标准 (ESWA 实战模板)
+  5. `05_ACM_Conference`：ACM SIG 会议与期刊官方原生标准 (KDD, SIGMOD 等)
+  6. `06_Springer_LNCS`：Springer LNCS 计算机科学经典顶会官方原生标准 (ECCV, MICCAI 等)
+* **参考文献智能宏解耦**：基于单一 `bib/refer.bib`，通过 `bib/journal_abrv.bib`（标准缩写字典）与 `bib/journal_full.bib`（官方全称字典），**改一个参数即可在 IEEE/LNCS 缩写 与 Elsevier/ACM 全称之间一键切换**；
+* **文献数据库自动诊断脚本**：提供 [`scripts/bib_checker.py`](file:///d:/2026-SJ/code/Latex-Template/scripts/bib_checker.py)，一键检测文献库字段完整性与宏绑定情况；
 * **高雅美化**：全局默认采用经典**学术墨绿色**（`#0B6623`）超链接与引用高亮；表格默认采用**自适应宽度 + 垂直水平全居中**；参考文献引入 `xurl` **任意字符智能换行**，彻底解决 URL / 表格溢出栏外的问题；
 * **VS Code 极简视图**：配置了 `files.exclude`，自动过滤隐藏 `.aux`、`.blg`、`.bcf`、`.log` 等无用中间文件。
 
@@ -28,7 +36,11 @@ Latex-Template/
 ├── Main.tex                            # 【一级目录主入口】默认 IEEE Transactions 官方标准双栏
 ├── Cover_Letter.tex                    # 【一级目录】投稿附信
 ├── Response.tex                        # 【一级目录】审稿逐条回复信
-├── compile.bat                         # 根目录一键自动化终端编译脚本
+├── compile.bat                         # 根目录一键自动化终端编译脚本 (支持 1-10 目标)
+│
+├── metadata/                           # 【核心元数据统一管理层】
+│   ├── paper_info.tex                  # 论文主标题、页眉标题、摘要、关键词、基金项目
+│   └── authors_info.tex                # 结构化作者姓名、单位常量、ORCID、邮箱
 │
 ├── sections/                           # 【核心共享内容】（所有模板共享此目录）
 │   ├── 01_introduction.tex             # 引言 (含真实文献引用)
@@ -39,22 +51,26 @@ Latex-Template/
 │
 ├── bib/                                # 【统一参考文献库与宏字典】
 │   ├── refer.bib                       # 真实学术文献数据库 (唯一事实来源)
-│   ├── journal_abrv.bib                # 【标准缩写字典】IEEE/ACM/Elsevier 期刊会议 ISO-4 缩写
-│   └── journal_full.bib                # 【官方全称字典】Elsevier/ACM/毕业论文 官方全称
+│   ├── journal_abrv.bib                # 【标准缩写字典】111+ IEEE/ACM/Elsevier 期刊会议 ISO-4 缩写
+│   └── journal_full.bib                # 【官方全称字典】111+ Elsevier/ACM/Springer 官方全称
 │
 ├── figures/                            # 【统一插图库】
 │
 ├── templates/                          # 【多出版社官方独立模板包】
 │   ├── 01_Custom_Preprint/             # 自定义现代学术预印本套件 (XeLaTeX + Biber)
 │   ├── 02_IEEE_Transactions/           # IEEE Transactions / Journals 官方原生标准
-│   ├── 03_IEEE_Conference/             # IEEE 旗舰会议官方原生标准 (INFOCOM, ICC 等)
+│   ├── 03_IEEE_Conference/             # IEEE 旗舰会议官方原生标准
 │   ├── 04_Elsevier_ESWA/               # Elsevier CAS 双栏官方原生标准 (ESWA 实战模板)
-│   └── 05_ACM_Conference/              # ACM SIG 会议与期刊官方原生标准 (KDD, SIGMOD 等)
+│   ├── 05_ACM_Conference/              # ACM SIG 会议与期刊官方原生标准
+│   └── 06_Springer_LNCS/               # Springer LNCS 计算机经典顶会官方原生标准
 │
 ├── packages/                           # 【底层依赖宏包与官方类库】
 │   ├── custom/                         # 自定义模板类 (main.cls, sup.cls, response.cls 等)
-│   └── publishers/                     # 官方出版社类库 (ieee, elsevier_cas, acm)
+│   └── publishers/                     # 官方出版社类库 (ieee, elsevier_cas, acm, springer_lncs)
 │       └── compat_helper.sty           # 轻量非侵入式辅助宏 (xurl断行、居中表格、SCU规范)
+│
+├── scripts/                            # 【科研实用诊断工具】
+│   └── bib_checker.py                  # BibTeX 文献完整性与宏字典诊断脚本
 │
 └── .vscode/settings.json               # VS Code 自动构建与隐藏中间文件配置
 ```
@@ -74,12 +90,19 @@ Latex-Template/
 
 ### 快速开始与编译指南
 
-#### 命令行一键编译 (`compile.bat`)
+#### 1. 命令行一键编译 (`compile.bat`)
 
 ```cmd
 compile.bat                     # 默认直接编译根目录 Main.tex (IEEE Trans)
 compile.bat Cover_Letter        # 编译根目录投稿信
 compile.bat Response            # 编译根目录审稿回复信
 compile.bat 04_Elsevier_ESWA    # 单独编译 Elsevier ESWA 模板
+compile.bat 06_Springer_LNCS    # 单独编译 Springer LNCS 模板
 compile.bat ALL                 # 一键编译根目录及全部出版社版本
+```
+
+#### 2. 文献数据库诊断 (`bib_checker.py`)
+
+```cmd
+python scripts/bib_checker.py
 ```

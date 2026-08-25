@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Springer LNCS (Lecture Notes in Computer Science) Template
+% --------------------------------------------------------
+% Publisher: Springer Nature
+% Target: Top Conferences (ECCV, MICCAI, ESORICS, CAV, Eurocrypt, etc.)
+% Build: pdflatex Main_Springer -> bibtex Main_Springer -> pdflatex Main_Springer -> pdflatex Main_Springer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[runningheads]{../../packages/publishers/springer_lncs/llncs}
+
+\usepackage{../../packages/publishers/compat_helper}
+\usepackage{orcidlink}
+\graphicspath{{../../figures/}}
+
+% Green academic theme
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = academicgreen,
+    citecolor  = academicgreen,
+    urlcolor   = academicgreen
+}
+
+% ---------------------------------------------------------
+% Load unified metadata & author constants
+% ---------------------------------------------------------
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
+
+% ---------------------------------------------------------
+% Manuscript Metadata (100% Official Springer LNCS Format)
+% ---------------------------------------------------------
+\title{\PaperTitle\thanks{\GrantFunding}}
+\titlerunning{\ShortPaperTitle}
+
+\author{\AuthorA\inst{1}\orcidlink{\OrcidA} \and
+\AuthorB\inst{1}\orcidlink{\OrcidB}\thanks{Corresponding author: \EmailB} \and
+\AuthorC\inst{2}\orcidlink{\OrcidC}}
+
+\authorrunning{\AuthorA{} et al.}
+
+\institute{\AffilA \\
+\email{\EmailA}, \email{\EmailB} \and
+\AffilB \\
+\email{\EmailC}}
+
+\begin{document}
+
+\maketitle
+
+% ---------------------------------------------------------
+% Abstract and Keywords
+% ---------------------------------------------------------
+\begin{abstract}
+\PaperAbstract
+
+\keywords{\PaperKeywords}
+\end{abstract}
+
+% ---------------------------------------------------------
+% Shared Manuscript Sections
+% ---------------------------------------------------------
+\input{../../sections/01_introduction}
+\input{../../sections/02_related_work}
+\input{../../sections/03_method}
+\input{../../sections/04_experiments}
+\input{../../sections/05_conclusion}
+
+% ---------------------------------------------------------
+% References (Springer splncs04 with full journal names)
+% ---------------------------------------------------------
+\bibliographystyle{../../packages/publishers/springer_lncs/splncs04}
+\bibliography{../../bib/journal_full,../../bib/refer}
+
+\end{document}

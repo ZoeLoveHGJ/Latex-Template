@@ -13,11 +13,12 @@ echo   5. 02_IEEE_Transactions          - templates/02_IEEE_Transactions/Main_IE
 echo   6. 03_IEEE_Conference            - templates/03_IEEE_Conference/Main_IEEE_Conf.tex
 echo   7. 04_Elsevier_ESWA              - templates/04_Elsevier_ESWA/Main_Elsevier.tex
 echo   8. 05_ACM_Conference             - templates/05_ACM_Conference/Main_ACM.tex
-echo   9. ALL                           - Build Root and All Templates
+echo   9. 06_Springer_LNCS              - templates/06_Springer_LNCS/Main_Springer.tex
+echo  10. ALL                           - Build Root and All Templates
 echo =====================================================================
 
 set TARGET=%1
-if "%TARGET%"=="" set /p TARGET="Please enter target number (1-9) or name [Default=1]: "
+if "%TARGET%"=="" set /p TARGET="Please enter target number (1-10) or name [Default=1]: "
 if "%TARGET%"=="" set TARGET=1
 
 if "%TARGET%"=="1" goto BUILD_ROOT_MAIN
@@ -44,7 +45,10 @@ if /i "%TARGET%"=="04_Elsevier_ESWA" goto BUILD_ELSEVIER
 if "%TARGET%"=="8" goto BUILD_ACM
 if /i "%TARGET%"=="05_ACM_Conference" goto BUILD_ACM
 
-if "%TARGET%"=="9" goto BUILD_ALL
+if "%TARGET%"=="9" goto BUILD_SPRINGER
+if /i "%TARGET%"=="06_Springer_LNCS" goto BUILD_SPRINGER
+
+if "%TARGET%"=="10" goto BUILD_ALL
 if /i "%TARGET%"=="ALL" goto BUILD_ALL
 
 echo Invalid target selected.
@@ -127,6 +131,17 @@ popd
 echo Built: templates/05_ACM_Conference/Main_ACM.pdf
 exit /b 0
 
+:BUILD_SPRINGER
+echo Compiling Springer LNCS (pdfLaTeX + BibTeX)...
+pushd templates\06_Springer_LNCS
+pdflatex -interaction=nonstopmode Main_Springer.tex
+bibtex Main_Springer
+pdflatex -interaction=nonstopmode Main_Springer.tex
+pdflatex -interaction=nonstopmode Main_Springer.tex
+popd
+echo Built: templates/06_Springer_LNCS/Main_Springer.pdf
+exit /b 0
+
 :BUILD_ALL
 echo ========================================
 echo Building Root and All Template Targets...
@@ -139,6 +154,7 @@ call :BUILD_IEEE_TRANS
 call :BUILD_IEEE_CONF
 call :BUILD_ELSEVIER
 call :BUILD_ACM
+call :BUILD_SPRINGER
 echo ========================================
 echo All publication targets built successfully!
 echo ========================================
