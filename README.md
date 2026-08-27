@@ -22,8 +22,8 @@
   4. `04_Elsevier_ESWA`：Elsevier CAS 双栏官方原生标准 (ESWA 实战模板)
   5. `05_ACM_Conference`：ACM SIG 会议与期刊官方原生标准 (KDD, SIGMOD 等)
   6. `06_Springer_LNCS`：Springer LNCS 计算机科学经典顶会官方原生标准 (ECCV, MICCAI 等)
-* **参考文献智能宏解耦**：基于单一 `bib/refer.bib`，通过 `bib/journal_abrv.bib`（标准缩写字典）与 `bib/journal_full.bib`（官方全称字典），**改一个参数即可在 IEEE/LNCS 缩写 与 Elsevier/ACM 全称之间一键切换**；
-* **文献数据库自动诊断脚本**：提供 [`scripts/bib_checker.py`](file:///d:/2026-SJ/code/Latex-Template/scripts/bib_checker.py)，一键检测文献库字段完整性与宏绑定情况；
+* **参考文献数据与样式解耦**：基于单一 `bib/refer.bib`，通过项目维护的 `bib/journal_abrv.bib`（缩写字典）与 `bib/journal_full.bib`（全称字典）复用 venue 数据；最终显示仍由目标出版社的官方 `.bst` 和 author guideline 决定，不能跨出版社套用规则；
+* **文献数据库自动诊断脚本**：提供 [`scripts/bib_checker.py`](scripts/bib_checker.py)，一键检测文献库字段完整性与宏绑定情况；
 * **高雅美化**：全局默认采用经典**学术墨绿色**（`#0B6623`）超链接与引用高亮；表格默认采用**自适应宽度 + 垂直水平全居中**；参考文献引入 `xurl` **任意字符智能换行**，彻底解决 URL / 表格溢出栏外的问题；
 * **VS Code 极简视图**：配置了 `files.exclude`，自动过滤隐藏 `.aux`、`.blg`、`.bcf`、`.log` 等无用中间文件。
 
@@ -38,6 +38,10 @@ Latex-Template/
 ├── Response.tex                        # 【一级目录】审稿逐条回复信
 ├── compile.bat                         # 根目录一键自动化终端编译脚本 (支持 1-10 目标)
 │
+├── docs/                               # 【仓库自有使用指南】（不修改官方模板）
+│   └── bibliography/
+│       └── ieee-references.md          # IEEE 参考文献规则、项目覆盖项与示例
+│
 ├── metadata/                           # 【核心元数据统一管理层】
 │   ├── paper_info.tex                  # 论文主标题、页眉标题、摘要、关键词、基金项目
 │   └── authors_info.tex                # 结构化作者姓名、单位常量、ORCID、邮箱
@@ -51,8 +55,8 @@ Latex-Template/
 │
 ├── bib/                                # 【统一参考文献库与宏字典】
 │   ├── refer.bib                       # 真实学术文献数据库 (唯一事实来源)
-│   ├── journal_abrv.bib                # 【标准缩写字典】111+ IEEE/ACM/Elsevier 期刊会议 ISO-4 缩写
-│   └── journal_full.bib                # 【官方全称字典】111+ Elsevier/ACM/Springer 官方全称
+│   ├── journal_abrv.bib                # 【项目维护】111+ 期刊会议缩写（投稿前按目标 venue 复核）
+│   └── journal_full.bib                # 【项目维护】111+ 期刊会议全称
 │
 ├── figures/                            # 【统一插图库】
 │
@@ -74,6 +78,14 @@ Latex-Template/
 │
 └── .vscode/settings.json               # VS Code 自动构建与隐藏中间文件配置
 ```
+
+---
+
+### 参考文献规范指南
+
+参考文献规则以**目标期刊/会议当前 author guideline 与官方模板**为最高优先级。IEEE、ACM、Springer LNCS、Elsevier、USENIX、Nature/Springer Nature 的样式、缩写和在线资源显示规则不可混用。
+
+* [IEEE Journals / Transactions 参考文献指南](docs/bibliography/ieee-references.md)：区分 IEEE 通用惯例、`IEEEtran.bst` 默认行为和可选的项目级 compact profile，并提供 BibTeX 与 `IEEEtranBSTCTL` 示例。
 
 ---
 
