@@ -7,23 +7,25 @@
 
 \documentclass{../../packages/custom/cover_letter}
 
-\papertitle{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
-\journalname{Target Journal / Conference Venue}
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
 
-\sendername{Dr. Xiaolin Jia}
-\sendertitle{Associate Professor}
-\senderaffiliation{Mobile IoT and RFID Key Laboratory \\ University Name}
-\senderemail{corresponding.author@example.com}
+\papertitle{\PaperTitle}
+\journalname{\DefaultJournalName}
+
+\sendername{Dr. \CorrespondingAuthor}
+\senderaffiliation{\DeptA \\ \InstA}
+\senderemail{\CorrespondingEmail}
 
 \recipientname{Prof. Editor-in-Chief}
 \recipienttitle{Editor-in-Chief}
-\recipientaffiliation{Editorial Office}
+\recipientaddress{Editorial Office}
 \opening{Dear Prof. Editor-in-Chief,}
 \closing{Sincerely yours,}
 
 \begin{document}
 
-\makeletterheader
+\makeheader
 
 We are pleased to submit our manuscript entitled "\thepapertitle" for consideration of publication in \thejournalname.
 
@@ -31,6 +33,6 @@ In this paper, we propose an open-source decoupled LaTeX authoring framework tha
 
 All authors have approved the manuscript and agree with its submission.
 
-\makeletterfooter
+\makeclosing
 
 \end{document}

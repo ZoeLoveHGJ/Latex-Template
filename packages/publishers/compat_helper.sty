@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{packages/publishers/compat_helper}[2026/08/25 Non-intrusive Styling and SCU Academic Standards Helper]
+\ProvidesPackage{packages/publishers/compat_helper}[2026/08/28 Non-intrusive Styling and SCU Academic Standards Helper]
 
 % 1. 超强 URL 与断行支持 (解决参考文献超长溢出)
 \RequirePackage{url}
@@ -7,7 +7,20 @@
 \urlstyle{same}
 
 % 2. 基础数学与图形支持 (提供 \text, \eqref, \includegraphics)
-\RequirePackage{amsmath,amssymb,amsfonts}
+% ACM acmart may preload newtxmath; loading amssymb/amsfonts afterwards can
+% redefine symbols such as \Bbbk. Keep this helper publisher-safe by always
+% loading amsmath, and only adding AMS symbol fonts when no math font package
+% has already claimed that namespace.
+\RequirePackage{amsmath}
+\makeatletter
+\@ifpackageloaded{newtxmath}{%
+  % acmart/newtxmath already provides the math symbol layer.
+}{%
+  \RequirePackage{amssymb}
+  \RequirePackage{amsfonts}
+}
+\@ifpackageloaded{ulem}{}{\RequirePackage[normalem]{ulem}}
+\makeatother
 \RequirePackage{graphicx}
 
 % 3. 经典学术高雅墨绿色定义 (Academic Forest/Pine Green)

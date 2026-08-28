@@ -36,9 +36,10 @@ Latex-Template/
 ├── Main.tex                            # 【一级目录主入口】默认 IEEE Transactions 官方标准双栏
 ├── Cover_Letter.tex                    # 【一级目录】投稿附信
 ├── Response.tex                        # 【一级目录】审稿逐条回复信
-├── compile.bat                         # 根目录一键自动化终端编译脚本 (支持 1-10 目标)
+├── compile.bat                         # 根目录一键自动化终端编译脚本 (支持 1-11 目标)
 │
 ├── docs/                               # 【仓库自有使用指南】（不修改官方模板）
+│   ├── quick-start-and-switching.md    # 快速接入、模板切换与验证清单
 │   └── bibliography/
 │       ├── ieee-references.md          # IEEE 参考文献规则、项目覆盖项与示例
 │       └── elsevier-references.md      # Elsevier 期刊参考文献规则、DOI 与 venue 名称指南
@@ -59,7 +60,8 @@ Latex-Template/
 │   ├── journal_abrv.bib                # 【项目维护】111+ 期刊会议缩写（投稿前按目标 venue 复核）
 │   └── journal_full.bib                # 【项目维护】111+ 期刊会议全称
 │
-├── figures/                            # 【统一插图库】
+├── figures/                            # 【统一插图库】新论文图片放这里
+├── figure/                             # 【历史示例资产】保留已有 sample figure PDF
 │
 ├── templates/                          # 【多出版社官方独立模板包】
 │   ├── 01_Custom_Preprint/             # 自定义现代学术预印本套件 (XeLaTeX + Biber)
@@ -86,6 +88,7 @@ Latex-Template/
 
 参考文献规则以**目标期刊/会议当前 author guideline 与官方模板**为最高优先级。IEEE、ACM、Springer LNCS、Elsevier、USENIX、Nature/Springer Nature 的样式、缩写和在线资源显示规则不可混用。
 
+* [快速接入与模板切换指南](docs/quick-start-and-switching.md)：说明新论文只需优先修改哪些文件、如何使用 `compile.bat PUBLISHERS` 做快速模板切换检查，以及何时运行完整 `ALL` 构建。
 * [IEEE Journals / Transactions 参考文献指南](docs/bibliography/ieee-references.md)：区分 IEEE 通用惯例、`IEEEtran.bst` 默认行为和可选的项目级 compact profile，并提供 BibTeX 与 `IEEEtranBSTCTL` 示例。
 * [Elsevier Journals 参考文献指南](docs/bibliography/elsevier-references.md)：区分
   Your Paper Your Way、具体期刊 Guide for Authors 和 CAS/elsarticle 样式行为，
@@ -114,11 +117,35 @@ compile.bat Cover_Letter        # 编译根目录投稿信
 compile.bat Response            # 编译根目录审稿回复信
 compile.bat 04_Elsevier_ESWA    # 单独编译 Elsevier ESWA 模板
 compile.bat 06_Springer_LNCS    # 单独编译 Springer LNCS 模板
-compile.bat ALL                 # 一键编译根目录及全部出版社版本
+compile.bat PUBLISHERS          # 严格检查官方 publisher 模板链路
+compile.bat ALL                 # 严格检查根目录、自定义预印本及全部 publisher 目标
 ```
+
+`compile.bat` 使用严格模式：LaTeX/BibTeX/Biber 任一步失败会立即返回非零退出码，目标 PDF 未生成也会报错。日常验证多出版社切换时，优先运行 `compile.bat PUBLISHERS`；需要同时验证 XeLaTeX/Biber 自定义预印本、投稿信和回复信时，再运行 `compile.bat ALL`。
 
 #### 2. 文献数据库诊断 (`bib_checker.py`)
 
 ```cmd
 python scripts/bib_checker.py
 ```
+
+---
+
+<a name="english"></a>
+
+## English
+
+This repository is a modular LaTeX manuscript suite for maintaining one shared content source while compiling publisher-specific targets.
+
+Main entry points:
+
+```cmd
+compile.bat Main
+compile.bat PUBLISHERS
+compile.bat ALL
+python scripts/bib_checker.py
+```
+
+For a new manuscript, update `metadata/paper_info.tex`, `metadata/authors_info.tex`, `sections/`, `bib/refer.bib`, and `figures/` first. Do not edit official publisher class/BST/vendor files under `packages/publishers/` unless a target author kit explicitly requires doing so in a submission copy.
+
+See `docs/quick-start-and-switching.md` for onboarding and template switching, and `docs/bibliography/` for publisher-scoped bibliography guidance.

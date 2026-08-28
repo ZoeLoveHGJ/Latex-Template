@@ -27,24 +27,27 @@
 \academictheme{red}
 
 %----------------------------------------------------------
-%  (Metadata)
+%  Unified metadata (shared with publisher templates)
 %----------------------------------------------------------
-\title{Modular Academic LaTeX Framework: Seamless Multi-Publisher Manuscript Migration}
+\input{../../metadata/paper_info}
+\input{../../metadata/authors_info}
 
-\author[1]{Hongquan Zhou$^{\orcidlink{0009-0000-7888-4115}}$}
-\author[1,2]{Xiaolin Jia$^{*,\orcidlink{0000-0002-4102-3490}}$}
-\author[2]{Zhong Du$^{\orcidlink{0000-0003-3809-6864}}$}
+\title{\PaperTitle}
 
-\affil[1]{Mobile IoT and RFID Key Laboratory, University Name, City, China}
-\affil[2]{School of Computer Science and Technology, Technology Center, City, China}
+\author[1]{\AuthorA$^{\orcidlink{\OrcidA}}$}
+\author[1,2]{\AuthorB$^{*,\orcidlink{\OrcidB}}$}
+\author[2]{\AuthorC$^{\orcidlink{\OrcidC}}$}
 
-\corres{Xiaolin Jia}
-\email{corresponding.author@example.com}
-\firstauthor{Hongquan Zhou}
-\femail{first.author@example.com}
+\affil[1]{\AffilA}
+\affil[2]{\AffilB}
 
-\leadauthor{H. Zhou et al.}
-\institution{Mobile IoT \& RFID Key Laboratory}
+\corres{\CorrespondingAuthor}
+\email{\CorrespondingEmail}
+\firstauthor{\FirstAuthor}
+\femail{\FirstAuthorEmail}
+
+\leadauthor{\LeadAuthorShort}
+\institution{\DeptA}
 
 \setabstractenabled{true}
 \setbool{corres-info}{true}
@@ -53,9 +56,9 @@
 % 
 %----------------------------------------------------------
 \begin{abstract}
-Tag identification in dense dynamic RFID systems poses significant throughput challenges under stochastic workload arrivals. This paper proposes a decoupled modular architecture that unifies modern authoring pipelines with major publisher formatting requirements (IEEE, Elsevier, ACM). By cleanly isolating scientific content from presentation layer mechanics, researchers can maintain a single source of truth while meeting diverse publication venues with zero migration overhead.
+\PaperAbstract
 \end{abstract}
-\keywords{Modular LaTeX, Academic Authoring, Multi-Publisher Migration, Reproducibility}
+\keywords{\PaperKeywords}
 
 %----------------------------------------------------------
 % 
