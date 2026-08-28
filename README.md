@@ -40,7 +40,8 @@ Latex-Template/
 │
 ├── docs/                               # 【仓库自有使用指南】（不修改官方模板）
 │   └── bibliography/
-│       └── ieee-references.md          # IEEE 参考文献规则、项目覆盖项与示例
+│       ├── ieee-references.md          # IEEE 参考文献规则、项目覆盖项与示例
+│       └── elsevier-references.md      # Elsevier 期刊参考文献规则、DOI 与 venue 名称指南
 │
 ├── metadata/                           # 【核心元数据统一管理层】
 │   ├── paper_info.tex                  # 论文主标题、页眉标题、摘要、关键词、基金项目
@@ -86,6 +87,9 @@ Latex-Template/
 参考文献规则以**目标期刊/会议当前 author guideline 与官方模板**为最高优先级。IEEE、ACM、Springer LNCS、Elsevier、USENIX、Nature/Springer Nature 的样式、缩写和在线资源显示规则不可混用。
 
 * [IEEE Journals / Transactions 参考文献指南](docs/bibliography/ieee-references.md)：区分 IEEE 通用惯例、`IEEEtran.bst` 默认行为和可选的项目级 compact profile，并提供 BibTeX 与 `IEEEtranBSTCTL` 示例。
+* [Elsevier Journals 参考文献指南](docs/bibliography/elsevier-references.md)：区分
+  Your Paper Your Way、具体期刊 Guide for Authors 和 CAS/elsarticle 样式行为，
+  说明 DOI、URL、期刊全称/缩写、数据集与 BibTeX 录入要点。
 
 ---
 
